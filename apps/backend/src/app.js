@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import process from 'node:process';
 import { db } from './db.js';
-import loginRoutes from '/uplift/geomemory-app/geomemorymap/apps/backend/src/modules/routes/loginRoutes.js';
+import loginRoutes from '/uplift/geomemory-app/geomemorymap/apps/backend/src/modules/routes/login-routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
