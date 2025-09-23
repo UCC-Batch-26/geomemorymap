@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import process from 'node:process';
 import { db } from './db.js';
-import loginRoutes from '/uplift/geomemory-app/geomemorymap/apps/backend/src/modules/samples/tests/loginRoutes.js';
+import loginRoutes from '/uplift/geomemory-app/geomemorymap/apps/backend/src/modules/routes/loginRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,7 +25,7 @@ app.use(
         callback(new Error(`Not allowed by CORS: ${origin}`));
       } else {
         callback(null, true);
-      } 
+      }
     },
   }),
 );
