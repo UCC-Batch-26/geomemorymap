@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = 'GeoMemoryMap';
+const JWT_SECRET = process.env.JWT_SECRET
 
 export async function login(request, response) {
   try {
