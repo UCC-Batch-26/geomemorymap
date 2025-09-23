@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export async function login(request, response) {
   try {
@@ -8,7 +8,7 @@ export async function login(request, response) {
 
     // token
     const token = jwt.sign(
-      { id: user._id, username: user.username },
+      { id: user._id, username: user.username, email: user.email },
       JWT_SECRET,
       { expiresIn: '7D' }, // expires in 7 days
     );
@@ -19,6 +19,7 @@ export async function login(request, response) {
       user: {
         id: user._id,
         username: user.username,
+        email: user.email,
       },
     });
   } catch (err) {
