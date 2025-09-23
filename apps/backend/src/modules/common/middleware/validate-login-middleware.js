@@ -16,14 +16,15 @@ export async function validateLogin(req, res, next) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    // check password
-    if (user.password !== password) {
-      return res.status(400).json({ message: 'Invalid' });
-    }
+    // // check password
+    // if (user.password !== password) {
+    //   return res.status(400).json({ message: 'Invalid' });
+    // }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if(!isMatch){
-      return res.status(400).json({ message: 'Inavalid'});
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Inavalid' });
+      console.log('Password match result:', isMatch);
     }
 
     req.user = user;
