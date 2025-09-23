@@ -25,7 +25,7 @@ app.use(
         callback(new Error(`Not allowed by CORS: ${origin}`));
       } else {
         callback(null, true);
-      }
+      } 
     },
   }),
 );
@@ -44,6 +44,7 @@ app.get('/ping', (req, res) => {
 
 // Sample route
 app.use('/', sampleRoutes);
+
 app.use('/api/auth', loginRoutes);
 
 // Error handling middleware, MUST always be the last

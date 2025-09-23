@@ -1,6 +1,8 @@
 # @prompt username
 # @prompt password
 POST http://localhost:3000/api/auth
+Content-Type: application/json
+origin : http://localhost:5173
 
 {
   "username": "{{username}}",
