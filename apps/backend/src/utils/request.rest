@@ -1,7 +1,7 @@
 # @prompt username
 # @prompt email
 # @prompt password
-POST http://localhost:3000/api/auth
+POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 origin : http://localhost:5173
 
@@ -9,4 +9,15 @@ origin : http://localhost:5173
   "username": "{{username}}",
   "email": "{{{email}}}",
   "password": "{{password}}"
+}
+
+### Register User
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+origin: http://localhost:5173
+
+{
+  "username": "dencio",
+  "email": "dencio@example.com",
+  "password": "pw1"
 }
