@@ -10,8 +10,8 @@ export async function register(request, response) {
 
     if (!username || !email || !password) {
       return response.status(400).json({
-        message: "All fields are required"
-      })
+        message: 'All fields are required',
+      });
     }
 
     const existingUser = await User.findOne({
@@ -21,14 +21,14 @@ export async function register(request, response) {
     if (existingUser) {
       if (existingUser.email === email) {
         return response.status(400).json({
-          message: "Email is already in use"
-        })
+          message: 'Email is already in use',
+        });
       }
 
       if (existingUser.username === username) {
         return response.status(400).json({
-          message: "Username already taken"
-        })
+          message: 'Username already taken',
+        });
       }
     }
 
@@ -38,13 +38,11 @@ export async function register(request, response) {
       username,
       email,
       password: hashedPassword,
-    })
+    });
 
-    const token = jwt.sign(
-      {id: newUser.id, username: newUser.username, email: newUser.email},
-      JWT_SECRET,
-      { expiresIn: '7D' }
-    )
+    const token = jwt.sign({ id: newUser.id, username: newUser.username, email: newUser.email }, JWT_SECRET, {
+      expiresIn: '7D',
+    });
 
     return response.status(201).json({
       message: 'User registered succesfully',
@@ -53,12 +51,12 @@ export async function register(request, response) {
         id: newUser._id,
         username: newUser.username,
         email: newUser.email,
-      }
-    })
+      },
+    });
   } catch (error) {
     console.error('Register Error:', error);
     response.status(500).json({
-      message: 'Internal server error'
-    })
+      message: 'Internal server error',
+    });
   }
 }

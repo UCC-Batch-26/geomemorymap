@@ -18,6 +18,6 @@ origin: http://localhost:5173
 
 {
   "username": "dencio",
-  "email": "dencio@example.com",
-  "password": "pw1"
+  "email": "dencio@email.com",
+  "password": "password1"
 }

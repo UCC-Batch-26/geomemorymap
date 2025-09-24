@@ -47,7 +47,7 @@ app.get('/ping', (req, res) => {
 app.use('/', sampleRoutes);
 
 app.use('/api/auth', loginRoutes);
-app.use('/api/auth', registerRoutes)
+app.use('/api/auth', registerRoutes);
 
 // Error handling middleware, MUST always be the last
 app.use(errorHandler);
