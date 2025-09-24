@@ -3,7 +3,7 @@ import { Outlet } from 'react-router';
 
 export default function BaseLayout() {
   return (
-    <div className=''>
+    <div className="">
       <NavBar />
       <main className="p-4">
         <Outlet />
