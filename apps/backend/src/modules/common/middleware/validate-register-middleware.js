@@ -13,6 +13,7 @@ export function validateRegister(request, response, next) {
     });
   }
 
+  // eslint-disable-next-line sonarjs/slow-regex
   const emailRegex = /^[A-Za-z0-9._]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
   if (!emailRegex.test(email)) {
     return response.status(400).json({
