@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-export function LoginForm({ setToken, setUser, setPage }) {
-  const [userName, setUserName] = useState('');
+export function LoginForm({ setToken, setUser }) {
+  const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ export function LoginForm({ setToken, setUser, setPage }) {
       const res = await fetch('http://localhost:3000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userName, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await res.json();
@@ -21,7 +21,7 @@ export function LoginForm({ setToken, setUser, setPage }) {
         setUser(data.user);
         navigate('/');
       } else {
-        alert(data.error || 'Login failed');
+        alert(data.message || 'Login failed');
       }
     } catch (err) {
       alert('Error connecting to server');
@@ -37,9 +37,9 @@ return (
 
         <input
           type="text"
-          placeholder="Username"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          placeholder="username"
+          value={username}
+          onChange={(e) => setusername(e.target.value)}
           required
           className="w-full p-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
         />
