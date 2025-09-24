@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import process from 'node:process';
 import { db } from './db.js';
+import loginRoutes from '/uplift/geomemory-app/geomemorymap/apps/backend/src/modules/routes/login-routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -42,7 +43,9 @@ app.get('/ping', (req, res) => {
 });
 
 // Sample route
-app.use('/sample', sampleRoutes);
+app.use('/', sampleRoutes);
+
+app.use('/api/auth', loginRoutes);
 
 // Error handling middleware, MUST always be the last
 app.use(errorHandler);
