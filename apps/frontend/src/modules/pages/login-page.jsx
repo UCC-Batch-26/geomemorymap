@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LoginForm } from '@/modules/sample/pages/login-form';
+import { LoginForm } from '@/modules/common/components/login-form';
 
 export function LoginPage() {
   const [token, setToken] = useState(null);
