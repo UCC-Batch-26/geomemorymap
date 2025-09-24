@@ -17,9 +17,17 @@ export async function register(request, response) {
     const existingUser = await User.findOne({email});
 
     if (existingUser) {
-      return response.status(400).json({
-        message: "Email already in use"
-      })
+      if (existingUser.email == email) {
+        return response.status(400).json({
+          message: "Email is already in use"
+        })
+      }
+
+      if (existingUser.username === username) {
+        return response.status(400).json({
+          message: "Username already taken"
+        })
+      }
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
