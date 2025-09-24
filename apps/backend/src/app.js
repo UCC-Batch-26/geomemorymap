@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import process from 'node:process';
 import { db } from './db.js';
-import loginRoutes from '/uplift/geomemory-app/geomemorymap/apps/backend/src/modules/routes/login-routes.js';
+import loginRoutes from '#modules/routes/login-routes.js';
 import registerRoutes from '#modules/routes/register-routes.js';
 
 const app = express();

@@ -1,4 +1,4 @@
-import { User } from '/uplift/geomemory-app/geomemorymap/apps/backend/src/modules/models/userSchema.js';
+import { User } from '#modules/models/userSchema.js';
 import bcrypt from 'bcrypt';
 
 export async function validateLogin(req, res, next) {
