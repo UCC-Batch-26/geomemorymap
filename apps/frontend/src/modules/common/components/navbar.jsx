@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 
 function NavBar() {
   return (
-    <nav className="flex justify-between px-50 py-10 items-center">
+    <nav className="bg-none flex justify-between px-50 py-10 items-center">
       <div className='flex items-center gap-3'>
         <Link to={'/'}><img src="../src/assets/geo-memory-map-nav-logo.png" alt="Geo Memory Map logo" className="w-13 h-10"/></Link>
         

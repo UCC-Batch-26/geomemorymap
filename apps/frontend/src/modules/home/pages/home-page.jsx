@@ -11,6 +11,7 @@ export function HomePage() {
   // }, [ping]);
 
   return (
+    
     <div className="grid gap-2 container grid-cols-4 mx-auto">
       {/* <div className="text-4xl text-center">This is the Home Page</div>
       <div className="text-center">Backend Connection: {status}</div>
@@ -31,5 +32,6 @@ export function HomePage() {
         Sign Up
       </Link>
     </div>
+    
   );
 }
