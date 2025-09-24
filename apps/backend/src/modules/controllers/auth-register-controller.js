@@ -14,10 +14,12 @@ export async function register(request, response) {
       })
     }
 
-    const existingUser = await User.findOne({email});
+    const existingUser = await User.findOne({
+      $or: [{ email }, { username }],
+    });
 
     if (existingUser) {
-      if (existingUser.email == email) {
+      if (existingUser.email === email) {
         return response.status(400).json({
           message: "Email is already in use"
         })
