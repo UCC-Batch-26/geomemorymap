@@ -8,8 +8,9 @@ function NavBar() {
           <img src="../src/assets/geo-memory-map-nav-logo.png" alt="Geo Memory Map logo" className="w-13 h-10" />
         </Link>
 
-        <h1 className="text-3xl font-display font-bold">Geo Memory Map</h1>
+        <h1 className="text-3xl font-display font-bold text-[#526B5C]">Geo Memory Map</h1>
       </div>
+
       <ul className="flex gap-10 font-display">
         <li>
           <Link to={'/'}>Home</Link>
