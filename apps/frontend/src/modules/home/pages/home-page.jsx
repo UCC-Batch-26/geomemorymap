@@ -2,6 +2,7 @@ import Hero from '@/modules/common/components/hero';
 import { Link } from 'react-router';
 import Cards from '@/modules/common/components/cards';
 import cards from '../hooks/cards';
+import AboutPage from './about-page';
 
 function createCards(card) {
   return <Cards key={card.id} img={card.imgURL} name={card.name} />;
@@ -23,6 +24,7 @@ export function HomePage() {
         Sign Up
       </Link>
       {cards.map(createCards)}
+      <AboutPage />
     </div>
   );
 }
