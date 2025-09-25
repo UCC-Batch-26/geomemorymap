@@ -21,3 +21,34 @@ origin: http://localhost:5173
   "email": "dencio@email.com",
   "password": "password1"
 }
+
+### memory 
+# @prompt title
+# @prompt description
+# @prompt longitude
+# @prompt latitude
+# @prompt address
+# @prompt tags
+# @prompt date
+# @prompt mediaUrl
+# @prompt mediaType
+POST http://localhost:3000/api/auth/memory
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODc5NzI3MywiZXhwIjoxNzYxMzg5MjczfQ.QSjm0bfj9mKGlsq8XxDcV-EoWMkwVbJFPY1DOuWLAzM
+origin: http://localhost:5173
+
+{
+  "title": "{{title}}",
+  "description": "{{description}}",
+  "location": {
+    "type": "Point",
+    "coordinates": [ "{{longitude}}", "{{latitude}}"],
+    "address": "{{address}}"
+  },
+  "media": [{
+    "url": "{{mediaUrl}}",
+    "mediaType": "{{mediaType}}"
+  }],
+  "tags": "{{tags}}",
+  "dates": "{{date}}"
+}
