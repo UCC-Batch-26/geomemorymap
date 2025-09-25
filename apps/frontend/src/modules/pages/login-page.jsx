@@ -1,12 +1,13 @@
-import { createBrowserRouter, RouterProvider } from 'react-router';
-import { LoginPage } from '@/modules/pages/login-page';
-import { RegistrationForm } from '@/modules/pages/registration-form';
+import { useState } from 'react';
+import { LoginForm } from '@/modules/common/components/login-form';
 
-const router = createBrowserRouter([
-    { path: '/', element: <LoginPage />},
-    { path: '/register', element: <RegistrationForm/>},
-]);
+export function LoginPage() {
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
-export function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <div>
+      <LoginForm setToken={setToken} setUser={setUser} />
+    </div>
+  );
 }

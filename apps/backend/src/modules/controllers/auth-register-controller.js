@@ -6,7 +6,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 export async function register(request, response) {
   try {
-    const { username, email, password } = request.body;
+    const { username, email, age, password } = request.body;
 
     if (!username || !email || !password) {
       return response.status(400).json({
@@ -38,6 +38,7 @@ export async function register(request, response) {
       username,
       email,
       password: hashedPassword,
+      age,
     });
 
     const token = jwt.sign({ id: newUser.id, username: newUser.username, email: newUser.email }, JWT_SECRET, {

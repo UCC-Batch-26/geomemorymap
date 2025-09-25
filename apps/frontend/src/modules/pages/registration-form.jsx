@@ -14,23 +14,35 @@ export function RegistrationForm() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    try {
+
+    const username = form.username.trim();
+    const email = form.email.trim().toLowerCase();
+    const password = form.password;
+    const age = form.age; 
+
+    if (!username || !email || !password) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+     try {
       const res = await fetch('http://localhost:3000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ username, email, password, age }),
       });
 
       const data = await res.json();
       console.log(data);
+
       if (res.ok) {
         alert('Registered successfully! You can login now.');
-        // setToken(data.token);
-        // setUser(data.user);
+        setForm({ username: '', email: '', password: '', age: '' });
       } else {
         alert(data.message || 'Registration failed');
       }
     } catch (error) {
+      console.error('Registration error:', error);
       alert('Error connecting to server');
     }
   };
@@ -45,7 +57,7 @@ export function RegistrationForm() {
 
       <input
         name="username"
-        placeholder="Name"
+        placeholder="Username"
         onChange={handleChange}
         required
         className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
