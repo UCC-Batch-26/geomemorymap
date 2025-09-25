@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-const memorySchema = new Schema (
+const memorySchema = new Schema(
   {
     title: {
       type: String,
@@ -29,8 +29,8 @@ const memorySchema = new Schema (
         url: String,
         type: {
           type: String,
-          enum: ["image", "video", "audio"],
-          default: "image",
+          enum: ['image', 'video', 'audio'],
+          default: 'image',
         },
       },
     ],
@@ -40,10 +40,11 @@ const memorySchema = new Schema (
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
-  }, {timestamps: true }
+  },
+  { timestamps: true },
 );
 
-export const Memory = mongoose.model("Memory", memorySchema);
+export const Memory = mongoose.model('Memory', memorySchema);
