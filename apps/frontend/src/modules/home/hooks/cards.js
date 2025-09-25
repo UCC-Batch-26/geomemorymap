@@ -1,6 +1,6 @@
-import bridgeImg from "@/assets/cards/bridge-card-img.jpg";
-import busImg from "@/assets/cards/bus-card-img.jpg";
-import seaShoreImg from "@/assets/cards/sea-shore-card-img.jpg";
+import bridgeImg from '@/assets/cards/bridge-card-img.jpg';
+import busImg from '@/assets/cards/bus-card-img.jpg';
+import seaShoreImg from '@/assets/cards/sea-shore-card-img.jpg';
 
 const cards = [
   {
