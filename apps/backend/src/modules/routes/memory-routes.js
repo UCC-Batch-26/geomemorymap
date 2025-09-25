@@ -11,7 +11,7 @@ router.post('/', authMiddleware, createMemory);
 router.get('/', authMiddleware, getMemories);
 router.get('/:id', authMiddleware, getMemoryById);
 router.put('/:id', authMiddleware, updateMemory);
-router.put('/:id', authMiddleware, deleteMemory);
+router.delete('/:id', authMiddleware, deleteMemory);
 
 export default router;
 
