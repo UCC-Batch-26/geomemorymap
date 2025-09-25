@@ -17,7 +17,7 @@ Content-Type: application/json
 origin: http://localhost:5173
 
 {
-  "username": "dencio",
-  "email": "dencio@email.com",
+  "username": "dean",
+  "email": "dean@example.com",
   "password": "password1"
 }
