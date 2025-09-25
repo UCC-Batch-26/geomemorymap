@@ -41,7 +41,7 @@ export async function register(request, response) {
     });
 
     const token = jwt.sign({ id: newUser.id, username: newUser.username, email: newUser.email }, JWT_SECRET, {
-      expiresIn: '7D',
+      expiresIn: '30D',
     });
 
     return response.status(201).json({

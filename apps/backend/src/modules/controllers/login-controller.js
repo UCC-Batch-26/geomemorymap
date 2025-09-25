@@ -10,7 +10,7 @@ export async function login(request, response) {
     const token = jwt.sign(
       { id: user._id, username: user.username, email: user.email },
       JWT_SECRET,
-      { expiresIn: '7D' }, // expires in 7 days
+      { expiresIn: '30D' }, // expires in 7 days
     );
 
     return response.status(200).json({
