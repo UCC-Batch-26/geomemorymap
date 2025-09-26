@@ -25,6 +25,9 @@ function NavBar() {
           <Link to={'/signup'}>Sign Up</Link>
         </li>
         <li>
+          <Link to={'/user'}>Profile</Link>
+        </li>
+        <li>
           <Link to={'/contact'}>Contact</Link>
         </li>
       </ul>
