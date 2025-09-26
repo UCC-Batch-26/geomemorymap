@@ -13,6 +13,12 @@ export async function deleteMemory(req, res){
         message: 'Memory not found or not yours'
       })
     }
+
+    res.json({
+      success: true,
+      message: 'Memory deleted succesfully',
+      data: memory
+    })
   } catch (error) {
     res.status(500).json({
       success: false,
