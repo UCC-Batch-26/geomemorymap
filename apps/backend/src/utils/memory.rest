@@ -1,0 +1,78 @@
+### CREATE Memory
+# @prompt title
+# @prompt description
+# @prompt latitude
+# @prompt longitude
+# @prompt photoUrl
+POST  http://localhost:3000/api/memories
+Content-Type: application/json
+Origin: http://localhost:5173
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
+
+{
+  "title": "{{title}}",
+  "description": "{{description}}",
+  "location": {
+    "lat": {{latitude}},
+    "lng": {{longitude}}
+  },
+  "photoURL": "{{photoUrl}}"
+}
+
+### GET All Memories
+GET http://localhost:3000/api/memories
+Content-Type: application/json
+Origin: http://localhost:5173
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
+
+### GET Memory By ID
+# @prompt memoryId
+GET http://localhost:3000/api/memories/{{memoryId}}
+Content-Type: application/json
+Origin: http://localhost:5173
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
+
+### UPDATE Memory
+# @prompt memoryId
+# @prompt newTitle
+# @prompt newDescription
+# @prompt newLatitude
+# @prompt newLongitude
+# @prompt newPhotoUrl
+PUT http://localhost:3000/api/memories/{{memoryId}}
+Content-Type: application/json
+Origin: http://localhost:5173
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
+
+{
+  "title": "{{newTitle}}",
+  "description": "{{newDescription}}",
+  "location": {
+    "lat": {{newLatitude}},
+    "lng": {{newLongitude}}
+  },
+  "photoURL": "{{newPhotoUrl}}"
+}
+
+### DELETE Memory
+# @prompt memoryId
+DELETE http://localhost:3000/api/memories/{{memoryId}}
+Content-Type: application/json
+Origin: http://localhost:5173
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
+
+###
+POST  http://localhost:3000/api/memories
+Content-Type: application/json
+Origin: http://localhost:5173
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
+
+{
+  "title": "Tuguegarao",
+  "description": "Mainit pag summer",
+  "location": {
+    "lat": 17.6132,
+    "lng": 121.7249
+  },
+  "photoURL": "https://res.cloudinary.com/demo/image/upload/sample.jpg"
+}
