@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 const memorySchema = new Schema(
   {
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
@@ -30,10 +30,10 @@ const memorySchema = new Schema(
         min: -180,
         max: 180,
       },
-      photoURL: {
-        type: String,
-        default: null,
-      },
+    },
+    photoURL: { 
+      type: String, 
+      default: null 
     },
   },
   { timestamps: true },
