@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { User } from '/uplift/geomemory-app/geomemorymap/apps/backend/src/modules/models/userSchema.js';
 
 // middleware for only logged-in user
-export async function createMiddleware(req, res, next) {
+export async function authMiddleware(req, res, next) {
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
