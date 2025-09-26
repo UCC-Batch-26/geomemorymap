@@ -1,3 +1,5 @@
+import { Memory } from '#modules/models/memories-schema.js';
+
 export async function getMemoryById(req, res){
   try {
     const memory = await Memory.findOne({

@@ -1,3 +1,5 @@
+import { Memory } from '#modules/models/memories-schema.js'
+
 export async function deleteMemory(req, res){
   try {
     const memory = await Memory.findOneAndDelete({

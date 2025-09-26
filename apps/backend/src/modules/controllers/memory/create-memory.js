@@ -1,4 +1,4 @@
-// import MemoryPin
+import { Memory } from '#modules/models/memories-schema.js'
 
 export async function createMemory(req, res) {
   try {
@@ -10,7 +10,7 @@ export async function createMemory(req, res) {
       })
     }
 
-    const newMemory = new MemoryPin({
+    const newMemory = new Memory({
       title,
       description,
       location, 

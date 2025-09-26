@@ -1,8 +1,8 @@
-// import
+import { Memory } from '#modules/models/memories-schema.js'
 
 export async function getMemories(req, res){
   try {
-    const memories = await MemorySchema.find({
+    const memories = await Memory.find({
       userId: req.user.id
     })
 
