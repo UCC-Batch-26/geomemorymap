@@ -1,20 +1,20 @@
-import { Memory } from '#modules/models/memories-schema.js'
+import { Memory } from '#modules/models/memories-schema.js';
 
-export async function getMemories(req, res){
+export async function getMemories(req, res) {
   try {
     const memories = await Memory.find({
-      userId: req.user.id
-    })
+      userId: req.user.id,
+    });
 
     res.json({
       success: true,
-      data: memories
-    })
+      data: memories,
+    });
   } catch (error) {
     console.error('Get Memories Error', error);
     res.status(500).json({
       success: false,
-      message: 'Failed to fetch memories'
-    })
+      message: 'Failed to fetch memories',
+    });
   }
 }

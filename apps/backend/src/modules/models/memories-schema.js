@@ -31,9 +31,9 @@ const memorySchema = new Schema(
         max: 180,
       },
     },
-    photoURL: { 
-      type: String, 
-      default: null 
+    photoURL: {
+      type: String,
+      default: null,
     },
   },
   { timestamps: true },

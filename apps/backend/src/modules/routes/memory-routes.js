@@ -16,4 +16,3 @@ router.put('/:id', authMiddleware, validateMemory, updateMemory);
 router.delete('/:id', authMiddleware, deleteMemory);
 
 export default router;
-
