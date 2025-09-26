@@ -1,8 +1,8 @@
-import { createMiddleware } from '#modules/common/middleware/create-memory-middleware.js';
+import { createMiddleware } from '#modules/common/middleware/auth-create-Middleware.js';
 import { createMemory } from '#modules/controllers/memory-controller.js';
-import express from 'express';
+import { Router } from 'express';
 
-const router = express.Router();
+const router = Router();
 
 router.post('/memory', createMiddleware, createMemory);
 

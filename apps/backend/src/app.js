@@ -9,8 +9,7 @@ import process from 'node:process';
 import { db } from './db.js';
 import loginRoutes from '#modules/routes/login-routes.js';
 import registerRoutes from '#modules/routes/register-routes.js';
-import { createMemory } from '#modules/controllers/memory-controller.js';
-import { createMiddleware } from '#modules/common/middleware/create-memory-middleware.js';
+import memoryRoutes from '/uplift/geomemory-app/geomemorymap/apps/backend/src/modules/routes/memory-routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -50,7 +49,7 @@ app.use('/', sampleRoutes);
 
 app.use('/api/auth', loginRoutes);
 app.use('/api/auth', registerRoutes);
-app.use('/api/auth', createMiddleware, createMemory);
+app.use('/api/auth', memoryRoutes);
 
 // Error handling middleware, MUST always be the last
 app.use(errorHandler);
