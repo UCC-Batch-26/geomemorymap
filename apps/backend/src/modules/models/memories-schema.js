@@ -2,6 +2,11 @@ import mongoose, { Schema } from 'mongoose';
 
 const memorySchema = new Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -13,35 +18,22 @@ const memorySchema = new Schema(
       trim: true,
     },
     location: {
-      type: {
+      lat: {
+        type: Number,
+        required: true,
+        min: -90,
+        max: 90,
+      },
+      lng: {
+        type: Number,
+        required: true,
+        min: -180,
+        max: 180,
+      },
+      photoURL: {
         type: String,
-        enum: ['Point'],
-        required: true,
+        default: null,
       },
-      coordinates: {
-        type: [Number],
-        required: true,
-      },
-      address: String,
-    },
-    media: [
-      {
-        url: String,
-        type: {
-          type: String,
-          enum: ['image', 'video', 'audio'],
-          default: 'image',
-        },
-      },
-    ],
-    tags: [String],
-    dates: {
-      type: Date,
-    },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
     },
   },
   { timestamps: true },
