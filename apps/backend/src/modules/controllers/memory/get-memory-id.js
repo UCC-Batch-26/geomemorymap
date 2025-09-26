@@ -1,10 +1,20 @@
 import { Memory } from '#modules/models/memories-schema.js';
+import mongoose from 'mongoose';
 
 export async function getMemoryById(req, res){
   try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid memory ID'
+      })
+    }
+
     const memory = await Memory.findOne({
-      id: req.params.id,
-      userId: req.user.id,
+      _id: id,
+      userId: req.user.id
     })
 
     if (!memory) {
