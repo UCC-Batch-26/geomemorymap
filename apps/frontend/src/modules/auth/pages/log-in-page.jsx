@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 function LoginPage({ setToken, setUser }) {
-  const [username, setusername] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ function LoginPage({ setToken, setUser }) {
       if (res.ok) {
         setToken(data.token);
         setUser(data.user);
-        navigate('/login');
+        navigate('/');
       } else {
         alert(data.message || 'Login failed');
       }
@@ -38,7 +38,7 @@ function LoginPage({ setToken, setUser }) {
           type="text"
           placeholder="username"
           value={username}
-          onChange={(e) => setusername(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
           required
           className="w-full p-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
         />
