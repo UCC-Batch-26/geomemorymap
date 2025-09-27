@@ -8,8 +8,8 @@ import LoginPage from '@/modules/auth/pages/log-in-page';
 import ContactPage from '@/modules/home/pages/contact-page';
 
 export function App() {
-  const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null);
+  const [_token, setToken] = useState(null);
+  const [_user, setUser] = useState(null);
 
   const router = createBrowserRouter([
     {
