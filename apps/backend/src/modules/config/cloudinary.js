@@ -1,3 +1,5 @@
+// This is where we connect to Cloudinary so our app knows
+// where to send and grab pictures from
 import {v2 as cloudinary } from "cloudinary";
 import {CloudinaryStorage} from "multer-storage-cloudinary";
 
@@ -11,6 +13,7 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
     return {
+      // this folder will shows in our Cloudinary Media Library
       folder: "geomemorymap",
       resource_type: "image",
       allowed_formats: ["jpg", "png", "jpeg", "webp"],
@@ -19,4 +22,4 @@ const storage = new CloudinaryStorage({
   }
 })
 
-export {cloudinary, storage}
+export { cloudinary, storage}
