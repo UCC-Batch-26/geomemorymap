@@ -10,10 +10,13 @@ import upload from '#modules/common/middleware/multer.js';
 
 const router = Router();
 
-router.post('/', authMiddleware, 
-  upload.single("image"), // handles picture upload
-  validateMemory, 
-  createMemory);
+router.post(
+  '/',
+  authMiddleware,
+  upload.single('image'), // handles picture upload
+  validateMemory,
+  createMemory,
+);
 router.get('/', authMiddleware, getMemories);
 router.get('/:id', authMiddleware, getMemoryById);
 router.put('/:id', authMiddleware, validateMemory, updateMemory);
