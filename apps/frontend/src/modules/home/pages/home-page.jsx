@@ -11,7 +11,7 @@ function createCards(card) {
 
 export function HomePage() {
   return (
-    <div>
+    <div className=''>
       <div className="grid gap-2 container grid-cols-4 mx-auto pb-10">
         <Hero />
         <h1 className="row-start-3 font-display text-6xl font-bold">Let's Explore The World</h1>
