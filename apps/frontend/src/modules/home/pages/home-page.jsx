@@ -28,6 +28,7 @@ export function HomePage() {
         {cards.map(createCards)}
         
       </div>
+      
       <div className="col-span-4 row-span-2">
           <ProfilePage />
           

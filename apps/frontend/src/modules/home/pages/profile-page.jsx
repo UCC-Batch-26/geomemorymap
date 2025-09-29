@@ -22,8 +22,8 @@ function ProfilePage() {
   };
 
   return (
-    
-    <section className="flex items-center justify-center bg-[#526b5c] h-screen pl-5 bg-auto bg-no-repeat bg-center">
+    <div className='bg-[url(@/assets/geo-memory-map-bg.png)] bg-no-repeat bg-center'>
+    <section className="flex items-center justify-center bg-[#526b5c]/80 h-screen pl-5 bg-auto bg-no-repeat bg-center">
         
       <div className="grid grid-cols-2 grid-rows-[500,auto] gap-4 w-[80vw]">
         <div className="bg-white/50 rounded-lg shadow-lg pb-5">
@@ -73,6 +73,7 @@ function ProfilePage() {
         {/* CARD GENERATEED FROM API BELOW */}
       </div>
     </section>
+    </div>
   );
 }
 
