@@ -40,7 +40,7 @@ Origin: http://localhost:5173
 --MyBoundary
 Content-Disposition: form-data; name="title"
 
-Tuguegarao
+Tuguegaraoasdasd
 --MyBoundary
 Content-Disposition: form-data; name="description"
 
@@ -57,16 +57,16 @@ Content-Disposition: form-data; name="lng"
 Content-Disposition: form-data; name="image"; filename="testdebug.jpg"
 Content-Type: image/jpeg
 
-@../tests/assets/testdebug.jpg
+< ./testdebug.jpg
 --MyBoundary--
 
-###
+### Create Memory with Image Upload
 POST http://localhost:3000/api/memories
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
-Origin: http://localhost:5173
 
 title=Tuguegarao
 description=Mainit pag summer
 lat=17.6132
 lng=121.7249
-image=@../tests/assets/testdebug.jpg
+image=@../../tests/assets/testdebug.jpg
+
