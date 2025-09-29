@@ -3,7 +3,7 @@ import { Outlet } from 'react-router';
 
 export default function BaseLayout() {
   return (
-    <div className="bg-[#F2F0EF]  h-screen">
+    <div className="bg-[#F2F0EF]">
       <NavBar />
       <main className="">
         <Outlet />

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import MapView from '@/modules/common/components/map-view';
 
 function ProfilePage() {
   const [title, setTitle] = useState('');
@@ -21,8 +22,10 @@ function ProfilePage() {
   };
 
   return (
-    <section className="flex items-center justify-center bg-[#526B5C] h-screen ">
-      <div className="grid grid-cols-2 grid-rows-2 gap-4 w-[80vw]">
+    
+    <section className="flex items-center justify-center bg-[#526b5c] h-screen pl-5 bg-auto bg-no-repeat bg-center">
+        
+      <div className="grid grid-cols-2 grid-rows-[500,auto] gap-4 w-[80vw]">
         <div className="bg-white/50 rounded-lg shadow-lg pb-5">
           <h1 className="font-display pt-5 pl-5 text-3xl">Add New Memory</h1>
           {/* FORM STARTS HERE */}
@@ -63,6 +66,11 @@ function ProfilePage() {
             </button>
           </form>
         </div>
+        <div className="place-items-center">
+          <MapView />
+        </div>
+        <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
+        {/* CARD GENERATEED FROM API BELOW */}
       </div>
     </section>
   );
