@@ -11,7 +11,12 @@ import { log } from '#utils/log.js';
  */
 // eslint-disable-next-line no-unused-vars
 export function errorHandler(err, req, res, next) {
-  log('error', err.stack); // Log error for debugging
+  log('error', {
+    name: err.name,
+    message: err.message,
+    stack: err.stack,
+    ...err
+  }); // Log error for debugging
 
   const statusCode = err.statusCode || 500; // Default to 500 if no status code is provided
   const message = err.message || 'Something went wrong.'; // Default error message
