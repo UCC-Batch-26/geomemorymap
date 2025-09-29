@@ -1,0 +1,72 @@
+// @fileMime = image/webp, image/png
+@fileName = testdebug.jpg
+@filePath = ./tests/assets/{{fileName}}
+###
+POST http://localhost:3000/api/memories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
+Content-Type: multipart/form-data; 
+Origin: http://localhost:5173
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Tuguegarao
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+Mainit pag summer
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="lat"
+
+17.6132
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="lng"
+
+121.7249
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="{{fileName}}"
+Content-Type: image/jpeg
+
+< {{filePath}}
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+###
+POST http://localhost:3000/api/memories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
+Content-Type: multipart/form-data; boundary=MyBoundary
+Origin: http://localhost:5173
+
+--MyBoundary
+Content-Disposition: form-data; name="title"
+
+Tuguegarao
+--MyBoundary
+Content-Disposition: form-data; name="description"
+
+Mainit pag summer
+--MyBoundary
+Content-Disposition: form-data; name="lat"
+
+17.6132
+--MyBoundary
+Content-Disposition: form-data; name="lng"
+
+121.7249
+--MyBoundary
+Content-Disposition: form-data; name="image"; filename="testdebug.jpg"
+Content-Type: image/jpeg
+
+@../tests/assets/testdebug.jpg
+--MyBoundary--
+
+###
+POST http://localhost:3000/api/memories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
+Origin: http://localhost:5173
+
+title=Tuguegarao
+description=Mainit pag summer
+lat=17.6132
+lng=121.7249
+image=@../tests/assets/testdebug.jpg
