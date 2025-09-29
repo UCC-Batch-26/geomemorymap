@@ -1,0 +1,71 @@
+import axios from 'axios';
+import { useState } from 'react';
+
+function ProfilePage() {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const postData = { title, description };
+    try {
+      await axios.post('/api/memories', postData);
+      alert('Memory added successfully!');
+      setTitle('');
+      setDescription('');
+    } catch (error) {
+      console.error('Error adding memory:', error);
+      alert('Failed to add memory. Please try again.');
+    }
+  };
+
+  return (
+    <section className="flex items-center justify-center bg-[#526B5C] h-screen ">
+      <div className="grid grid-cols-2 grid-rows-2 gap-4 w-[80vw]">
+        <div className="bg-white/50 rounded-lg shadow-lg pb-5">
+          <h1 className="font-display pt-5 pl-5 text-3xl">Add New Memory</h1>
+          {/* FORM STARTS HERE */}
+          <form action="" method="post" className="ml-5 rounded-lg" onSubmit={handleSubmit}>
+            <h2 className="font-display p-2 text-2xl">Title</h2>
+
+            <input
+              type="text"
+              placeholder="Title of your memory..."
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="ml-2 bg-white/20  w-full max-w-2xl min-w-1 rounded-sm"
+              required
+            />
+
+            <h2 className="font-display p-2 text-2xl">Description</h2>
+
+            <textarea
+              className="ml-2 block w-full bg-white/20 rounded-sm min-w-1  max-w-2xl h-full min-h-25"
+              placeholder="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            ></textarea>
+
+            <button
+              type="submit"
+              className="focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 ml-2 my-2 "
+            >
+              Submit
+            </button>
+
+            <button
+              type="submit"
+              className="focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 my-2"
+            >
+              Upload
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default ProfilePage;

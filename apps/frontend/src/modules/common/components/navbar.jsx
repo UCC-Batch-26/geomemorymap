@@ -1,11 +1,12 @@
 import { Link } from 'react-router';
+import logo from '@/assets/geo-memory-map-nav-logo.png';
 
 function NavBar() {
   return (
     <nav className="bg-none flex justify-between px-50 py-10 items-center">
       <div className="flex items-center gap-3">
         <Link to={'/'}>
-          <img src="../src/assets/geo-memory-map-nav-logo.png" alt="Geo Memory Map logo" className="w-13 h-10" />
+          <img src={logo} alt="Geo Memory Map logo" className="w-13 h-10" />
         </Link>
 
         <h1 className="text-3xl font-display font-bold text-[#526B5C]">Geo Memory Map</h1>
@@ -23,6 +24,9 @@ function NavBar() {
         </li>
         <li>
           <Link to={'/signup'}>Sign Up</Link>
+        </li>
+        <li>
+          <Link to={'/user'}>Profile</Link>
         </li>
         <li>
           <Link to={'/contact'}>Contact</Link>
