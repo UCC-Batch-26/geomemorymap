@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import MapView from '@/modules/common/components/map-view';
 
-function ProfilePage() {
+function MemoryFormPage() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -76,4 +76,4 @@ function ProfilePage() {
   );
 }
 
-export default ProfilePage;
+export default MemoryFormPage;

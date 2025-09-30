@@ -2,7 +2,7 @@ import Hero from '@/modules/common/components/hero';
 import { Link } from 'react-router';
 import Cards from '@/modules/common/components/cards';
 import cards from '../hooks/cards';
-import ProfilePage from './profile-page';
+import MemoryFormPage from './memory-form-page';
 
 function createCards(card) {
   return <Cards key={card.id} img={card.imgURL} name={card.name} />;
@@ -30,7 +30,7 @@ export function HomePage() {
       </div>
 
       <div className="col-span-4 row-span-2">
-        <ProfilePage />
+        <MemoryFormPage />
       </div>
     </div>
   );

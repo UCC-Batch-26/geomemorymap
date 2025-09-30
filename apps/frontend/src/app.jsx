@@ -6,7 +6,7 @@ import BaseLayout from '@/modules/home/layouts/base-layout';
 import SignUpPage from '@/modules/auth/pages/sign-up-page';
 import LoginPage from '@/modules/auth/pages/log-in-page';
 import ContactPage from '@/modules/home/pages/contact-page';
-import ProfilePage from './modules/home/pages/profile-page';
+import MemoryFormPage from './modules/home/pages/memory-form-page';
 
 export function App() {
   const [_token, setToken] = useState(null);
