@@ -27,7 +27,10 @@ export function validateMemory(req, res, next) {
     });
   }
 
-  const { lat, lng } = location;
+  let { lat, lng } = location;
+
+  lat = Number(lat);
+  lng = Number(lng);
 
   if (typeof lat !== 'number' || lat < -90 || lat > 90) {
     return res.status(400).json({

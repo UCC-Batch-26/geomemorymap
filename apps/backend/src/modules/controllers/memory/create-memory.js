@@ -11,11 +11,11 @@ export async function createMemory(req, res) {
     }
 
     const newMemory = new Memory({
+      userId: req.user.id,
       title,
       description,
       location,
       photoURL: photoURL || null,
-      userId: req.user.id,
     });
 
     await newMemory.save();
