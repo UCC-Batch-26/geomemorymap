@@ -31,7 +31,7 @@ Content-Type: image/jpeg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 
-###
+### CREATE - Test Upload Picture
 POST http://localhost:3000/api/memories
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
 Content-Type: multipart/form-data; boundary=MyBoundary
@@ -40,24 +40,24 @@ Origin: http://localhost:5173
 --MyBoundary
 Content-Disposition: form-data; name="title"
 
-Tuguegaraoasdasd
+TuguegaraoCity
 --MyBoundary
 Content-Disposition: form-data; name="description"
 
 Mainit pag summer
 --MyBoundary
-Content-Disposition: form-data; name="lat"
+Content-Disposition: form-data; name="location[lat]"
 
 17.6132
 --MyBoundary
-Content-Disposition: form-data; name="lng"
+Content-Disposition: form-data; name="location[lng]"
 
 121.7249
 --MyBoundary
 Content-Disposition: form-data; name="image"; filename="testdebug.jpg"
 Content-Type: image/jpeg
 
-< ./testdebug.jpg
+< ../../tests/assets/apple.jpg
 --MyBoundary--
 
 ### Create Memory with Image Upload
