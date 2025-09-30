@@ -7,6 +7,7 @@ function MemoryFormPage() {
   const [description, setDescription] = useState('');
   const [memories, setMemories] = useState([]);
 
+  // Fetch memories from backend
   useEffect(() => {
     const fetchMemories = async () => {
       try {
