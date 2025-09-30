@@ -40,19 +40,19 @@ Origin: http://localhost:5173
 --MyBoundary
 Content-Disposition: form-data; name="title"
 
-TuguegaraoCity
+Manila
 --MyBoundary
 Content-Disposition: form-data; name="description"
 
-Mainit pag summer
+China town ganda
 --MyBoundary
 Content-Disposition: form-data; name="location[lat]"
 
-17.6132
+14.6
 --MyBoundary
 Content-Disposition: form-data; name="location[lng]"
 
-121.7249
+120.98
 --MyBoundary
 Content-Disposition: form-data; name="image"; filename="testdebug.jpg"
 Content-Type: image/jpeg
