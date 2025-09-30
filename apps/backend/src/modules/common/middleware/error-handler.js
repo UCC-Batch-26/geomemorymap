@@ -15,7 +15,7 @@ export function errorHandler(err, req, res, next) {
     name: err.name,
     message: err.message,
     stack: err.stack,
-    ...err
+    ...err,
   }); // Log error for debugging
 
   const statusCode = err.statusCode || 500; // Default to 500 if no status code is provided
