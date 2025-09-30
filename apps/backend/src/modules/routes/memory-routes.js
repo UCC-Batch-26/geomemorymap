@@ -13,7 +13,7 @@ const router = Router();
 router.post(
   '/',
   authMiddleware,
-  upload.single('image'), // handles picture upload 
+  upload.single('image'), // handles picture upload
   validateMemory,
   createMemory,
 );
