@@ -12,7 +12,7 @@ export function HomePage() {
   return (
     <div>
       <div className="grid container grid-cols-4 m-auto h-screen">
-        <Hero /> 
+        <Hero />
         <div>
           <h1 className="font-display text-6xl font-bold pb-5">Let's Explore The World</h1>
           <p className="min-h-0 max-h-24">

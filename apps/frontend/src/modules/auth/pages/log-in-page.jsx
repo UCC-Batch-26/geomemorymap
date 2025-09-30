@@ -32,11 +32,9 @@ function LoginPage({ setToken, setUser }) {
   return (
     <div className="fixed bg-[url(@/assets/geo-memory-map-bg.png)] bg-size-[600px] bg-no-repeat bg-center ">
       <div className="grid grid-cols-4 bg-[#526b5c]/80 h-[100vh]">
-        <div className='col-start-2 row-start-2'>
+        <div className="col-start-2 row-start-2">
           <h1 className="font-[Montserrat] text-7xl font-bold text-white text-left">Login</h1>
-          <h3 className="font-[Montserrat] text-2xl font-bold text-white text-left py-5">
-            Sign in to continue
-          </h3>
+          <h3 className="font-[Montserrat] text-2xl font-bold text-white text-left py-5">Sign in to continue</h3>
           <h4 className="font-[Montserrat] text-md  text-white text-left py-20">
             Discover your world's stories—pin your memories, share your moments, and bring your map to life!
           </h4>
