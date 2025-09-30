@@ -1,25 +1,64 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MapView from '@/modules/common/components/map-view';
 
 function MemoryFormPage() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [memories, setMemories] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    const fetchMemories = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const res = await fetch('/api/memories', {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          }
+        })
 
-    const postData = { title, description };
-    try {
-      await axios.post('/api/memories', postData);
-      alert('Memory added successfully!');
-      setTitle('');
-      setDescription('');
-    } catch (error) {
-      console.error('Error adding memory:', error);
-      alert('Failed to add memory. Please try again.');
+        if (!res.ok) throw new Error('Failed to fetch memories');
+        const data = await res.json();
+        setMemories(data);
+      } catch (error) {
+        console.error('Error fetching memories', error)
+      }
     }
-  };
+
+    fetchMemories();
+  }, []);
+
+  // Handle form submit
+  const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  const postData = { title, description };
+
+  try {
+    const token = localStorage.getItem('token'); // Get token for Authorization
+
+    const res = await fetch('/api/memories', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(postData), // Send title & description
+    });
+
+    if (!res.ok) throw new Error('Failed to add memory');
+
+    const newMemory = await res.json(); // Get the memory returned from backend
+    setMemories((prev) => [newMemory, ...prev]) // Add new memory to state
+    setTitle(''); 
+    setDescription('');
+    alert('Memory added successfully!');
+  } catch (error) { 
+    console.error('Error adding memory:', error);
+    alert('Failed to add memory. Please try again.');
+  }
+};
 
   return (
     <div className="bg-[url(@/assets/geo-memory-map-bg.png)] bg-no-repeat bg-center">
