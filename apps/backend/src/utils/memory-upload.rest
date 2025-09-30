@@ -60,6 +60,20 @@ Content-Type: image/jpeg
 < ../../tests/assets/apple.jpg
 --MyBoundary--
 
+### Uploading a photo (optional) via the new route
+POST http://localhost:3000/api/memories/upload-photo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
+Content-Type: multipart/form-data; boundary=MyBoundary
+Origin: http://localhost:5173
+
+--MyBoundary
+Content-Disposition: form-data; name="image"; filename="banana.jpg"
+Content-Type: image/jpeg
+
+< ../../tests/assets/banana.jpg
+--MyBoundary--
+
+
 ### Create Memory with Image Upload
 POST http://localhost:3000/api/memories
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNlNWU4Y2RjOGQ3ZDBkZDMwNmFhMSIsInVzZXJuYW1lIjoiZGVhbiIsImVtYWlsIjoiZGVhbkBleGFtcGxlLmNvbSIsImlhdCI6MTc1ODg4NjMwMSwiZXhwIjoxNzU5NDkxMTAxfQ.0CXVEM229PurtN0jEkc6IXTGkeoS12aTtFZeAsacx5o
