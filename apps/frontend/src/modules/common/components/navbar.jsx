@@ -3,7 +3,7 @@ import logo from '@/assets/geo-memory-map-nav-logo.png';
 
 function NavBar() {
   return (
-    <nav className="bg-none flex justify-between px-50 py-10 place-items-center items-center w-full">
+    <nav className="bg-[#f2f0ef] flex justify-between px-50 py-10 place-items-center items-center w-full">
       <div className=" flex items-center gap-3">
         <Link to={'/'}>
           <img src={logo} alt="Geo Memory Map logo" className="w-13 h-10" />

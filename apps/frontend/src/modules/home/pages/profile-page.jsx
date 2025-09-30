@@ -44,7 +44,7 @@ function ProfilePage() {
             <h2 className="font-display p-2 text-2xl">Description</h2>
 
             <textarea
-              className="ml-2 block w-full bg-white/20 rounded-sm min-w-1  max-w-2xl h-full min-h-25"
+              className="ml-2 block w-full bg-white/20 rounded-sm min-w-1  max-w-2xl h-full min-h-50"
               placeholder="Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
