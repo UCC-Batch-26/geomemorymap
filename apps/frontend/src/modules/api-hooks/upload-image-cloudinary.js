@@ -4,16 +4,16 @@ const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 export async function uploadImageToCloudinary(file) {
   const formData = new FormData();
 
-  formData.append("file", file);
-  formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
   const response = await fetch(CLOUDINARY_URL, {
-    method: "POST",
+    method: 'POST',
     body: formData,
-  })
+  });
 
   if (!response.ok) {
-    throw new Error("Failed to upload image");
+    throw new Error('Failed to upload image');
   }
 
   const data = await response.json();

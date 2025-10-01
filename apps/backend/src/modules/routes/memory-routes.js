@@ -10,12 +10,7 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.post(
-  '/',
-  authMiddleware,
-  validateMemory,
-  createMemory,
-);
+router.post('/', authMiddleware, validateMemory, createMemory);
 
 /*router.post(
   '/upload-photo',

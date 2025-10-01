@@ -3,7 +3,6 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useEffect } from 'react';
 
-
 function LoginPage({ setToken, setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -24,32 +23,31 @@ function LoginPage({ setToken, setUser }) {
         setToken(data.token);
         setUser(data.user);
 
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user))
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
 
-        toast.success("Logged in successfully!");
+        toast.success('Logged in successfully!');
         setLoggedIn(true);
-
       } else {
         toast.error(data.message || 'Login failed');
       }
     } catch (error) {
-        if (error.response) {
-          // Server responded with a status outside 2xx
-          if (error.response.status === 401) {
-            toast.error("Unauthorized – please log in again");
-          } else if (error.response.status >= 500) {
-            toast.error("Server error, please try later");
-          } else {
-            toast.error(error.response.data?.message || "Something went wrong");
-          }
-        } else if (error.request) {
-          // No response from server
-          toast.error("No response from server. Check your internet.");
+      if (error.response) {
+        // Server responded with a status outside 2xx
+        if (error.response.status === 401) {
+          toast.error('Unauthorized – please log in again');
+        } else if (error.response.status >= 500) {
+          toast.error('Server error, please try later');
         } else {
-          // Something else (like code bug)
-          toast.error("Unexpected error occurred");
+          toast.error(error.response.data?.message || 'Something went wrong');
         }
+      } else if (error.request) {
+        // No response from server
+        toast.error('No response from server. Check your internet.');
+      } else {
+        // Something else (like code bug)
+        toast.error('Unexpected error occurred');
+      }
       console.error(error);
     }
   };

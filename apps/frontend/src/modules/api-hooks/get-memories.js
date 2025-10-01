@@ -7,6 +7,6 @@ export async function getMemories(token) {
     },
   });
 
-  if (!response.ok) throw new Error("Failed to fetch memories");
+  if (!response.ok) throw new Error('Failed to fetch memories');
   return response.json(); // array of memories
 }
