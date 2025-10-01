@@ -40,6 +40,9 @@ function MemoryFormPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Start a loading toast
+    const toastId = toast.loading('Uploading memory...');
+
     //const postData = { title, description };
 
     try {
@@ -77,10 +80,10 @@ function MemoryFormPage() {
       setTitle('');
       setDescription('');
       setImageFile(null);
-      toast.success('Memory added successfully!');
+      toast.success('Memory added successfully!', {id: toastId});
     } catch (error) {
       console.error('Error adding memory:', error);
-      toast.error('Failed to add memory. Please try again.');
+      toast.error('Failed to add memory. Please try again.', {id: toastId});
     }
   };
 
