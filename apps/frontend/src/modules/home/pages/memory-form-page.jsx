@@ -3,6 +3,7 @@ import MapView from '@/modules/common/components/map-view';
 import { uploadImageToCloudinary } from '@/modules/api-hooks/upload-image-cloudinary';
 import { createMemory } from '@/modules/api-hooks/create-memory';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 function MemoryFormPage() {
   const [title, setTitle] = useState("");
@@ -10,6 +11,7 @@ function MemoryFormPage() {
   const [imageFile, setImageFile] = useState(null);
   const [_memories, setMemories] = useState([]);
   const [location, setLocation] = useState({lat: 14.5995, lng: 120.9842}) // this is default Manila for testing purpose
+  const navigate = useNavigate();
 
   // Fetch memories from backend
   useEffect(() => {
@@ -42,6 +44,17 @@ function MemoryFormPage() {
 
     try {
       const token = localStorage.getItem('token'); // Get token for Authorization
+
+      if (!token) {
+        toast.error("You must be logged in to create a memory", {
+          icon: "⚠️"
+        });
+
+        setTimeout(() => {
+          navigate("/login"); // if User isn't Authenticated, goes to Login Page
+        }, 1500);
+        return; 
+      }
 
       let photoURL = "";
       if (imageFile) {
