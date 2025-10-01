@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import MapView from '@/modules/common/components/map-view';
 import { uploadImageToCloudinary } from '@/modules/api-hooks/upload-image-cloudinary';
 import { createMemory } from '@/modules/api-hooks/create-memory';
+import toast from 'react-hot-toast';
 
 function MemoryFormPage() {
   const [title, setTitle] = useState("");
@@ -60,10 +61,10 @@ function MemoryFormPage() {
       setTitle("");
       setDescription("");
       setImageFile(null);
-      alert("Memory added successfully!")
+      toast.success("Memory added successfully!")
     } catch (error) {
       console.error('Error adding memory:', error);
-      alert('Failed to add memory. Please try again.');
+      toast.error('Failed to add memory. Please try again.');
     }
   }
 
