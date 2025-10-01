@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react';
 import MapView from '@/modules/common/components/map-view';
+import { uploadImageToCloudinary } from '@/modules/api-hooks/upload-image-cloudinary';
+import { createMemory } from '@/modules/api-hooks/create-memory';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 function MemoryFormPage() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [imageFile, setImageFile] = useState(null);
   const [_memories, setMemories] = useState([]);
+  const [location, _setLocation] = useState({ lat: 14.5995, lng: 120.9842 }); // this is default Manila for testing purpose
+  const navigate = useNavigate();
 
   // Fetch memories from backend
   useEffect(() => {
@@ -33,30 +40,50 @@ function MemoryFormPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const postData = { title, description };
+    // Start a loading toast
+    const toastId = toast.loading('Uploading memory...');
+
+    //const postData = { title, description };
 
     try {
       const token = localStorage.getItem('token'); // Get token for Authorization
 
-      const res = await fetch('/api/memories', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+      if (!token) {
+        toast.error('You must be logged in to create a memory', {
+          icon: '⚠️',
+        });
+
+        setTimeout(() => {
+          navigate('/login'); // if User isn't Authenticated, goes to Login Page
+        }, 1500);
+        return;
+      }
+
+      let photoURL = '';
+      if (imageFile) {
+        photoURL = await uploadImageToCloudinary(imageFile);
+      }
+
+      const newMemory = await createMemory(
+        {
+          title,
+          description,
+          location, // { lat, lng }
+          photoURL, // string URL from Cloudinary
         },
-        body: JSON.stringify(postData), // Send title & description
-      });
+        token,
+      );
 
-      if (!res.ok) throw new Error('Failed to add memory');
+      setMemories((prev) => [newMemory, ...prev]);
 
-      const newMemory = await res.json(); // Get the memory returned from backend
-      setMemories((prev) => [newMemory, ...prev]); // Add new memory to state
+      // Reset form
       setTitle('');
       setDescription('');
-      alert('Memory added successfully!');
+      setImageFile(null);
+      toast.success('Memory added successfully!', { id: toastId });
     } catch (error) {
       console.error('Error adding memory:', error);
-      alert('Failed to add memory. Please try again.');
+      toast.error('Failed to add memory. Please try again.', { id: toastId });
     }
   };
 
@@ -89,18 +116,14 @@ function MemoryFormPage() {
                 required
               ></textarea>
 
+              <h2 className="font-display p-2 text-2xl">Upload Photo</h2>
+              <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} className="ml-2" />
+
               <button
                 type="submit"
                 className="focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 ml-2 my-2 "
               >
                 Submit
-              </button>
-
-              <button
-                type="submit"
-                className="focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 my-2"
-              >
-                Upload
               </button>
             </form>
           </div>
@@ -114,5 +137,4 @@ function MemoryFormPage() {
     </div>
   );
 }
-
 export default MemoryFormPage;
