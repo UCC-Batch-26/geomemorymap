@@ -30,11 +30,15 @@ export function App() {
   return (
     <>
       <RouterProvider router={router} />
-      <Toaster position="top-center" toastOptions={{
+      <Toaster
+        position="top-center"
+        toastOptions={{
           style: {
-            marginTop: '2rem', 
+            marginTop: '2rem',
           },
-        }} /> {/* global-toaster */}
+        }}
+      />{' '}
+      {/* global-toaster */}
     </>
   );
 }

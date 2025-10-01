@@ -80,10 +80,10 @@ function MemoryFormPage() {
       setTitle('');
       setDescription('');
       setImageFile(null);
-      toast.success('Memory added successfully!', {id: toastId});
+      toast.success('Memory added successfully!', { id: toastId });
     } catch (error) {
       console.error('Error adding memory:', error);
-      toast.error('Failed to add memory. Please try again.', {id: toastId});
+      toast.error('Failed to add memory. Please try again.', { id: toastId });
     }
   };
 
