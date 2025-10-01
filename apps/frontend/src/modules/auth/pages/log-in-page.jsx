@@ -34,8 +34,23 @@ function LoginPage({ setToken, setUser }) {
         toast.error(data.message || 'Login failed');
       }
     } catch (error) {
+        if (error.response) {
+          // Server responded with a status outside 2xx
+          if (error.response.status === 401) {
+            toast.error("Unauthorized – please log in again");
+          } else if (error.response.status >= 500) {
+            toast.error("Server error, please try later");
+          } else {
+            toast.error(error.response.data?.message || "Something went wrong");
+          }
+        } else if (error.request) {
+          // No response from server
+          toast.error("No response from server. Check your internet.");
+        } else {
+          // Something else (like code bug)
+          toast.error("Unexpected error occurred");
+        }
       console.error(error);
-      toast.error('Error connecting to server');
     }
   };
 
