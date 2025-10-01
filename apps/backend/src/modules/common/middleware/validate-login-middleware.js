@@ -23,7 +23,7 @@ export async function validateLogin(req, res, next) {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: 'Inavalid' });
+      return res.status(400).json({ message: 'Invalid credentials' });
     }
 
     req.user = user;
