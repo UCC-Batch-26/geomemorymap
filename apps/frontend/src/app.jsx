@@ -6,7 +6,6 @@ import BaseLayout from '@/modules/home/layouts/base-layout';
 import SignUpPage from '@/modules/auth/pages/sign-up-page';
 import LoginPage from '@/modules/auth/pages/log-in-page';
 import ContactPage from '@/modules/home/pages/contact-page';
-import Map from './modules/common/components/map';
 
 export function App() {
   const [_token, setToken] = useState(null);
@@ -22,7 +21,6 @@ export function App() {
         { path: '/signup', element: <SignUpPage /> },
         { path: '/login', element: <LoginPage setToken={setToken} setUser={setUser} /> },
         { path: '/contact', element: <ContactPage /> },
-        { path: '/map', element: <Map /> },
       ],
     },
   ]);
