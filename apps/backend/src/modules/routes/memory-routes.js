@@ -6,14 +6,13 @@ import { getMemories } from '#modules/controllers/memory/get-memories.js';
 import { getMemoryById } from '#modules/controllers/memory/get-memory-id.js';
 import { updateMemory } from '#modules/controllers/memory/update-memory.js';
 import { Router } from 'express';
-import upload from '#modules/common/middleware/multer.js';
+// import upload from '#modules/common/middleware/multer.js';
 
 const router = Router();
 
 router.post(
   '/',
   authMiddleware,
-  upload.single('image'), // handles picture upload
   validateMemory,
   createMemory,
 );
