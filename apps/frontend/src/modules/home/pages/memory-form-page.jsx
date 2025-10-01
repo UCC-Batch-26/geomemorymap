@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import MapView from '@/modules/common/components/map-view';
+import { uploadImageToCloudinary } from '@/modules/api-hooks/upload-image-cloudinary';
+import { createMemory } from '@/modules/api-hooks/create-memory';
 
 function MemoryFormPage() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageFile, setImageFile] = useState(null);
   const [_memories, setMemories] = useState([]);
+  const [location, setLocation] = useState({lat: 14.5995, lng: 120.9842}) // this is default Manila for testing purpose
 
   // Fetch memories from backend
   useEffect(() => {
@@ -33,32 +37,35 @@ function MemoryFormPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const postData = { title, description };
+    //const postData = { title, description };
 
     try {
       const token = localStorage.getItem('token'); // Get token for Authorization
 
-      const res = await fetch('/api/memories', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(postData), // Send title & description
-      });
+      let photoURL = "";
+      if (imageFile) {
+        photoURL = await uploadImageToCloudinary(imageFile);
+      }
 
-      if (!res.ok) throw new Error('Failed to add memory');
+      const newMemory = await createMemory({
+        title,
+        description,
+        location, // { lat, lng }
+        photoURL, // string URL from Cloudinary
+        }, token)
 
-      const newMemory = await res.json(); // Get the memory returned from backend
-      setMemories((prev) => [newMemory, ...prev]); // Add new memory to state
-      setTitle('');
-      setDescription('');
-      alert('Memory added successfully!');
+      setMemories((prev) => [newMemory, ...prev]);
+
+      // Reset form
+      setTitle("");
+      setDescription("");
+      setImageFile(null);
+      alert("Memory added successfully!")
     } catch (error) {
       console.error('Error adding memory:', error);
       alert('Failed to add memory. Please try again.');
     }
-  };
+  }
 
   return (
     <div className="bg-[url(@/assets/geo-memory-map-bg.png)] bg-no-repeat bg-center">
@@ -88,19 +95,20 @@ function MemoryFormPage() {
                 onChange={(e) => setDescription(e.target.value)}
                 required
               ></textarea>
+              
+              <h2 className="font-display p-2 text-2xl">Upload Photo</h2>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImageFile(e.target.files[0])}
+                className="ml-2"
+              />
 
               <button
                 type="submit"
                 className="focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 ml-2 my-2 "
               >
                 Submit
-              </button>
-
-              <button
-                type="submit"
-                className="focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 my-2"
-              >
-                Upload
               </button>
             </form>
           </div>
@@ -114,5 +122,4 @@ function MemoryFormPage() {
     </div>
   );
 }
-
 export default MemoryFormPage;
