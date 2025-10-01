@@ -15,6 +15,10 @@ export async function createMemory(memoryData, token) {
     }),
   });
 
-  if (!response.ok) throw new Error("Failed to create memory");
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    console.error("Backend error:", errorData);
+    throw new Error(errorData.message || "Failed to create memory");
+  }
   return response.json();
 }
