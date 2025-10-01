@@ -19,11 +19,28 @@ function ContactPage() {
             </ul>
           </div>
           <div className="flex w-[50%] justify-center items-center">
-            <form action="submit" method="post" className='border border-solid w-[80%]  ' >
-              <input type="text" name="" id="name" placeholder="Name" className='border border-solid w-[40%] my-5 mx-5'/>
-              <input type="email" name="" id="email" placeholder="Email" className='border border-solid  w-[40%] mx-5'/>
-              <textarea name="" id="" className='bg-white/50 w-[85%] h-50  m-5'></textarea>
-              <button type="submit" className='inline-flex h-12 w-50 ml-5 mb-5 font-display text-xl items-center justify-center rounded-md bg-[#526b5c] px-5 font-medium text-neutral-50 shadow-lg shadow-neutral-500/20 transition active:scale-90'>Submit</button>
+            <form action="submit" method="post" className="border border-solid w-[80%]  ">
+              <input
+                type="text"
+                name=""
+                id="name"
+                placeholder="Name"
+                className="border border-solid w-[40%] my-5 mx-5"
+              />
+              <input
+                type="email"
+                name=""
+                id="email"
+                placeholder="Email"
+                className="border border-solid  w-[40%] mx-5"
+              />
+              <textarea name="" id="" className="bg-white/50 w-[85%] h-50  m-5"></textarea>
+              <button
+                type="submit"
+                className="inline-flex h-12 w-50 ml-5 mb-5 font-display text-xl items-center justify-center rounded-md bg-[#526b5c] px-5 font-medium text-neutral-50 shadow-lg shadow-neutral-500/20 transition active:scale-90"
+              >
+                Submit
+              </button>
             </form>
           </div>
         </div>
