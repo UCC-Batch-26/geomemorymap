@@ -1,9 +1,13 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useEffect } from 'react';
+
 
 function LoginPage({ setToken, setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -22,15 +26,28 @@ function LoginPage({ setToken, setUser }) {
 
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user))
-        navigate('/');
+
+        toast.success("Logged in successfully!");
+        setLoggedIn(true);
+
       } else {
-        alert(data.message || 'Login failed');
+        toast.error(data.message || 'Login failed');
       }
     } catch (error) {
       console.error(error);
-      alert('Error connecting to server');
+      toast.error('Error connecting to server');
     }
   };
+
+  useEffect(() => {
+    if (loggedIn) {
+      const timer = setTimeout(() => {
+        navigate('/');
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [loggedIn, navigate]);
 
   return (
     <div className="fixed bg-[url(@/assets/geo-memory-map-bg.png)] bg-size-[600px] bg-no-repeat bg-center ">
