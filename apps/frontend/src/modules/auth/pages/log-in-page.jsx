@@ -19,6 +19,9 @@ function LoginPage({ setToken, setUser }) {
       if (res.ok) {
         setToken(data.token);
         setUser(data.user);
+
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user))
         navigate('/');
       } else {
         alert(data.message || 'Login failed');
