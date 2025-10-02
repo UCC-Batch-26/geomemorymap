@@ -4,6 +4,7 @@ import { uploadImageToCloudinary } from '@/modules/api-hooks/upload-image-cloudi
 import { createMemory } from '@/modules/api-hooks/create-memory';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
+import { getCityFromCoords } from '@/modules/api-hooks/reverse-geocode';
 
 function MemoryFormPage() {
   const [title, setTitle] = useState('');
@@ -11,7 +12,17 @@ function MemoryFormPage() {
   const [imageFile, setImageFile] = useState(null);
   const [_memories, setMemories] = useState([]);
   const [location, setLocation] = useState({ lat: 14.5995, lng: 120.9842 }); // this is default Manila for testing purpose
+  const [locationName, setLocationName] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchDefaultLocationName = async () => {
+      const label = await getCityFromCoords(location.lat, location.lng);
+      setLocationName(label);
+    };
+
+    fetchDefaultLocationName();
+  }, []);
 
   // Fetch memories from backend
   useEffect(() => {
@@ -50,7 +61,7 @@ function MemoryFormPage() {
 
       if (!token) {
         toast.error('You must be logged in to create a memory', {
-          icon: '⚠️',
+          icon: '⚠️', id: toastId
         });
 
         setTimeout(() => {
@@ -123,7 +134,9 @@ function MemoryFormPage() {
 
               <h2 className="font-display p-2 text-2xl">Location</h2>
               <p className="ml-2">
-                Latitude: {location.lat}, Longitude: {location.lng}{' '}
+                {locationName
+                  ? `${locationName} (${location.lat.toFixed(4)}, ${location.lng.toFixed(4)})` // place name with coordinates
+                  : `Latitude: ${location.lat.toFixed(4)}, Longitude: ${location.lng.toFixed(4)}`}
               </p>
 
               <h2 className="font-display p-2 text-2xl">Upload Photo</h2>
@@ -139,7 +152,11 @@ function MemoryFormPage() {
           </div>
 
           <div className="place-items-center">
-            <MapView onLocationSelect={(coords) => setLocation(coords)} />
+            <MapView onLocationSelect={async (coords) => {
+              setLocation(coords); // keep coordinates
+              const label = await getCityFromCoords(coords.lat, coords.lng);
+              setLocationName(label) // store barangay, city for UI
+            }} />
           </div>
           <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
           {/* CARD GENERATEED FROM API BELOW */}
