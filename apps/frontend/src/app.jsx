@@ -7,6 +7,7 @@ import SignUpPage from '@/modules/auth/pages/sign-up-page';
 import LoginPage from '@/modules/auth/pages/log-in-page';
 import ContactPage from '@/modules/home/pages/contact-page';
 import MemoryFormPage from './modules/home/pages/memory-form-page';
+import { Toaster } from 'react-hot-toast';
 
 export function App() {
   const [_token, setToken] = useState(null);
@@ -26,5 +27,18 @@ export function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            marginTop: '2rem',
+          },
+        }}
+      />{' '}
+      {/* global-toaster */}
+    </>
+  );
 }
