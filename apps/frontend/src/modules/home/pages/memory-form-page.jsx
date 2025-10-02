@@ -61,7 +61,8 @@ function MemoryFormPage() {
 
       if (!token) {
         toast.error('You must be logged in to create a memory', {
-          icon: '⚠️', id: toastId
+          icon: '⚠️',
+          id: toastId,
         });
 
         setTimeout(() => {
@@ -86,7 +87,7 @@ function MemoryFormPage() {
       );
 
       let currentMemories = _memories;
-      if(!Array.isArray(currentMemories)) {
+      if (!Array.isArray(currentMemories)) {
         currentMemories = [];
       }
       const updatedMemories = [newMemory].concat(currentMemories);
@@ -152,11 +153,13 @@ function MemoryFormPage() {
           </div>
 
           <div className="place-items-center">
-            <MapView onLocationSelect={async (coords) => {
-              setLocation(coords); // keep coordinates
-              const label = await getCityFromCoords(coords.lat, coords.lng);
-              setLocationName(label) // store barangay, city for UI
-            }} />
+            <MapView
+              onLocationSelect={async (coords) => {
+                setLocation(coords); // keep coordinates
+                const label = await getCityFromCoords(coords.lat, coords.lng);
+                setLocationName(label); // store barangay, city for UI
+              }}
+            />
           </div>
           <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
           {/* CARD GENERATEED FROM API BELOW */}

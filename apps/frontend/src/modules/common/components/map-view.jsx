@@ -3,14 +3,14 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvent, useMap } from 'rea
 import 'leaflet/dist/leaflet.css';
 import toast from 'react-hot-toast';
 
-function RecenterMap({center}) {
+function RecenterMap({ center }) {
   const map = useMap();
   useEffect(() => {
     if (center) {
-      map.flyTo(center, map.getZoom())
+      map.flyTo(center, map.getZoom());
     }
   }, [center, map]);
-  
+
   return null;
 }
 
@@ -28,28 +28,28 @@ export default function MapView({ onLocationSelect }) {
       requestedLocation.current = true;
 
       if (navigator.geolocation) {
-        
-        const toastId = toast.loading("Fetching your location...");
+        const toastId = toast.loading('Fetching your location...');
 
         const timer = setTimeout(() => {
-          toast("Location request timed out", {id: toastId, icon:"ℹ️"})
+          toast('Location request timed out', { id: toastId, icon: 'ℹ️' });
         }, 10000);
 
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            clearTimeout(timer)
+            clearTimeout(timer);
             const { latitude, longitude } = position.coords;
             setCenter([latitude, longitude]); // update center
             onLocationSelect?.({ lat: latitude, lng: longitude });
 
-            toast.success("Location found", {id: toastId, icon: "🧭"});
+            toast.success('Location found', { id: toastId, icon: '🧭' });
           },
           (error) => {
-            clearTimeout(timer)
+            clearTimeout(timer);
             console.error('Geolocation error:', error);
-            toast.error("Unable to fetch your location ❌", {id: toastId});
+            toast.error('Unable to fetch your location ❌', { id: toastId });
             // keep fallback center if error
-          }, {timeout: 10000},
+          },
+          { timeout: 10000 },
         );
       }
     }
@@ -62,7 +62,7 @@ export default function MapView({ onLocationSelect }) {
       const position = marker.getLatLng();
       setCenter([position.lat, position.lng]);
       onLocationSelect?.({ lat: position.lat, lng: position.lng });
-      toast("Marker moved to new position 📍")
+      toast('Marker moved to new position 📍');
     }
   };
 
@@ -71,7 +71,7 @@ export default function MapView({ onLocationSelect }) {
       const { lat, lng } = e.latlng;
       setCenter([lat, lng]);
       onLocationSelect?.({ lat, lng });
-      toast("New location selected📍");
+      toast('New location selected📍');
     });
     return null;
   };
@@ -85,7 +85,7 @@ export default function MapView({ onLocationSelect }) {
         />
 
         <MapClickHandler />
-        <RecenterMap center={center}/>
+        <RecenterMap center={center} />
         {/* Draggable marker for user location */}
         <Marker position={center} draggable={true} eventHandlers={{ dragend: handleDragEnd }} ref={markerRef}>
           <Popup>Drag me to adjust :round_pushpin:</Popup>
