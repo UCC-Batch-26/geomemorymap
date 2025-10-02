@@ -28,9 +28,17 @@ export default function MapView({ onLocationSelect }) {
       requestedLocation.current = true;
 
       if (navigator.geolocation) {
+        
         const toastId = toast.loading("Fetching your location...");
+
+        const timer = setTimeout(() => {
+          toast.dismiss(toastId);
+          toast("Location request timed out", {id: toastId, icon:"ℹ️"})
+        }, 10000);
+
         navigator.geolocation.getCurrentPosition(
           (position) => {
+            clearTimeout(timer)
             const { latitude, longitude } = position.coords;
             setCenter([latitude, longitude]); // update center
             onLocationSelect?.({ lat: latitude, lng: longitude });
@@ -39,10 +47,11 @@ export default function MapView({ onLocationSelect }) {
             toast.success("Location found", {id: toastId, icon: "🧭"});
           },
           (error) => {
+            clearTimeout(timer)
             console.error('Geolocation error:', error);
             toast.error("Unable to fetch your location ❌", {id: toastId});
             // keep fallback center if error
-          },
+          }, {timeout: 10000},
         );
       }
     }
