@@ -32,7 +32,6 @@ export default function MapView({ onLocationSelect }) {
         const toastId = toast.loading("Fetching your location...");
 
         const timer = setTimeout(() => {
-          toast.dismiss(toastId);
           toast("Location request timed out", {id: toastId, icon:"ℹ️"})
         }, 10000);
 
@@ -43,7 +42,6 @@ export default function MapView({ onLocationSelect }) {
             setCenter([latitude, longitude]); // update center
             onLocationSelect?.({ lat: latitude, lng: longitude });
 
-            toast.dismiss(toastId);
             toast.success("Location found", {id: toastId, icon: "🧭"});
           },
           (error) => {
@@ -73,7 +71,7 @@ export default function MapView({ onLocationSelect }) {
       const { lat, lng } = e.latlng;
       setCenter([lat, lng]);
       onLocationSelect?.({ lat, lng });
-      toast("Map clicked: moved marker 📍");
+      toast("New location selected📍");
     });
     return null;
   };
