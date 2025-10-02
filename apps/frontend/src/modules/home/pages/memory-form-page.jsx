@@ -4,21 +4,32 @@ import { uploadImageToCloudinary } from '@/modules/api-hooks/upload-image-cloudi
 import { createMemory } from '@/modules/api-hooks/create-memory';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
+import { getCityFromCoords } from '@/modules/api-hooks/reverse-geocode';
 
 function MemoryFormPage() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [_memories, setMemories] = useState([]);
-  const [location, _setLocation] = useState({ lat: 14.5995, lng: 120.9842 }); // this is default Manila for testing purpose
+  const [location, setLocation] = useState({ lat: 14.5995, lng: 120.9842 }); // this is default Manila for testing purpose
+  const [locationName, setLocationName] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchDefaultLocationName = async () => {
+      const label = await getCityFromCoords(location.lat, location.lng);
+      setLocationName(label);
+    };
+
+    fetchDefaultLocationName();
+  }, []);
 
   // Fetch memories from backend
   useEffect(() => {
     const fetchMemories = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('/api/memories', {
+        const res = await fetch('http://localhost:3000/api/memories', {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -27,7 +38,7 @@ function MemoryFormPage() {
 
         if (!res.ok) throw new Error('Failed to fetch memories');
         const data = await res.json();
-        setMemories(data);
+        setMemories(data.memories);
       } catch (error) {
         console.error('Error fetching memories', error);
       }
@@ -51,6 +62,7 @@ function MemoryFormPage() {
       if (!token) {
         toast.error('You must be logged in to create a memory', {
           icon: '⚠️',
+          id: toastId,
         });
 
         setTimeout(() => {
@@ -74,7 +86,12 @@ function MemoryFormPage() {
         token,
       );
 
-      setMemories((prev) => [newMemory, ...prev]);
+      let currentMemories = _memories;
+      if (!Array.isArray(currentMemories)) {
+        currentMemories = [];
+      }
+      const updatedMemories = [newMemory].concat(currentMemories);
+      setMemories(updatedMemories);
 
       // Reset form
       setTitle('');
@@ -116,6 +133,13 @@ function MemoryFormPage() {
                 required
               ></textarea>
 
+              <h2 className="font-display p-2 text-2xl">Location</h2>
+              <p className="ml-2">
+                {locationName
+                  ? `${locationName} (${location.lat.toFixed(4)}, ${location.lng.toFixed(4)})` // place name with coordinates
+                  : `Latitude: ${location.lat.toFixed(4)}, Longitude: ${location.lng.toFixed(4)}`}
+              </p>
+
               <h2 className="font-display p-2 text-2xl">Upload Photo</h2>
               <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} className="ml-2" />
 
@@ -127,8 +151,15 @@ function MemoryFormPage() {
               </button>
             </form>
           </div>
+
           <div className="place-items-center">
-            <MapView />
+            <MapView
+              onLocationSelect={async (coords) => {
+                setLocation(coords); // keep coordinates
+                const label = await getCityFromCoords(coords.lat, coords.lng);
+                setLocationName(label); // store barangay, city for UI
+              }}
+            />
           </div>
           <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
           {/* CARD GENERATEED FROM API BELOW */}
