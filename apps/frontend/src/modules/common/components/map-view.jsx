@@ -30,7 +30,7 @@ export default function MapView({ onLocationSelect }) {
   const handleDragEnd = () => {
     const marker = markerRef.current;
     if (marker != null) {
-      const pos = marker.getLatLng;
+      const pos = marker.getLatLng();
       setCenter(marker.getLatLng());
       onLocationSelect?.({ lat: pos.lat, lng: pos.lng });
     }
