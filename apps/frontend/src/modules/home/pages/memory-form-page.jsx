@@ -116,6 +116,11 @@ function MemoryFormPage() {
                 required
               ></textarea>
 
+              <h2 className="font-display p-2 text-2xl">Location</h2>
+              <p className="ml-2">
+                Latitude: {location.lat}, Longitude: {location.lng}{' '}
+              </p>
+
               <h2 className="font-display p-2 text-2xl">Upload Photo</h2>
               <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} className="ml-2" />
 
@@ -127,8 +132,9 @@ function MemoryFormPage() {
               </button>
             </form>
           </div>
+
           <div className="place-items-center">
-            <MapView />
+            <MapView onLocationSelect={(coords) => _setLocation(coords)} />
           </div>
           <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
           {/* CARD GENERATEED FROM API BELOW */}
