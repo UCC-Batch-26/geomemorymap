@@ -27,7 +27,7 @@ function MemoryFormPage() {
 
         if (!res.ok) throw new Error('Failed to fetch memories');
         const data = await res.json();
-        setMemories(data);
+        setMemories(data.memories);
       } catch (error) {
         console.error('Error fetching memories', error);
       }
@@ -74,7 +74,12 @@ function MemoryFormPage() {
         token,
       );
 
-      setMemories((prev) => [newMemory, ...prev]);
+      let currentMemories = _memories;
+      if(!Array.isArray(currentMemories)) {
+        currentMemories = [];
+      }
+      const updatedMemories = [newMemory].concat(currentMemories);
+      setMemories(updatedMemories);
 
       // Reset form
       setTitle('');
