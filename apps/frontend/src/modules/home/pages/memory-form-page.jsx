@@ -10,7 +10,7 @@ function MemoryFormPage() {
   const [description, setDescription] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [_memories, setMemories] = useState([]);
-  const [location, _setLocation] = useState({ lat: 14.5995, lng: 120.9842 }); // this is default Manila for testing purpose
+  const [location, setLocation] = useState({ lat: 14.5995, lng: 120.9842 }); // this is default Manila for testing purpose
   const navigate = useNavigate();
 
   // Fetch memories from backend
@@ -18,7 +18,7 @@ function MemoryFormPage() {
     const fetchMemories = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('/api/memories', {
+        const res = await fetch('http://localhost:3000/api/memories', {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -134,7 +134,7 @@ function MemoryFormPage() {
           </div>
 
           <div className="place-items-center">
-            <MapView onLocationSelect={(coords) => _setLocation(coords)} />
+            <MapView onLocationSelect={(coords) => setLocation(coords)} />
           </div>
           <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
           {/* CARD GENERATEED FROM API BELOW */}
