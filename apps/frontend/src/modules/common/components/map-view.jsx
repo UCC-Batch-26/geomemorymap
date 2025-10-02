@@ -1,6 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvent } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvent, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import toast from 'react-hot-toast';
+
+function RecenterMap({center}) {
+  const map = useMap();
+  useEffect(() => {
+    if (center) {
+      map.flyTo(center, map.getZoom())
+    }
+  }, [center, map]);
+  
+  return null;
+}
 
 export default function MapView({ onLocationSelect }) {
   // Default center (Manila) as fallback
@@ -8,21 +20,31 @@ export default function MapView({ onLocationSelect }) {
 
   // Store marker reference
   const markerRef = useRef(null);
+  const requestedLocation = useRef(false);
 
   //current user location
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setCenter([latitude, longitude]); // update center
-          onLocationSelect?.({ lat: latitude, lng: longitude });
-        },
-        (error) => {
-          console.error('Geolocation error:', error);
-          // keep fallback center if error
-        },
-      );
+    if (!requestedLocation.current) {
+      requestedLocation.current = true;
+
+      if (navigator.geolocation) {
+        const toastId = toast.loading("Fetching your location...");
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            setCenter([latitude, longitude]); // update center
+            onLocationSelect?.({ lat: latitude, lng: longitude });
+
+            toast.dismiss(toastId);
+            toast.success("Location found", {id: toastId, icon: "🧭"});
+          },
+          (error) => {
+            console.error('Geolocation error:', error);
+            toast.error("Unable to fetch your location ❌", {id: toastId});
+            // keep fallback center if error
+          },
+        );
+      }
     }
   }, []);
 
@@ -33,6 +55,7 @@ export default function MapView({ onLocationSelect }) {
       const position = marker.getLatLng();
       setCenter([position.lat, position.lng]);
       onLocationSelect?.({ lat: position.lat, lng: position.lng });
+      toast("Marker moved to new position 📍")
     }
   };
 
@@ -41,6 +64,7 @@ export default function MapView({ onLocationSelect }) {
       const { lat, lng } = e.latlng;
       setCenter([lat, lng]);
       onLocationSelect?.({ lat, lng });
+      toast("Map clicked: moved marker 📍");
     });
     return null;
   };
@@ -54,7 +78,7 @@ export default function MapView({ onLocationSelect }) {
         />
 
         <MapClickHandler />
-
+        <RecenterMap center={center}/>
         {/* Draggable marker for user location */}
         <Marker position={center} draggable={true} eventHandlers={{ dragend: handleDragEnd }} ref={markerRef}>
           <Popup>Drag me to adjust :round_pushpin:</Popup>
