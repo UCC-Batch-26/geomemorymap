@@ -4,20 +4,26 @@ export async function getCityFromCoords(lat, lng) {
     const data = await res.json();
 
     const { suburb, city, town, village, county, state } = data.address;
-    let locationString = '';
-    if (suburb) {
-      locationString += suburb;
+    
+    let barangay = '';
+    if (suburb && !suburb.toLowerCase().includes('subdivision')) {
+      barangay += suburb;
+    }
+    else if (village) {
+      barangay = village; // fallback to village if suburb is missing
     }
 
-    const mainPlace = city || town || village || county || state;
-    if (mainPlace) {
-      if (locationString) {
-        locationString += ', ';
-      }
-      locationString += mainPlace;
-    }
+    const municipality = city || town || county || state || '';
 
-    return locationString || 'Unknown location';
+    if (barangay && municipality) {
+     return `${barangay}, ${municipality}`;
+    } else if (municipality) {
+      return municipality;
+    } else if (barangay) {
+      return barangay;
+    } else {
+      return 'Unknown location'
+    }
   } catch (error) {
     console.error('Error fetching city:', error);
     return 'Unknown location';
