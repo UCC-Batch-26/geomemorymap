@@ -28,7 +28,6 @@ export async function getCityFromCoords(lat, lng) {
     // Build final result
     const parts = [barangay, municipality, province].filter(Boolean); // remove empty strings
     return parts.length > 0 ? parts.join(', ') : 'Unknown location';
-
   } catch (error) {
     console.error('Error fetching city:', error);
     return 'Unknown location';
