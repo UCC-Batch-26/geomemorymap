@@ -13,7 +13,7 @@ L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x,
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
-})
+});
 
 function RecenterMap({ center }) {
   const map = useMap();
