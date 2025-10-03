@@ -13,6 +13,8 @@ export async function uploadImageToCloudinary(file) {
   });
 
   if (!response.ok) {
+    const errorText = await response.text();
+    console.error('Cloudinary upload failed:', errorText);
     throw new Error('Failed to upload image');
   }
 
