@@ -13,7 +13,11 @@ export async function getCityFromCoords(lat, lng) {
       barangay = village; // fallback to village if suburb is missing
     }
 
-    const municipality = city || town || county || state || '';
+    let municipality = town || city || county || '';
+
+    if (barangay === municipality) {
+      municipality = '';
+    }
 
     if (barangay && municipality) {
      return `${barangay}, ${municipality}`;
