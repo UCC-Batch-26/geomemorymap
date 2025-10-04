@@ -3,9 +3,9 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 
 const SIGN_UP_URL = `${import.meta.env.VITE_BACKEND_URL}/api/auth/register`;
-const navigate = useNavigate();
 
 function SignUpPage() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     username: '',
     email: '',
