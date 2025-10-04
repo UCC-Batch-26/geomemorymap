@@ -7,8 +7,11 @@ function SignUpPage() {
     username: '',
     email: '',
     password: '',
+    confirmPassword: '',
     age: '',
   });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -72,7 +75,7 @@ function SignUpPage() {
         />
 
         <input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           name="password"
           placeholder="Password"
           onChange={handleChange}
@@ -81,13 +84,28 @@ function SignUpPage() {
         />
 
         <input
-          type="number"
-          name="age"
-          placeholder="Age"
+          type={showPassword ? 'text' : 'password'}
+          name="confirmPassword"
+          placeholder="Confirm Password"
           onChange={handleChange}
           required
-          className="w-full px-3 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+          className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
         />
+
+        {/* Show password toggle affecting both fields */}
+        <div className="flex items-center mb-4">
+          <input
+            type="checkbox"
+            id="showPassword"
+            checked={showPassword}
+            onChange={() => setShowPassword(!showPassword)}
+            className="mr-2"
+          />
+          <label htmlFor="showPassword" className="text-sm text-gray-700">
+            Show Password
+          </label>
+        </div>
+
 
         <button
           type="submit"
