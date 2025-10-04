@@ -51,7 +51,7 @@ function SignUpPage() {
       if (res.ok) {
         toast.success('Registered successfully! You can login now.');
         setForm({ username: '', email: '', password: '', age: '' });
-        setTimeout(() => navigate('/'), 1000);
+        setTimeout(() => navigate('/login'), 1000);
       } else {
         toast.error(data.message || 'Registration failed');
       }
