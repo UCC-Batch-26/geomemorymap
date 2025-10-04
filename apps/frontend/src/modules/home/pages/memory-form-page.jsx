@@ -18,6 +18,20 @@ function MemoryFormPage() {
   const [location, setLocation] = useState({ lat: 14.5995, lng: 120.9842 }); // this is default Manila for testing purpose
   const [locationName, setLocationName] = useState('');
   const navigate = useNavigate();
+  const [labels, setLabels] = useState({});
+
+  useEffect(() => {
+    const run = async () => {
+      const entries = _memories.filter((m) => m.location && !labels[m._id]);
+      const updates = {};
+      for (const m of entries) {
+        const name = await getCityFromCoords(m.location.lat, m.location.lng);
+        updates[m._id] = name ?? null;
+      }
+      if (Object.keys(updates).length) setLabels((prev) => ({ ...prev, ...updates }));
+    };
+    run();
+  }, [_memories]);
 
   useEffect(() => {
     const fetchDefaultLocationName = async () => {
@@ -43,7 +57,7 @@ function MemoryFormPage() {
         if (!res.ok) throw new Error('Failed to fetch memories');
         const result = await res.json();
         const data = result.data;
-        console.log('Fetched memories:', data[0].title);
+        console.log('Fetched memories:', data);
 
         setMemories(data);
       } catch (error) {
@@ -148,7 +162,21 @@ function MemoryFormPage() {
               </p>
 
               <h2 className="font-display p-2 text-2xl">Upload Photo</h2>
-              <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} className="ml-2" />
+              
+                <input
+                  id="file-upload"
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  onChange={(e) => setImageFile(e.target.files[0])}
+                />
+                <label
+                  htmlFor="file-upload"
+                  className="cursor-pointer px-4 py-2 bg-green-700 text-white rounded-lg shadow hover:bg-green-800 transition duration-150 inline-block mr-5"
+                >
+                  Upload File
+                </label>
+              
 
               <button
                 type="submit"
@@ -179,9 +207,11 @@ function MemoryFormPage() {
                 .slice(0, 6)
                 .map((memory) => (
                   <MemCards
-                    key={memory.id}
+                    key={memory._id ?? memory.id}
                     img={memory.photoURL}
                     title={memory.title}
+                    locationName={labels[memory._id] ?? null}
+                    location={memory.location}
                     description={memory.description}
                   />
                 ))}
