@@ -6,6 +6,8 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import { getCityFromCoords } from '@/modules/api-hooks/reverse-geocode';
 
+const MEMORY_URL = `${import.meta.env.VITE_BACKEND_URL}/api/memories`;
+
 function MemoryFormPage() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -29,7 +31,7 @@ function MemoryFormPage() {
     const fetchMemories = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:3000/api/memories', {
+        const res = await fetch(MEMORY_URL, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,

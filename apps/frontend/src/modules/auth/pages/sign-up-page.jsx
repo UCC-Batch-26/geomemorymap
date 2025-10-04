@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+const SIGN_UP_URL = `${import.meta.env.VITE_BACKEND_URL}/api/auth/register`;
+
 function SignUpPage() {
   const [form, setForm] = useState({
     username: '',
@@ -26,7 +28,7 @@ function SignUpPage() {
     }
 
     try {
-      const res = await fetch('http://localhost:3000/api/auth/register', {
+      const res = await fetch(SIGN_UP_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password, age }),
