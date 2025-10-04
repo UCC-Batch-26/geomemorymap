@@ -173,9 +173,18 @@ function MemoryFormPage() {
           <div className="row-start-3 col-span-2 gap-4 pb-5">
             <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
             <div className="flex flex-wrap gap-4 place-content-center">
-              {_memories.slice().reverse().slice(0, 6).map((memory) => (
-                <MemCards key={memory.id} img={memory.photoURL} title={memory.title} description={memory.description} />
-              ))}
+              {_memories
+                .slice()
+                .reverse()
+                .slice(0, 6)
+                .map((memory) => (
+                  <MemCards
+                    key={memory.id}
+                    img={memory.photoURL}
+                    title={memory.title}
+                    description={memory.description}
+                  />
+                ))}
             </div>
           </div>
         </div>
