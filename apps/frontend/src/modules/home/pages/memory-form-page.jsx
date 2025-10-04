@@ -112,7 +112,7 @@ function MemoryFormPage() {
 
   return (
     <div className="bg-[url(@/assets/geo-memory-map-bg.png)] bg-no-repeat bg-center">
-      <section className=" items-center justify-center bg-[#526b5c]/90 h-screen bg-auto bg-no-repeat bg-center justify-items-center ">
+      <section className=" items-center justify-center bg-[#526b5c]/90 h-full bg-auto bg-no-repeat bg-center justify-items-center ">
         <div className="grid grid-cols-2 gap-4 place-items-center w-[80%]  pt-10">
           <div className="bg-white/50 rounded-lg shadow-lg pb-5">
             <h1 className="font-display pt-5 pl-5 text-3xl">Add New Memory</h1>
@@ -171,7 +171,7 @@ function MemoryFormPage() {
           {/* CARD GENERATEED FROM API BELOW */}
           <div className="row-start-3 col-span-2 gap-4 pb-5">
             <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
-            <div className="flex flex-row flex-wrap gap-4 place-content-center">
+            <div className="flex flex-wrap gap-4 place-content-center">
               {_memories.slice().reverse().slice(0, 6).map((memory) => (
                 <MemCards key={memory.id} img={memory.photoURL} title={memory.title} description={memory.description} />
               ))}

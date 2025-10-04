@@ -1,6 +1,6 @@
 function MemCards(props) {
   return (
-    <div className='h-80'>
+    <div className=''>
       <img className='p-5 h-80 w-100 border-white border-[10px] rounded-md' src={props.img} alt={props.title} />
       <h2 className='font-display font-semibold'>{props.title}</h2>
       <p className='font-display'>{props.description}</p>
