@@ -27,7 +27,14 @@ export function App() {
       path: '/',
       element: <BaseLayout />,
       children: [
-        { index: true, element: <ProtectedRoute><HomePage /></ProtectedRoute> },
+        {
+          index: true,
+          element: (
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          ),
+        },
         { path: '/about', element: <AboutPage /> },
         { path: '/contact', element: <ContactPage /> },
       ],
