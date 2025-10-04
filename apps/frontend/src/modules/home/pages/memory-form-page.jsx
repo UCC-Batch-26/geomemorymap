@@ -112,12 +112,12 @@ function MemoryFormPage() {
 
   return (
     <div className="bg-[url(@/assets/geo-memory-map-bg.png)] bg-no-repeat bg-center">
-      <section className=" items-center justify-center bg-[#526b5c]/80 h-screen pl-5 bg-auto bg-no-repeat bg-center">
-        <div className="grid grid-cols-2 gap-4 w-[80vw]">
+      <section className=" items-center justify-center bg-[#526b5c]/90 h-screen bg-auto bg-no-repeat bg-center justify-items-center ">
+        <div className="grid grid-cols-2 gap-4 place-items-center w-[80%]  pt-10">
           <div className="bg-white/50 rounded-lg shadow-lg pb-5">
             <h1 className="font-display pt-5 pl-5 text-3xl">Add New Memory</h1>
             {/* FORM STARTS HERE */}
-            <form action="" method="post" className="ml-5 rounded-lg" onSubmit={handleSubmit}>
+            <form action="" method="post" className="ml-5 rounded-lg w-160" onSubmit={handleSubmit}>
               <h2 className="font-display p-2 text-2xl">Title</h2>
 
               <input
@@ -125,14 +125,14 @@ function MemoryFormPage() {
                 placeholder="Title of your memory..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="ml-2 bg-white/20  w-full max-w-2xl min-w-1 rounded-sm"
+                className="ml-2 bg-white/20 w-[90%] rounded-sm"
                 required
               />
 
               <h2 className="font-display p-2 text-2xl">Description</h2>
 
               <textarea
-                className="ml-2 block w-full bg-white/20 rounded-sm min-w-1  max-w-2xl h-full min-h-50"
+                className="ml-2 block w-[90%] bg-white/20 rounded-sm min-w-1  max-w-2xl h-full min-h-50"
                 placeholder="Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -171,8 +171,8 @@ function MemoryFormPage() {
           {/* CARD GENERATEED FROM API BELOW */}
           <div className="row-start-3 col-span-2 gap-4 pb-5">
             <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
-            <div className="flex flex-row flex-wrap gap-4">
-              {_memories.slice(0, 6).map((memory) => (
+            <div className="flex flex-row flex-wrap gap-4 place-content-center">
+              {_memories.slice().reverse().slice(0, 6).map((memory) => (
                 <MemCards key={memory.id} img={memory.photoURL} title={memory.title} description={memory.description} />
               ))}
             </div>
