@@ -30,9 +30,7 @@ export function HomePage() {
         {cards.map(createCards)}
       </div>
 
-      <div className="justify-items-center bg-[#526b5c] h-full">
-        {token ? <MemoryFormPage /> : null}
-      </div>
+      <div className="justify-items-center bg-[#526b5c] h-full">{token ? <MemoryFormPage /> : null}</div>
     </div>
   );
 }

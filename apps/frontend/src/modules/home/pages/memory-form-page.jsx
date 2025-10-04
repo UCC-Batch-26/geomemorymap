@@ -162,28 +162,27 @@ function MemoryFormPage() {
               </p>
 
               <h2 className="font-display p-2 text-2xl">Upload Photo</h2>
-              
-                <input
-                  id="file-upload"
-                  type="file"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={(e) => setImageFile(e.target.files[0])}
-                />
-                <label
-                  htmlFor="file-upload"
-                  className="cursor-pointer py-2 px-4 place-content-center  bg-green-700 text-white rounded-lg shadow hover:bg-green-800 transition duration-150 inline-block mr-5"
-                >
-                  Upload File
-                </label>
 
-                <button
-                  type="submit"
-                  className="justify-end items-end focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 ml-2 my-2 "
-                >
-                  Submit
-                </button>
-              
+              <input
+                id="file-upload"
+                type="file"
+                className="hidden"
+                accept="image/*"
+                onChange={(e) => setImageFile(e.target.files[0])}
+              />
+              <label
+                htmlFor="file-upload"
+                className="cursor-pointer py-2 px-4 place-content-center  bg-green-700 text-white rounded-lg shadow hover:bg-green-800 transition duration-150 inline-block mr-5"
+              >
+                Upload File
+              </label>
+
+              <button
+                type="submit"
+                className="justify-end items-end focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 ml-2 my-2 "
+              >
+                Submit
+              </button>
             </form>
           </div>
 

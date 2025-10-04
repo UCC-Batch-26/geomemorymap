@@ -22,7 +22,9 @@ function MemCards({ img, title, description, location, locationName }) {
         />
         <h2 className="font-display font-semibold py-2">{title}</h2>
         <p className="font-display py-2">📍{locationName} </p>
-        <p className="font-display py-2">📍{lat}, {lng}</p>
+        <p className="font-display py-2">
+          📍{lat}, {lng}
+        </p>
         <p className="font-display py-2">{description}</p>
       </div>
     </div>
