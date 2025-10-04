@@ -11,7 +11,7 @@ import { Toaster } from 'react-hot-toast';
 import { ProtectedRoute } from '@/modules/utils/protected-routes';
 
 export function App() {
-  const [token, setToken] = useState(() => localStorage.getItem('token'));
+  const [_token, setToken] = useState(() => localStorage.getItem('token'));
   const [_user, setUser] = useState(null);
 
   const router = createBrowserRouter([
