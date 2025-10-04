@@ -33,9 +33,9 @@ function SignUpPage() {
       return;
     }
 
-    if (password !== form.confirmPassword) { 
-      toast.error("Passwords do not match"); 
-      return; 
+    if (password !== form.confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
     }
 
     try {
@@ -114,7 +114,6 @@ function SignUpPage() {
             Show Password
           </label>
         </div>
-
 
         <button
           type="submit"
