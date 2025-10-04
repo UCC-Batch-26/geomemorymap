@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const SIGN_UP_URL = `${import.meta.env.VITE_BACKEND_URL}/api/auth/register`;
 
@@ -30,6 +31,11 @@ function SignUpPage() {
       return;
     }
 
+    if (password !== form.confirmPassword) { 
+      toast.error("Passwords do not match"); 
+      return; 
+    }
+
     try {
       const res = await fetch(SIGN_UP_URL, {
         method: 'POST',
@@ -41,14 +47,14 @@ function SignUpPage() {
       console.log(data);
 
       if (res.ok) {
-        alert('Registered successfully! You can login now.');
+        toast.success('Registered successfully! You can login now.');
         setForm({ username: '', email: '', password: '', age: '' });
       } else {
-        alert(data.message || 'Registration failed');
+        toast.error(data.message || 'Registration failed');
       }
     } catch (error) {
       console.error('Registration error:', error);
-      alert('Error connecting to server');
+      toast.error('Error connecting to server');
     }
   };
 
