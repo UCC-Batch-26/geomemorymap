@@ -3,6 +3,8 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useEffect } from 'react';
 
+const LOGIN_URL = `${import.meta.env.VITE_BACKEND_URL}/api/auth/login`;
+
 function LoginPage({ setToken, setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -12,7 +14,7 @@ function LoginPage({ setToken, setUser }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:3000/api/auth/login', {
+      const res = await fetch(LOGIN_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

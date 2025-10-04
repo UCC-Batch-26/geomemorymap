@@ -5,6 +5,8 @@ import { createMemory } from '@/modules/api-hooks/create-memory';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import { getCityFromCoords } from '@/modules/api-hooks/reverse-geocode';
+
+const MEMORY_URL = `${import.meta.env.VITE_BACKEND_URL}/api/memories`;
 import MemCards from '@/modules/common/components/mem-cards';
 // import { getMemories } from '@/modules/api-hooks/get-memories';
 
@@ -24,14 +26,13 @@ function MemoryFormPage() {
     };
 
     fetchDefaultLocationName();
-  }, []);
+  }, [location.lat, location.lng]);
 
   // Fetch memories from backend
   useEffect(() => {
     const fetchMemories = async () => {
       try {
         const token = localStorage.getItem('token');
-        console.log('token:', localStorage.getItem('token'));
         const res = await fetch('http://localhost:3000/api/memories', {
           headers: {
             'Content-Type': 'application/json',

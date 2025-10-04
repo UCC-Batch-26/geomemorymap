@@ -1,12 +1,20 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
+
+const SIGN_UP_URL = `${import.meta.env.VITE_BACKEND_URL}/api/auth/register`;
 
 function SignUpPage() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     username: '',
     email: '',
     password: '',
+    confirmPassword: '',
     age: '',
   });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -25,8 +33,13 @@ function SignUpPage() {
       return;
     }
 
+    if (password !== form.confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+
     try {
-      const res = await fetch('http://localhost:3000/api/auth/register', {
+      const res = await fetch(SIGN_UP_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password, age }),
@@ -36,14 +49,15 @@ function SignUpPage() {
       console.log(data);
 
       if (res.ok) {
-        alert('Registered successfully! You can login now.');
+        toast.success('Registered successfully! You can login now.');
         setForm({ username: '', email: '', password: '', age: '' });
+        setTimeout(() => navigate('/'), 1000);
       } else {
-        alert(data.message || 'Registration failed');
+        toast.error(data.message || 'Registration failed');
       }
     } catch (error) {
       console.error('Registration error:', error);
-      alert('Error connecting to server');
+      toast.error('Error connecting to server');
     }
   };
 
@@ -70,7 +84,7 @@ function SignUpPage() {
         />
 
         <input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           name="password"
           placeholder="Password"
           onChange={handleChange}
@@ -79,13 +93,27 @@ function SignUpPage() {
         />
 
         <input
-          type="number"
-          name="age"
-          placeholder="Age"
+          type={showPassword ? 'text' : 'password'}
+          name="confirmPassword"
+          placeholder="Confirm Password"
           onChange={handleChange}
           required
-          className="w-full px-3 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+          className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
         />
+
+        {/* Show password toggle affecting both fields */}
+        <div className="flex items-center mb-4">
+          <input
+            type="checkbox"
+            id="showPassword"
+            checked={showPassword}
+            onChange={() => setShowPassword(!showPassword)}
+            className="mr-2"
+          />
+          <label htmlFor="showPassword" className="text-sm text-gray-700">
+            Show Password
+          </label>
+        </div>
 
         <button
           type="submit"
