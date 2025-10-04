@@ -65,7 +65,7 @@ export default function MapView({ onLocationSelect }) {
         );
       }
     }
-  }, []);
+  }, [onLocationSelect]);
 
   // Handle drag end
   const handleDragEnd = () => {

@@ -24,7 +24,7 @@ function MemoryFormPage() {
     };
 
     fetchDefaultLocationName();
-  }, []);
+  }, [location.lat, location.lng]);
 
   // Fetch memories from backend
   useEffect(() => {
