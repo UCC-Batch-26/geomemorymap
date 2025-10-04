@@ -9,6 +9,7 @@ function createCards(card) {
 }
 
 export function HomePage() {
+  const token = localStorage.getItem('token');
   return (
     <div>
       <div className="grid container grid-cols-4 m-auto h-screen">
@@ -30,7 +31,7 @@ export function HomePage() {
       </div>
 
       <div className="justify-items-center bg-[#526b5c] h-full">
-        <MemoryFormPage />
+        {token ? <MemoryFormPage /> : null}
       </div>
     </div>
   );

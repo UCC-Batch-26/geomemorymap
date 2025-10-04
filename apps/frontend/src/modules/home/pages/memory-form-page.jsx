@@ -126,9 +126,9 @@ function MemoryFormPage() {
   };
 
   return (
-    <div className="bg-[url(@/assets/geo-memory-map-bg.png)] bg-no-repeat bg-center">
-      <section className=" items-center justify-center bg-[#526b5c]/90 h-full bg-auto bg-no-repeat bg-center justify-items-center ">
-        <div className="grid grid-cols-2 gap-4 place-items-center w-[80%]  pt-10">
+    <div className="bg-[url(@/assets/geo-memory-map-bg.png)] bg-no-repeat bg-center min-h-screen">
+      <section className="flex items-center justify-center bg-[#526b5c]/90 min-h-screen bg-auto bg-no-repeat bg-center justify-items-center ">
+        <div className="grid grid-cols-2 gap-4 place-items-center pt-10  max-w-[60%] w-full mx-auto">
           <div className="bg-white/50 rounded-lg shadow-lg pb-5">
             <h1 className="font-display pt-5 pl-5 text-3xl">Add New Memory</h1>
             {/* FORM STARTS HERE */}
@@ -172,18 +172,18 @@ function MemoryFormPage() {
                 />
                 <label
                   htmlFor="file-upload"
-                  className="cursor-pointer px-4 py-2 bg-green-700 text-white rounded-lg shadow hover:bg-green-800 transition duration-150 inline-block mr-5"
+                  className="cursor-pointer py-2 px-4 place-content-center  bg-green-700 text-white rounded-lg shadow hover:bg-green-800 transition duration-150 inline-block mr-5"
                 >
                   Upload File
                 </label>
-              
 
-              <button
-                type="submit"
-                className="focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 ml-2 my-2 "
-              >
-                Submit
-              </button>
+                <button
+                  type="submit"
+                  className="justify-end items-end focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 ml-2 my-2 "
+                >
+                  Submit
+                </button>
+              
             </form>
           </div>
 
