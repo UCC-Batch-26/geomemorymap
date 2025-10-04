@@ -29,7 +29,7 @@ export function HomePage() {
         {cards.map(createCards)}
       </div>
 
-      <div className="col-span-4 row-span-2">
+      <div className="justify-items-center bg-[#526b5c] h-screen ">
         <MemoryFormPage />
       </div>
     </div>

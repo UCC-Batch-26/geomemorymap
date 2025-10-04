@@ -5,6 +5,8 @@ import { createMemory } from '@/modules/api-hooks/create-memory';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import { getCityFromCoords } from '@/modules/api-hooks/reverse-geocode';
+import MemCards from '@/modules/common/components/mem-cards';
+// import { getMemories } from '@/modules/api-hooks/get-memories';
 
 function MemoryFormPage() {
   const [title, setTitle] = useState('');
@@ -29,6 +31,7 @@ function MemoryFormPage() {
     const fetchMemories = async () => {
       try {
         const token = localStorage.getItem('token');
+        console.log('token:', localStorage.getItem('token'));
         const res = await fetch('http://localhost:3000/api/memories', {
           headers: {
             'Content-Type': 'application/json',
@@ -37,8 +40,11 @@ function MemoryFormPage() {
         });
 
         if (!res.ok) throw new Error('Failed to fetch memories');
-        const data = await res.json();
-        setMemories(data.memories);
+        const result = await res.json();
+        const data = result.data;
+        console.log('Fetched memories:', data[0].title);
+
+        setMemories(data);
       } catch (error) {
         console.error('Error fetching memories', error);
       }
@@ -106,8 +112,8 @@ function MemoryFormPage() {
 
   return (
     <div className="bg-[url(@/assets/geo-memory-map-bg.png)] bg-no-repeat bg-center">
-      <section className="flex items-center justify-center bg-[#526b5c]/80 h-screen pl-5 bg-auto bg-no-repeat bg-center">
-        <div className="grid grid-cols-2 grid-rows-[500,auto] gap-4 w-[80vw]">
+      <section className=" items-center justify-center bg-[#526b5c]/80 h-screen pl-5 bg-auto bg-no-repeat bg-center">
+        <div className="grid grid-cols-2 gap-4 w-[80vw]">
           <div className="bg-white/50 rounded-lg shadow-lg pb-5">
             <h1 className="font-display pt-5 pl-5 text-3xl">Add New Memory</h1>
             {/* FORM STARTS HERE */}
@@ -161,8 +167,16 @@ function MemoryFormPage() {
               }}
             />
           </div>
-          <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
+
           {/* CARD GENERATEED FROM API BELOW */}
+          <div className="row-start-3 col-span-2 gap-4 pb-5">
+            <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
+            <div className="flex flex-row flex-wrap gap-4">
+              {_memories.slice(0, 6).map((memory) => (
+                <MemCards key={memory.id} img={memory.photoURL} title={memory.title} description={memory.description} />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </div>
