@@ -105,6 +105,14 @@ function LoginPage({ setToken, setUser }) {
             >
               Login
             </button>
+
+            <button
+              type="button"
+              onClick={() => navigate('/signup')}
+              className="w-full bg-white/70 text-gray-700 py-2 rounded-md hover:bg-white transition mt-3"
+            >
+              Register
+            </button>
           </form>
         </div>
       </div>
