@@ -8,20 +8,27 @@ import LoginPage from '@/modules/auth/pages/log-in-page';
 import ContactPage from '@/modules/home/pages/contact-page';
 import MemoryFormPage from './modules/home/pages/memory-form-page';
 import { Toaster } from 'react-hot-toast';
+import { ProtectedRoute } from '@/modules/utils/protected-routes';
 
 export function App() {
-  const [_token, setToken] = useState(null);
+  const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [_user, setUser] = useState(null);
 
   const router = createBrowserRouter([
     {
+      path: '/login',
+      element: <LoginPage setToken={setToken} setUser={setUser} />,
+    },
+    {
+      path: '/signup',
+      element: <SignUpPage />,
+    },
+    {
       path: '/',
       element: <BaseLayout />,
       children: [
-        { index: true, element: <HomePage /> },
+        { index: true, element: <ProtectedRoute><HomePage /></ProtectedRoute> },
         { path: '/about', element: <AboutPage /> },
-        { path: '/signup', element: <SignUpPage /> },
-        { path: '/login', element: <LoginPage setToken={setToken} setUser={setUser} /> },
         { path: '/contact', element: <ContactPage /> },
       ],
     },
