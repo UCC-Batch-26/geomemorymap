@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 const SIGN_UP_URL = `${import.meta.env.VITE_BACKEND_URL}/api/auth/register`;
+const navigate = useNavigate();
 
 function SignUpPage() {
   const [form, setForm] = useState({
@@ -49,6 +51,7 @@ function SignUpPage() {
       if (res.ok) {
         toast.success('Registered successfully! You can login now.');
         setForm({ username: '', email: '', password: '', age: '' });
+        setTimeout(() => navigate('/'), 1000);
       } else {
         toast.error(data.message || 'Registration failed');
       }
