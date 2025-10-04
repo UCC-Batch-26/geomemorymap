@@ -80,7 +80,7 @@ function SignUpPage() {
           </div>
         </div>
 
-        <form className="bg-white border border-black rounded-lg p-6 w-80 shadow-md" onSubmit={handleRegister}>
+        <form className="bg-white border rounded-lg p-6 w-80 shadow-md" onSubmit={handleRegister}>
           <h2 className="text-xl font-bold mb-4 text-center">Register</h2>
 
           <input
