@@ -7,6 +7,13 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
+const greenIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+  shadowUrl: markerShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
+
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -26,7 +33,7 @@ function RecenterMap({ center }) {
   return null;
 }
 
-export default function MapView({ onLocationSelect }) {
+export default function MapView({ _memories = [], onLocationSelect }) {
   // Default center (Manila) as fallback
   const [center, setCenter] = useState([14.5995, 120.9842]);
 
@@ -99,10 +106,32 @@ export default function MapView({ onLocationSelect }) {
         <MapClickHandler />
         <RecenterMap center={center} />
         {/* Draggable marker for user location */}
-        <Marker position={center} draggable={true} eventHandlers={{ dragend: handleDragEnd }} ref={markerRef}>
-          <Popup>Drag me to adjust :round_pushpin:</Popup>
+        <Marker
+          position={center}
+          draggable={true}
+          icon={greenIcon}
+          eventHandlers={{ dragend: handleDragEnd }}
+          ref={markerRef}
+        >
+          <Popup>Drag me to adjust!</Popup>
         </Marker>
 
+        {/* Memory markers */}
+        {_memories
+          .filter((memory) => memory.location && memory.location.lat && memory.location.lng)
+          .map((memory) => (
+            <Marker key={memory._id} position={[memory.location.lat, memory.location.lng]}>
+              <Popup>
+                <div>
+                  <strong>{memory.title}</strong>
+                  <p>{memory.description}</p>
+                  {memory.photoURL && (
+                    <img src={memory.photoURL} alt={memory.title} className="w-32 h-32 object-cover mt-2" />
+                  )}
+                </div>
+              </Popup>
+            </Marker>
+          ))}
         {/* Example fixed markers
         <Marker position={[14.6925, 120.9699]}>
           <Popup>Hello from Valenzuela! :flag_ph:</Popup>

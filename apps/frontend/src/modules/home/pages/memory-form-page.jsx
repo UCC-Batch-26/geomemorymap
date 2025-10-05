@@ -210,6 +210,7 @@ function MemoryFormPage() {
 
           <div className="place-items-center">
             <MapView
+              _memories={_memories}
               onLocationSelect={async (coords) => {
                 setLocation(coords); // keep coordinates
                 const label = await getCityFromCoords(coords.lat, coords.lng);
