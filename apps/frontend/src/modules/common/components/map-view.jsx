@@ -130,15 +130,19 @@ export default function MapView({ _memories = [], onLocationSelect }) {
             >
               <Tooltip>
                 <div
-                  className="
+  className="
     bg-[#526b5c]/90 text-white font-display
     px-4 py-3 rounded-xl shadow-lg
     transition-transform duration-300 ease-in-out
-    hover:scale-105 hover:bg-[#6b8b74]"
-                >
+    hover:scale-105 hover:bg-[#6b8b74]
+    w-[220px] sm:w-[260px] md:w-[300px]
+    overflow-hidden break-words
+  "
+>
+                  
                   <h1 className="text-2xl font-semibold pt-2">{memory.title}</h1>
                   <hr className="flex h-px my-2 bg-white/40 border-0 m-auto" />
-                  <p className="text-lg text-center mb-2">{memory.description}</p>
+                  <p className="text-lg text-justify mb-2 break-words whitespace-normal line-clamp-4 overflow-hidden">{memory.description}</p>
                   <div className="">
                     {memory.photoURL && (
                       <img
