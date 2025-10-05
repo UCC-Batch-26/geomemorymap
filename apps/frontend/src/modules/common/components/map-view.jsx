@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef  } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvent, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import toast from 'react-hot-toast';
@@ -122,11 +122,12 @@ export default function MapView({ _memories = [], onLocationSelect }) {
           .map((memory) => (
             <Marker key={memory._id} position={[memory.location.lat, memory.location.lng]}>
               <Popup>
-                <div>
-                  <strong>{memory.title}</strong>
-                  <p>{memory.description}</p>
+                <div className='font-display'>
+                  <h1 className='text-2xl font-semibold pt-2'>{memory.title}</h1>
+                  <hr className="flex h-px my-2 bg-black/40 border-0  m-auto" />
+                  <p className='text-lg text-center'>{memory.description}</p>
                   {memory.photoURL && (
-                    <img src={memory.photoURL} alt={memory.title} className="w-32 h-32 object-cover mt-2" />
+                    <img src={memory.photoURL} alt={memory.title} className="flex w-screen m-auto object-cover " />
                   )}
                 </div>
               </Popup>
