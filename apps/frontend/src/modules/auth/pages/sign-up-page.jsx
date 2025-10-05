@@ -83,39 +83,49 @@ function SignUpPage() {
         <form className="bg-white border rounded-lg p-6 w-80 shadow-md" onSubmit={handleRegister}>
           <h2 className="text-xl font-bold mb-4 text-center">Register</h2>
 
+          <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+            Username
+          </label>
           <input
+            id="username"
             name="username"
             placeholder="Username"
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring focus:ring-blue-300"
           />
 
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
           <input
+            id='email'
             type="email"
             name="email"
             placeholder="Email"
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring focus:ring-blue-300"
           />
 
+          <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
           <input
+            id='password'
             type={showPassword ? 'text' : 'password'}
             name="password"
             placeholder="Password"
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring focus:ring-blue-300"
           />
 
+          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirm Password</label>
           <input
+            id='confirmPassword'
             type={showPassword ? 'text' : 'password'}
             name="confirmPassword"
             placeholder="Confirm Password"
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring focus:ring-blue-300"
           />
 
           {/* Show password toggle affecting both fields */}
