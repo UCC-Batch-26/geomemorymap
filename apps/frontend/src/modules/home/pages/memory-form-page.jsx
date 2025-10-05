@@ -19,6 +19,7 @@ function MemoryFormPage() {
   const [locationName, setLocationName] = useState('');
   const navigate = useNavigate();
   const [labels, setLabels] = useState({});
+  const [isFileTooBig, setFileTooBig] = useState(false);
 
   const fetchMemories = async () => {
     try {
@@ -93,7 +94,7 @@ function MemoryFormPage() {
       }
 
       let photoURL = '';
-      if (imageFile) {
+      if (!photoURL && imageFile) {
         photoURL = await uploadImageToCloudinary(imageFile);
       }
 
@@ -164,26 +165,46 @@ function MemoryFormPage() {
 
               <h2 className="font-display p-2 text-2xl">Upload Photo</h2>
 
-              <input
-                id="file-upload"
-                type="file"
-                className="hidden"
-                accept="image/*"
-                onChange={(e) => setImageFile(e.target.files[0])}
-              />
-              <label
-                htmlFor="file-upload"
-                className="cursor-pointer py-2 px-4 place-content-center  bg-green-700 text-white rounded-lg shadow hover:bg-green-800 transition duration-150 inline-block mr-5"
-              >
-                Upload File
-              </label>
+              <div className="ml-2 mb-4 flex items-center gap-4">
+                <input
+                  id="file-upload"
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (!file) {
+                      return;
+                    }
 
-              <button
-                type="submit"
-                className="justify-end items-end focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 ml-2 my-2 "
-              >
-                Submit
-              </button>
+                    if (file.size > 5 * 1024 * 1024) {
+                      setFileTooBig(true);
+                      setImageFile(null);
+                    } else {
+                      setFileTooBig(false);
+                      setImageFile(file);
+                    }
+                  }}
+                />
+                <label
+                  htmlFor="file-upload"
+                  className="cursor-pointer py-2 px-4 bg-green-700 text-white rounded-lg shadow hover:bg-green-800 transition duration-150"
+                >
+                  Upload File
+                </label>
+
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 text-sm font-medium text-white bg-green-700 rounded-lg shadow hover:bg-green-800 transition"
+                >
+                  Submit
+                </button>
+              </div>
+
+              {/* Warning message */}
+              {isFileTooBig && <p className="text-red-500 ml-2 mt-1 text-sm">File’s too chunky! &lt; 5MB please</p>}
+
+              <p className="text-sm text-gray-500 mt-1 ml-2">Maximum file size: 5MB</p>
             </form>
           </div>
 
