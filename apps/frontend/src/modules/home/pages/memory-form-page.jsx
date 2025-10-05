@@ -19,7 +19,7 @@ function MemoryFormPage() {
   const [locationName, setLocationName] = useState('');
   const navigate = useNavigate();
   const [labels, setLabels] = useState({});
-  const [isFileTooBig, setFileTooBig] = useState(false)
+  const [isFileTooBig, setFileTooBig] = useState(false);
 
   const fetchMemories = async () => {
     try {
@@ -173,19 +173,18 @@ function MemoryFormPage() {
                   accept="image/*"
                   onChange={(e) => {
                     const file = e.target.files[0];
-                      if (!file) {
-                        return 
-                      }
-
-                      if (file.size > 5 * 1024 * 1024) {
-                        setFileTooBig(true);
-                        setImageFile(null);
-                      } else {
-                        setFileTooBig(false);
-                        setImageFile(file)
-                      }
+                    if (!file) {
+                      return;
                     }
-                  }
+
+                    if (file.size > 5 * 1024 * 1024) {
+                      setFileTooBig(true);
+                      setImageFile(null);
+                    } else {
+                      setFileTooBig(false);
+                      setImageFile(file);
+                    }
+                  }}
                 />
                 <label
                   htmlFor="file-upload"
@@ -203,16 +202,9 @@ function MemoryFormPage() {
               </div>
 
               {/* Warning message */}
-              {isFileTooBig && (
-                <p className="text-red-500 ml-2 mt-1 text-sm">
-                  File’s too chunky! &lt; 5MB please
-                </p>
-              )}
+              {isFileTooBig && <p className="text-red-500 ml-2 mt-1 text-sm">File’s too chunky! &lt; 5MB please</p>}
 
-              <p className="text-sm text-gray-500 mt-1 ml-2">
-                Maximum file size: 5MB
-              </p>
-
+              <p className="text-sm text-gray-500 mt-1 ml-2">Maximum file size: 5MB</p>
             </form>
           </div>
 
