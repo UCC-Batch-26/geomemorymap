@@ -31,7 +31,7 @@ function MemoryFormPage() {
       if (Object.keys(updates).length) setLabels((prev) => ({ ...prev, ...updates }));
     };
     run();
-  }, [_memories]);
+  }, [_memories, labels]);
 
   useEffect(() => {
     const fetchDefaultLocationName = async () => {
