@@ -65,7 +65,7 @@ function SignUpPage() {
     <section className="fixed bg-[url(@/assets/geo-memory-map-bg.png)] bg-size-[900px] bg-no-repeat bg-center h-screen w-full">
       <div className="flex items-center justify-center min-h-screen bg-[#526b5c]/80 text-white">
         <div className=" font-display flex flex-col justify-center-safe gap-5 text-left">
-          <h1 className="text-7xl font-semibold pt-20 pr-20">Create New Account</h1>
+          <h1 className="text-5xl font-semibold pt-20 pr-20">Create New Account</h1>
 
           <div className="flex flex-row items-center gap-2">
             <h3 className="text-2xl font-semibold">Already Registered?</h3>
@@ -80,8 +80,8 @@ function SignUpPage() {
           </div>
         </div>
 
-        <form className="bg-white border rounded-lg p-6 w-80 shadow-md" onSubmit={handleRegister}>
-          <h2 className="text-xl font-bold mb-4 text-center">Register</h2>
+        <form className="bg-white/50 border border-black rounded-lg p-6 w-80 shadow-md" onSubmit={handleRegister}>
+          {/* <h2 className="text-xl font-bold mb-4 text-center">Register</h2> */}
 
           <label htmlFor="username" className="block text-sm font-medium text-gray-700">
             Username
