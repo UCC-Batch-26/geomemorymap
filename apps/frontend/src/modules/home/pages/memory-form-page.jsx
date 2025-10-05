@@ -21,25 +21,25 @@ function MemoryFormPage() {
   const [labels, setLabels] = useState({});
 
   const fetchMemories = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:3000/api/memories', {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch('http://localhost:3000/api/memories', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        if (!res.ok) throw new Error('Failed to fetch memories');
-        const result = await res.json();
-        const data = result.data;
-        console.log('Fetched memories:', data);
+      if (!res.ok) throw new Error('Failed to fetch memories');
+      const result = await res.json();
+      const data = result.data;
+      console.log('Fetched memories:', data);
 
-        setMemories(data);
-      } catch (error) {
-        console.error('Error fetching memories', error);
-      }
-    };
+      setMemories(data);
+    } catch (error) {
+      console.error('Error fetching memories', error);
+    }
+  };
 
   useEffect(() => {
     const run = async () => {
