@@ -95,9 +95,11 @@ function SignUpPage() {
             className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring focus:ring-blue-300"
           />
 
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            Email
+          </label>
           <input
-            id='email'
+            id="email"
             type="email"
             name="email"
             placeholder="Email"
@@ -106,9 +108,11 @@ function SignUpPage() {
             className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring focus:ring-blue-300"
           />
 
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+          <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            Password
+          </label>
           <input
-            id='password'
+            id="password"
             type={showPassword ? 'text' : 'password'}
             name="password"
             placeholder="Password"
@@ -117,9 +121,11 @@ function SignUpPage() {
             className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring focus:ring-blue-300"
           />
 
-          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirm Password</label>
+          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+            Confirm Password
+          </label>
           <input
-            id='confirmPassword'
+            id="confirmPassword"
             type={showPassword ? 'text' : 'password'}
             name="confirmPassword"
             placeholder="Confirm Password"
