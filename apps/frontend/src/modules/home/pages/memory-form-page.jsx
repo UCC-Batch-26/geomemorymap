@@ -137,7 +137,7 @@ function MemoryFormPage() {
           <div className="bg-white/50 rounded-lg shadow-lg pb-5">
             <h1 className="font-display pt-5 pl-5 text-3xl">Add New Memory</h1>
             {/* FORM STARTS HERE */}
-            <form action="" method="post" className="ml-5 rounded-lg w-160" onSubmit={handleSubmit}>
+            <form action="" method="post" className="ml-5 rounded-lg w-120" onSubmit={handleSubmit}>
               <h2 className="font-display p-2 text-2xl">Title</h2>
 
               <input
