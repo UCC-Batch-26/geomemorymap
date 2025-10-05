@@ -105,27 +105,20 @@ export default function MapView({ _memories = [], onLocationSelect }) {
 
         {/* Memory markers */}
         {_memories
-        .filter(memory => memory.location && memory.location.lat && memory.location.lng)
-        .map(memory => (
-          <Marker
-            key={memory._id}
-            position={[memory.location.lat, memory.location.lng]}
-          >
-            <Popup>
-              <div>
-                <strong>{memory.title}</strong>
-                <p>{memory.description}</p>
-                {memory.photoURL && (
-                  <img
-                    src={memory.photoURL}
-                    alt={memory.title}
-                    className="w-32 h-32 object-cover mt-2"
-                  />
-                )}
-              </div>
-            </Popup>
-          </Marker>
-        ))}
+          .filter((memory) => memory.location && memory.location.lat && memory.location.lng)
+          .map((memory) => (
+            <Marker key={memory._id} position={[memory.location.lat, memory.location.lng]}>
+              <Popup>
+                <div>
+                  <strong>{memory.title}</strong>
+                  <p>{memory.description}</p>
+                  {memory.photoURL && (
+                    <img src={memory.photoURL} alt={memory.title} className="w-32 h-32 object-cover mt-2" />
+                  )}
+                </div>
+              </Popup>
+            </Marker>
+          ))}
         {/* Example fixed markers
         <Marker position={[14.6925, 120.9699]}>
           <Popup>Hello from Valenzuela! :flag_ph:</Popup>
