@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef  } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvent, useMap } from 'react-leaflet';
+import { useState, useEffect, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvent, useMap, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import toast from 'react-hot-toast';
 import L from 'leaflet';
@@ -120,17 +120,36 @@ export default function MapView({ _memories = [], onLocationSelect }) {
         {_memories
           .filter((memory) => memory.location && memory.location.lat && memory.location.lng)
           .map((memory) => (
-            <Marker key={memory._id} position={[memory.location.lat, memory.location.lng]}>
-              <Popup>
-                <div className='font-display'>
-                  <h1 className='text-2xl font-semibold pt-2'>{memory.title}</h1>
-                  <hr className="flex h-px my-2 bg-black/40 border-0  m-auto" />
-                  <p className='text-lg text-center'>{memory.description}</p>
-                  {memory.photoURL && (
-                    <img src={memory.photoURL} alt={memory.title} className="flex w-screen m-auto object-cover " />
-                  )}
+            <Marker
+              key={memory._id}
+              position={[memory.location.lat, memory.location.lng]}
+              eventHandlers={{
+                mouseover: (e) => e.target.openPopup(),
+                mouseout: (e) => e.target.closePopup(),
+              }}
+            >
+              <Tooltip>
+                <div
+                  className="
+    bg-[#526b5c]/90 text-white font-display
+    px-4 py-3 rounded-xl shadow-lg
+    transition-transform duration-300 ease-in-out
+    hover:scale-105 hover:bg-[#6b8b74]"
+                >
+                  <h1 className="text-2xl font-semibold pt-2">{memory.title}</h1>
+                  <hr className="flex h-px my-2 bg-white/40 border-0 m-auto" />
+                  <p className="text-lg text-center mb-2">{memory.description}</p>
+                  <div className="">
+                    {memory.photoURL && (
+                      <img
+                        src={memory.photoURL}
+                        alt={memory.title}
+                        className="m-auto h-[50%]  object-contain rounded-2xl"
+                      />
+                    )}
+                  </div>
                 </div>
-              </Popup>
+              </Tooltip>
             </Marker>
           ))}
         {/* Example fixed markers

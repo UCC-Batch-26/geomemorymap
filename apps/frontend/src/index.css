@@ -7,8 +7,8 @@
 }
 
 #map {
-  height: 500px;
-  width: 600px;
+  height: 590px;
+  width: 780px;
 }
 
 .leaflet-container {
@@ -16,3 +16,19 @@
   width: 100%;
   border-radius: 20px;
 }
+
+
+/* Remove Leaflet Tooltip border and default styling */
+.leaflet-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  padding: 0 !important;
+}
+
+/* Optional: remove the small arrow/pointer triangle */
+.leaflet-tooltip::before {
+  display: none !important;
+}
+
