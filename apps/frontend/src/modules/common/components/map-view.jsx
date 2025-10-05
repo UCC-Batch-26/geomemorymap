@@ -7,6 +7,13 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
+const greenIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+  shadowUrl: markerShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
+
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -99,7 +106,7 @@ export default function MapView({ _memories = [], onLocationSelect }) {
         <MapClickHandler />
         <RecenterMap center={center} />
         {/* Draggable marker for user location */}
-        <Marker position={center} draggable={true} eventHandlers={{ dragend: handleDragEnd }} ref={markerRef}>
+        <Marker position={center} draggable={true} icon={greenIcon} eventHandlers={{ dragend: handleDragEnd }} ref={markerRef}>
           <Popup>Drag me to adjust!</Popup>
         </Marker>
 
