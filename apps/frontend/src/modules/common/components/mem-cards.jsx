@@ -7,7 +7,7 @@ function MemCards({ img, title, description, location, locationName }) {
 
   return (
     <div>
-      <div className="border border-white bg-white p-3 rounded-xl shadow-2xl">
+      <div className="border border-white bg-white p-3 rounded-xl shadow-2xl w-100 h-full">
         <img
           className="h-80 w-100 border-white  object-cover bg-[#526b5c]"
           src={src}
