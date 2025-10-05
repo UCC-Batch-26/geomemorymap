@@ -145,14 +145,14 @@ function MemoryFormPage() {
                 placeholder="Title of your memory..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="ml-2 bg-white/20 w-full rounded-sm"
+                className="ml-2 bg-white/20 w-[95%] rounded-sm"
                 required
               />
 
               <h2 className="font-display p-2 text-2xl">Description</h2>
 
               <textarea
-                className="ml-2 block w-full bg-white/20 rounded-sm min-h-[100px]"
+                className="ml-2 block w-[95%] bg-white/20 rounded-sm min-h-[100px]"
                 placeholder="Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -211,7 +211,7 @@ function MemoryFormPage() {
             </form>
           </div>
 
-          <div className="w-full h-full">
+          <div className="w-full h-full place-items-center">
             <MapView
               _memories={_memories}
               onLocationSelect={async (coords) => {

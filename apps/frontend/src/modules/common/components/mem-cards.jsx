@@ -7,9 +7,9 @@ function MemCards({ img, title, description, location, locationName }) {
 
   return (
     <div>
-      <div className="place-items-center border border-white bg-white p-3 rounded-xl shadow-2xl w-100 h-[100%]">
+      <div className="border border-white bg-white p-3 rounded-xl shadow-2xl w-100 h-[100%]">
         <img
-          className="h-[50%] w-auto border-white  object-cover bg-[#526b5c]"
+          className="flex m-auto h-[50%] w-auto border-white  object-cover bg-[#526b5c]"
           src={src}
           alt={title}
           onError={(e) => {
