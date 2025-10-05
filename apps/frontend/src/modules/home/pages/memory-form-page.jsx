@@ -24,7 +24,7 @@ function MemoryFormPage() {
   const fetchMemories = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:3000/api/memories', {
+      const res = await fetch(MEMORY_URL, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -33,7 +33,7 @@ function MemoryFormPage() {
 
       if (!res.ok) throw new Error('Failed to fetch memories');
       const result = await res.json();
-      const data = result.data;
+      const data = result.data || result._memories;
       console.log('Fetched memories:', data);
 
       setMemories(data);
@@ -57,7 +57,7 @@ function MemoryFormPage() {
 
   useEffect(() => {
     const fetchDefaultLocationName = async () => {
-      const label = await getCityFromCoords(location.lat, location.lng);
+      const label = await getCityFromCoords(location.lat, location.lng).catch(() => null);
       setLocationName(label);
     };
 
@@ -114,6 +114,9 @@ function MemoryFormPage() {
       }
       const updatedMemories = [newMemory].concat(currentMemories);
       setMemories(updatedMemories);
+
+      // small delay before refetching from backend
+      await new Promise(resolve => setTimeout(resolve, 500));
       await fetchMemories();
 
       // Reset form
