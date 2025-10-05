@@ -116,7 +116,7 @@ function MemoryFormPage() {
       setMemories(updatedMemories);
 
       // small delay before refetching from backend
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       await fetchMemories();
 
       // Reset form
