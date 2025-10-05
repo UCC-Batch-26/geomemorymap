@@ -106,7 +106,13 @@ export default function MapView({ _memories = [], onLocationSelect }) {
         <MapClickHandler />
         <RecenterMap center={center} />
         {/* Draggable marker for user location */}
-        <Marker position={center} draggable={true} icon={greenIcon} eventHandlers={{ dragend: handleDragEnd }} ref={markerRef}>
+        <Marker
+          position={center}
+          draggable={true}
+          icon={greenIcon}
+          eventHandlers={{ dragend: handleDragEnd }}
+          ref={markerRef}
+        >
           <Popup>Drag me to adjust!</Popup>
         </Marker>
 
