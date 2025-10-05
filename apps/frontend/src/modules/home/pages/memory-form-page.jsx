@@ -20,6 +20,27 @@ function MemoryFormPage() {
   const navigate = useNavigate();
   const [labels, setLabels] = useState({});
 
+  const fetchMemories = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const res = await fetch('http://localhost:3000/api/memories', {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) throw new Error('Failed to fetch memories');
+        const result = await res.json();
+        const data = result.data;
+        console.log('Fetched memories:', data);
+
+        setMemories(data);
+      } catch (error) {
+        console.error('Error fetching memories', error);
+      }
+    };
+
   useEffect(() => {
     const run = async () => {
       const entries = _memories.filter((m) => m.location && !labels[m._id]);
@@ -44,27 +65,6 @@ function MemoryFormPage() {
 
   // Fetch memories from backend
   useEffect(() => {
-    const fetchMemories = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:3000/api/memories', {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!res.ok) throw new Error('Failed to fetch memories');
-        const result = await res.json();
-        const data = result.data;
-        console.log('Fetched memories:', data);
-
-        setMemories(data);
-      } catch (error) {
-        console.error('Error fetching memories', error);
-      }
-    };
-
     fetchMemories();
   }, []);
 
@@ -113,6 +113,7 @@ function MemoryFormPage() {
       }
       const updatedMemories = [newMemory].concat(currentMemories);
       setMemories(updatedMemories);
+      await fetchMemories();
 
       // Reset form
       setTitle('');
