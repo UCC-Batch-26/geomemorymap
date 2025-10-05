@@ -19,7 +19,7 @@ function NavBar() {
         <li>
           <Link to={'/about'}>About</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to={'/login'}>Login</Link>
         </li>
         <li>
@@ -27,7 +27,7 @@ function NavBar() {
         </li>
         <li>
           <Link to={'/user'}>Profile</Link>
-        </li>
+        </li> */}
         <li>
           <Link to={'/contact'}>Contact</Link>
         </li>
