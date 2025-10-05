@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router';
 import { getCityFromCoords } from '@/modules/api-hooks/reverse-geocode';
 
 const MEMORY_URL = `${import.meta.env.VITE_BACKEND_URL}/api/memories`;
+import MemCards from '@/modules/common/components/mem-cards';
+// import { getMemories } from '@/modules/api-hooks/get-memories';
 
 function MemoryFormPage() {
   const [title, setTitle] = useState('');
@@ -16,6 +18,41 @@ function MemoryFormPage() {
   const [location, setLocation] = useState({ lat: 14.5995, lng: 120.9842 }); // this is default Manila for testing purpose
   const [locationName, setLocationName] = useState('');
   const navigate = useNavigate();
+  const [labels, setLabels] = useState({});
+
+  const fetchMemories = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch('http://localhost:3000/api/memories', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) throw new Error('Failed to fetch memories');
+      const result = await res.json();
+      const data = result.data;
+      console.log('Fetched memories:', data);
+
+      setMemories(data);
+    } catch (error) {
+      console.error('Error fetching memories', error);
+    }
+  };
+
+  useEffect(() => {
+    const run = async () => {
+      const entries = _memories.filter((m) => m.location && !labels[m._id]);
+      const updates = {};
+      for (const m of entries) {
+        const name = await getCityFromCoords(m.location.lat, m.location.lng);
+        updates[m._id] = name ?? null;
+      }
+      if (Object.keys(updates).length) setLabels((prev) => ({ ...prev, ...updates }));
+    };
+    run();
+  }, [_memories, labels]);
 
   useEffect(() => {
     const fetchDefaultLocationName = async () => {
@@ -28,24 +65,6 @@ function MemoryFormPage() {
 
   // Fetch memories from backend
   useEffect(() => {
-    const fetchMemories = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const res = await fetch(MEMORY_URL, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!res.ok) throw new Error('Failed to fetch memories');
-        const data = await res.json();
-        setMemories(data.memories);
-      } catch (error) {
-        console.error('Error fetching memories', error);
-      }
-    };
-
     fetchMemories();
   }, []);
 
@@ -94,6 +113,7 @@ function MemoryFormPage() {
       }
       const updatedMemories = [newMemory].concat(currentMemories);
       setMemories(updatedMemories);
+      await fetchMemories();
 
       // Reset form
       setTitle('');
@@ -107,13 +127,13 @@ function MemoryFormPage() {
   };
 
   return (
-    <div className="bg-[url(@/assets/geo-memory-map-bg.png)] bg-no-repeat bg-center">
-      <section className="flex items-center justify-center bg-[#526b5c]/80 h-screen pl-5 bg-auto bg-no-repeat bg-center">
-        <div className="grid grid-cols-2 grid-rows-[500,auto] gap-4 w-[80vw]">
+    <div className="bg-[url(@/assets/geo-memory-map-bg.png)] bg-no-repeat bg-center min-h-screen">
+      <section className="flex items-center justify-center bg-[#526b5c]/90 min-h-screen bg-auto bg-no-repeat bg-center justify-items-center ">
+        <div className="grid grid-cols-2 gap-4 place-items-center pt-10  max-w-[60%] w-full mx-auto">
           <div className="bg-white/50 rounded-lg shadow-lg pb-5">
             <h1 className="font-display pt-5 pl-5 text-3xl">Add New Memory</h1>
             {/* FORM STARTS HERE */}
-            <form action="" method="post" className="ml-5 rounded-lg" onSubmit={handleSubmit}>
+            <form action="" method="post" className="ml-5 rounded-lg w-160" onSubmit={handleSubmit}>
               <h2 className="font-display p-2 text-2xl">Title</h2>
 
               <input
@@ -121,14 +141,14 @@ function MemoryFormPage() {
                 placeholder="Title of your memory..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="ml-2 bg-white/20  w-full max-w-2xl min-w-1 rounded-sm"
+                className="ml-2 bg-white/20 w-[90%] rounded-sm"
                 required
               />
 
               <h2 className="font-display p-2 text-2xl">Description</h2>
 
               <textarea
-                className="ml-2 block w-full bg-white/20 rounded-sm min-w-1  max-w-2xl h-full min-h-50"
+                className="ml-2 block w-[90%] bg-white/20 rounded-sm min-w-1  max-w-2xl h-full min-h-50"
                 placeholder="Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -143,11 +163,24 @@ function MemoryFormPage() {
               </p>
 
               <h2 className="font-display p-2 text-2xl">Upload Photo</h2>
-              <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} className="ml-2" />
+
+              <input
+                id="file-upload"
+                type="file"
+                className="hidden"
+                accept="image/*"
+                onChange={(e) => setImageFile(e.target.files[0])}
+              />
+              <label
+                htmlFor="file-upload"
+                className="cursor-pointer py-2 px-4 place-content-center  bg-green-700 text-white rounded-lg shadow hover:bg-green-800 transition duration-150 inline-block mr-5"
+              >
+                Upload File
+              </label>
 
               <button
                 type="submit"
-                className="focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 ml-2 my-2 "
+                className="justify-end items-end focus:outline-none text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 ml-2 my-2 "
               >
                 Submit
               </button>
@@ -163,8 +196,27 @@ function MemoryFormPage() {
               }}
             />
           </div>
-          <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
+
           {/* CARD GENERATEED FROM API BELOW */}
+          <div className="row-start-3 col-span-2 gap-4 pb-5">
+            <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
+            <div className="flex flex-wrap gap-4 place-content-center">
+              {_memories
+                .slice()
+                .reverse()
+                .slice(0, 6)
+                .map((memory) => (
+                  <MemCards
+                    key={memory._id ?? memory.id}
+                    img={memory.photoURL}
+                    title={memory.title}
+                    locationName={labels[memory._id] ?? null}
+                    location={memory.location}
+                    description={memory.description}
+                  />
+                ))}
+            </div>
+          </div>
         </div>
       </section>
     </div>
