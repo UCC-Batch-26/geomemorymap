@@ -77,7 +77,7 @@ function SignUpPage() {
           <div className="flex flex-col">
             <hr className="w-24 h-px my-2 bg-white/40 border-0 self-start" />
             <span className="py-2 text-xl text-white/80">Save memories. Pin moments.</span>
-          </div>  
+          </div>
         </div>
 
         <form className="bg-white border rounded-lg p-6 w-80 shadow-md" onSubmit={handleRegister}>
