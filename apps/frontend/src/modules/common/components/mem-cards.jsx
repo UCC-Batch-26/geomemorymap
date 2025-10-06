@@ -1,4 +1,6 @@
 import noImage from '@/assets/no-image-available.jpg';
+import { useState } from 'react';
+import ModalImage from 'react-modal-image';
 
 function MemCards({ img, title, description, location, locationName }) {
   const src = img ?? noImage; // only replaces null/undefined
@@ -7,9 +9,9 @@ function MemCards({ img, title, description, location, locationName }) {
 
   return (
     <div>
-      <div className="border border-white bg-white p-3 rounded-xl shadow-2xl w-100 h-[100%]">
+      <div className="border border-white bg-white p-3 rounded-xl shadow-2xl w-100 h-[100%] transition duration-300 ease-out hover:-translate-y-1 hover:shadow-3xl cursor-pointer">
         <img
-          className="flex m-auto h-[50%] w-auto border-white  object-cover bg-[#526b5c]"
+          className="flex m-auto h-[50%] w-auto border-white  object-cover bg-[#526b5c]  transition-transform duration-500 ease-out hover:scale-105"
           src={src}
           alt={title}
           onError={(e) => {
