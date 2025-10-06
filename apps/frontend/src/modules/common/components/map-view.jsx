@@ -137,7 +137,7 @@ export default function MapView({ _memories = [], onLocationSelect }) {
                     hover:scale-105 hover:bg-[#6b8b74]
                     w-[220px] sm:w-[260px] md:w-[300px]
                     overflow-hidden break-words"
-                  >
+                >
                   <h1 className="text-2xl font-semibold pt-2">{memory.title}</h1>
                   <hr className="flex h-px my-2 bg-white/40 border-0 m-auto" />
                   <p className="text-lg text-justify mb-2 break-words whitespace-normal line-clamp-4 overflow-hidden">
