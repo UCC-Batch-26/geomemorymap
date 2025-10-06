@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 const SIGN_UP_URL = `${import.meta.env.VITE_BACKEND_URL}/api/auth/register`;
 
@@ -69,9 +69,9 @@ function SignUpPage() {
 
           <div className="flex flex-row items-center gap-2">
             <h3 className="text-2xl font-semibold">Already Registered?</h3>
-            <a className="text-green-500  text-2xl underline hover:no-underline" href="/login">
+            <Link to="/login" className="text-green-500  text-2xl underline hover:no-underline">
               Login
-            </a>
+            </Link>
           </div>
 
           <div className="flex flex-col">
