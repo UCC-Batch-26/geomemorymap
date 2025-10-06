@@ -1,6 +1,4 @@
 import noImage from '@/assets/no-image-available.jpg';
-import { useState } from 'react';
-import ModalImage from 'react-modal-image';
 
 function MemCards({ img, title, description, location, locationName }) {
   const src = img ?? noImage; // only replaces null/undefined
