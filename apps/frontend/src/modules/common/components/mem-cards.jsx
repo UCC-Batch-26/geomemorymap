@@ -7,19 +7,21 @@ function MemCards({ img, title, description, location, locationName }) {
 
   return (
     <div>
-      <div className="border border-white bg-white p-3 rounded-xl shadow-2xl w-70 h-full">
-        <img
-          className="h-80 w-auto border-white  object-cover bg-[#526b5c]"
-          src={src}
-          alt={title}
-          onError={(e) => {
-            if (e.currentTarget.src !== noImage) {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = noImage;
-            }
-          }}
-          loading="lazy"
-        />
+      <div className="border border-white bg-white p-3 rounded-xl shadow-2xl w-100 h-[100%] transition duration-300 ease-out hover:-translate-y-1 hover:shadow-3xl cursor-pointer">
+        <div className="w-full h-48 overflow-hidden rounded-lg">
+          <img
+            className="w-full max-h-64 object-cover border-white bg-[#526b5c] transition-transform duration-500 ease-out hover:scale-105w-full max-h-64 object-cover border-white bg-[#526b5c] transition-transform duration-500 ease-out hover:scale-105"
+            src={src}
+            alt={title}
+            onError={(e) => {
+              if (e.currentTarget.src !== noImage) {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = noImage;
+              }
+            }}
+            loading="lazy"
+          />
+        </div>
         <h2 className="font-display font-semibold py-2">{title}</h2>
         <p className="font-display py-2">📍{locationName} </p>
         <p className="font-display py-2">

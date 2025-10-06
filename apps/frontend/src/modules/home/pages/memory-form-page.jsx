@@ -133,11 +133,11 @@ function MemoryFormPage() {
   return (
     <div className="bg-[url(@/assets/geo-memory-map-bg.png)] bg-no-repeat bg-center min-h-screen">
       <section className="flex items-center justify-center bg-[#526b5c]/90 min-h-screen bg-auto bg-no-repeat bg-center justify-items-center ">
-        <div className="grid grid-cols-2 gap-4 place-items-center pt-10  max-w-[60%] w-full mx-auto">
-          <div className="bg-white/50 rounded-lg shadow-lg pb-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-10 max-w-7xl w-full mx-auto px-4">
+          <div className="bg-white/50 rounded-lg shadow-lg w-full p-6">
             <h1 className="font-display pt-5 pl-5 text-3xl">Add New Memory</h1>
             {/* FORM STARTS HERE */}
-            <form action="" method="post" className="ml-5 rounded-lg w-120" onSubmit={handleSubmit}>
+            <form action="" method="post" className="ml-5 rounded-lg w-[100%]" onSubmit={handleSubmit}>
               <h2 className="font-display p-2 text-2xl">Title</h2>
 
               <input
@@ -145,14 +145,14 @@ function MemoryFormPage() {
                 placeholder="Title of your memory..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="ml-2 bg-white/20 w-[90%] rounded-sm"
+                className="ml-2 bg-white/20 w-[95%] rounded-sm"
                 required
               />
 
               <h2 className="font-display p-2 text-2xl">Description</h2>
 
               <textarea
-                className="ml-2 block w-[90%] bg-white/20 rounded-sm min-w-1  max-w-2xl h-full min-h-50"
+                className="ml-2 block w-[95%] bg-white/20 rounded-sm min-h-[100px]"
                 placeholder="Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -211,7 +211,7 @@ function MemoryFormPage() {
             </form>
           </div>
 
-          <div className="place-items-center">
+          <div className="w-full h-full place-items-center">
             <MapView
               _memories={_memories}
               onLocationSelect={async (coords) => {
@@ -223,9 +223,9 @@ function MemoryFormPage() {
           </div>
 
           {/* CARD GENERATEED FROM API BELOW */}
-          <div className="row-start-3 col-span-2 gap-4 pb-5">
+          <div className="sm:col-span-2 w-full pb-10">
             <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
-            <div className="flex flex-wrap gap-4 place-content-center">
+            <div className="flex flex-wrap gap-4 justify-center place-item">
               {_memories
                 .slice()
                 .reverse()
