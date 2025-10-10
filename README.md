@@ -1,6 +1,24 @@
-# Team Project
+<p align="center">
+  <img src="apps/frontend/public/geo-memory-map-nav-logo.png" alt="GeoMemoryMap Logo" width="200"/>
+</p>
+<h1 align="center">GeoMemoryMap</h1>
+<p align="center" style="font-size: 16px; line-height: 1.6;">
+GeoMemoryMap is a full-stack web app that lets users pin memories on an interactive map. Each memory includes a title, description, photo, and location. It combines geolocation, cloud storage, and modern web technologies to create a visual journal of moments around the world.
+</p>
 
-Welcome to our Team Project! This guide is designed to help you get started with setting up the project on your local machine. If you encounter any issues along the way, remember that it's all part of the learning process. Let's get started.
+
+## Team Project
+Built as part of our **Uplift Code Camp Full-Stack Web Development Bootcamp**, this project represents our team’s collaborative work in designing, developing, and deploying a full-stack application.
+
+## 📁 Project Structure
+- `apps/frontend/` – React + Vite app
+- `apps/backend/` – Express.js API
+
+## 🧰 Tech Stack
+**Frontend**: Vite, React.js, React Router, React-Leaflet, Fetch API, Tailwind CSS<br>
+**Backend**: Node.js, Express.js, RESTful APIs, Multer, Multer-Cloudinary-Storage, Cloudinary, Nominatim (Geocoding API)<br>
+**Database**: MongoDB (Atlas)<br>
+**Tools & Deployment**: GitHub, Vercel, Postman, pnpm<br>
 
 ## ✅ Prerequisites
 
@@ -63,3 +81,10 @@ pnpm fix
 ## 🚀 Congrats
 
 You've set up the project on your local machine. You're now ready to start exploring and contributing to the project. If you have any questions or run into issues, do not hesitate to ask for help from your team or search online for solutions. Happy coding!
+
+## 👨‍💻 Contributors
+
+**Dean Harley Pal** – Full Stack Developer<br>
+**Nerbert Bulaquena** - Full Stack Developer<br>
+**Peter John Galeno** - Full Stack Developer<br>
+**Nathaniel Dacasin** - Full Stack Developer<br>
