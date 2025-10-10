@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">GeoMemoryMap</h1>
 <p align="center" style="font-size: 16px; line-height: 1.6;">
-GeoMemoryMap is a full-stack web app that lets users pin memories on an interactive map. Each memory includes a title, description, photo, and location. It combines geolocation, cloud storage, and modern web technologies to create a visual journal of moments around the world
+GeoMemoryMap is a full-stack web app that lets users pin memories on an interactive map. Each memory includes a title, description, photo, and location. It combines geolocation, cloud storage, and modern web technologies to create a visual journal of moments around the world.
 </p>
 
 
