@@ -103,7 +103,7 @@ function MemoryFormPage() {
           description,
           location,
           photoURL,
-        }
+        };
 
         const updatedMemories = [newMemory, ..._memories];
         setMemories(updatedMemories);
@@ -113,8 +113,8 @@ function MemoryFormPage() {
         setDescription('');
         setImageFile(null);
 
-        toast.success('Memory added temporarily in Guest Mode', {id: toastId});
-        return
+        toast.success('Memory added temporarily in Guest Mode', { id: toastId });
+        return;
       }
 
       // Normal Logged-In User

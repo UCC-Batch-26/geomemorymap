@@ -7,18 +7,18 @@ import toast from 'react-hot-toast';
 
 function NavBar() {
   const navigate = useNavigate();
-   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-   useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem('token');
     const isGuest = sessionStorage.getItem('guest') === 'true';
 
     if (token || isGuest) {
       setIsAuthenticated(true);
     }
-   }, []);
+  }, []);
 
-   const handleLogout = () => {
+  const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
 
@@ -27,9 +27,8 @@ function NavBar() {
 
     toast.success('Logged out succesfully');
 
-    navigate('/login')
-   }
-
+    navigate('/login');
+  };
 
   return (
     <nav className="bg-[#f2f0ef] flex justify-between px-50 py-10 place-items-center items-center w-full">

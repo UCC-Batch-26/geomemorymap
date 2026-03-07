@@ -41,7 +41,7 @@ export function App() {
             <ProtectedRoute>
               <MemoryFormPage />
             </ProtectedRoute>
-          )
+          ),
         },
         { path: '/about', element: <AboutPage /> },
         { path: '/contact', element: <ContactPage /> },

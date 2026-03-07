@@ -6,15 +6,17 @@
 GeoMemoryMap is a full-stack web app that lets users pin memories on an interactive map. Each memory includes a title, description, photo, and location. It combines geolocation, cloud storage, and modern web technologies to create a visual journal of moments around the world.
 </p>
 
-
 ## Team Project
+
 Built as part of our **Uplift Code Camp Full-Stack Web Development Bootcamp**, this project represents our team’s collaborative work in designing, developing, and deploying a full-stack application.
 
 ## 📁 Project Structure
+
 - `apps/frontend/` – React + Vite app
 - `apps/backend/` – Express.js API
 
 ## 🧰 Tech Stack
+
 **Frontend**: Vite, React.js, React Router, React-Leaflet, Fetch API, Tailwind CSS<br>
 **Backend**: Node.js, Express.js, RESTful APIs, Multer, Multer-Cloudinary-Storage, Cloudinary, Nominatim (Geocoding API)<br>
 **Database**: MongoDB (Atlas)<br>
