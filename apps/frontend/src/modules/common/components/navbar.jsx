@@ -1,7 +1,36 @@
 import { Link } from 'react-router';
 import logo from '@/assets/geo-memory-map-nav-logo.png';
+import { useNavigate } from 'react-router';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 function NavBar() {
+  const navigate = useNavigate();
+   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+   useEffect(() => {
+    const token = localStorage.getItem('token');
+    const isGuest = sessionStorage.getItem('guest') === 'true';
+
+    if (token || isGuest) {
+      setIsAuthenticated(true);
+    }
+   }, []);
+
+   const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    sessionStorage.removeItem('guest');
+    sessionStorage.removeItem('guestMemories');
+
+    toast.success('Logged out succesfully');
+
+    navigate('/login')
+   }
+
+
   return (
     <nav className="bg-[#f2f0ef] flex justify-between px-50 py-10 place-items-center items-center w-full">
       <div className=" flex items-center gap-3">
@@ -12,7 +41,7 @@ function NavBar() {
         <h1 className="text-3xl font-display font-bold text-[#526B5C]">Geo Memory Map</h1>
       </div>
 
-      <ul className="flex gap-10 font-display">
+      <ul className="flex gap-10 font-display items-center">
         <li>
           <Link to={'/'}>Home</Link>
         </li>
@@ -31,6 +60,17 @@ function NavBar() {
         <li>
           <Link to={'/contact'}>Contact</Link>
         </li>
+
+        {isAuthenticated && (
+          <li>
+            <button
+              onClick={handleLogout}
+              className="bg-[#EF6B48] text-white px-4 py-2 rounded-md hover:bg-[#e9542b] transition"
+            >
+              Logout
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   );
