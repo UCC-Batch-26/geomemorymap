@@ -35,6 +35,14 @@ export function App() {
             </ProtectedRoute>
           ),
         },
+        {
+          path: '/guest-memory',
+          element: (
+            <ProtectedRoute>
+              <MemoryFormPage />
+            </ProtectedRoute>
+          )
+        },
         { path: '/about', element: <AboutPage /> },
         { path: '/contact', element: <ContactPage /> },
       ],
