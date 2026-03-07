@@ -21,8 +21,16 @@ function MemoryFormPage() {
   const [labels, setLabels] = useState({});
   const [isFileTooBig, setFileTooBig] = useState(false);
 
+  const isGuest = sessionStorage.getItem('guest') === 'true';
+
   const fetchMemories = async () => {
     try {
+      if (isGuest) {
+        const guestMemories = sessionStorage.getItem('guestMemories');
+        setMemories(guestMemories ? JSON.parse(guestMemories) : []);
+        return;
+      }
+
       const token = localStorage.getItem('token');
       const res = await fetch(MEMORY_URL, {
         headers: {
@@ -81,6 +89,35 @@ function MemoryFormPage() {
     try {
       const token = localStorage.getItem('token'); // Get token for Authorization
 
+      // Guest flow
+      if (isGuest) {
+        let photoURL = '';
+
+        if (imageFile) {
+          photoURL = URL.createObjectURL(imageFile);
+        }
+
+        const newMemory = {
+          id: Date.now(),
+          title,
+          description,
+          location,
+          photoURL,
+        }
+
+        const updatedMemories = [newMemory, ..._memories];
+        setMemories(updatedMemories);
+        sessionStorage.setItem('guestMemories', JSON.stringify(updatedMemories));
+
+        setTitle('');
+        setDescription('');
+        setImageFile(null);
+
+        toast.success('Memory added temporarily in Guest Mode', {id: toastId});
+        return
+      }
+
+      // Normal Logged-In User
       if (!token) {
         toast.error('You must be logged in to create a memory', {
           icon: '⚠️',
