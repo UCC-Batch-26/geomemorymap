@@ -113,6 +113,22 @@ function LoginPage({ setToken, setUser }) {
             >
               Register
             </button>
+
+            <button
+              type='button'
+              onClick={() => {
+                setUser({username: 'Guest'});
+                // No token for guest
+                setToken(null);
+                // Mark as guest in session only
+                sessionStorage.setItem('guest', 'true');
+                toast.success('Continuing as Guest');
+                navigate('/guest-memory');
+              }}
+              className='w-full bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300 transition mt-3'
+            >
+              Continue as Guest
+            </button>
           </form>
         </div>
       </div>
