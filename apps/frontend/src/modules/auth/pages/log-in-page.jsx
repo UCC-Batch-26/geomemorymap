@@ -76,7 +76,7 @@ function LoginPage({ setToken, setUser }) {
         </div>
         {/* FORM */}
         <div className="place-items-center col-start-3 row-start-2">
-          <form onSubmit={handleLogin} className="bg-white/50 p-6 rounded-xl shadow-md w-80 h-90">
+          <form onSubmit={handleLogin} className="bg-white/50 p-6 rounded-xl shadow-md w-80 ">
             <h2 className="text-3xl font-bold text-gray-100 text-shadow-2xs text-center mb-6 font-[Montserrat]">
               Login
             </h2>
@@ -114,21 +114,28 @@ function LoginPage({ setToken, setUser }) {
               Register
             </button>
 
-            <button
-              type="button"
-              onClick={() => {
-                setUser({ username: 'Guest' });
-                // No token for guest
-                setToken(null);
-                // Mark as guest in session only
-                sessionStorage.setItem('guest', 'true');
-                toast.success('Continuing as Guest');
-                navigate('/guest-memory');
-              }}
-              className="w-full bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300 transition mt-3"
-            >
-              Continue as Guest
-            </button>
+            <div className="my-4 border-t border-white/40"></div>
+
+            {/* GUEST SECTION */}
+            <div className="text-center">
+              <p className="text-[#526b5c] mb-3 font-[Montserrat] font-semibold">
+                Continue as Guest
+              </p>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setUser({ username: 'Guest' });
+                  setToken(null);
+                  sessionStorage.setItem('guest', 'true');
+                  toast.success('Continuing as Guest');
+                  navigate('/guest-memory');
+                }}
+                className="w-full bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300 transition"
+              >
+                Continue
+              </button>
+            </div>
           </form>
         </div>
       </div>
