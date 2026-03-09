@@ -118,9 +118,7 @@ function LoginPage({ setToken, setUser }) {
 
             {/* GUEST SECTION */}
             <div className="text-center">
-              <p className="text-[#526b5c] mb-3 font-[Montserrat] font-semibold">
-                Continue as Guest
-              </p>
+              <p className="text-[#526b5c] mb-3 font-[Montserrat] font-semibold">Continue as Guest</p>
 
               <button
                 type="button"
