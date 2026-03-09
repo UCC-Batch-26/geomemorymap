@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 function NavBar() {
+  const navLink =
+  "relative transition transform hover:-translate-y-1 duration-200 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#526B5C] after:transition-all after:duration-300 hover:after:w-full";
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -42,10 +44,10 @@ function NavBar() {
 
       <ul className="flex gap-10 font-display items-center">
         <li>
-          <Link to={'/'}>Home</Link>
+          <Link to={'/'} className={navLink}>Home</Link>
         </li>
         <li>
-          <Link to={'/about'}>About</Link>
+          <Link to={'/about'} className={navLink}>About</Link>
         </li>
         {/* <li>
           <Link to={'/login'}>Login</Link>
@@ -57,14 +59,14 @@ function NavBar() {
           <Link to={'/user'}>Profile</Link>
         </li> */}
         <li>
-          <Link to={'/contact'}>Contact</Link>
+          <Link to={'/contact'} className={navLink}>Contact</Link>
         </li>
 
         {isAuthenticated && (
           <li>
             <button
               onClick={handleLogout}
-              className="bg-[#EF6B48] text-white px-4 py-2 rounded-md hover:bg-[#e9542b] transition"
+              className="bg-[#EF6B48] text-white px-4 py-2 rounded-md hover:bg-[#e9542b] hover:-translate-y-0.5 transition duration-200"
             >
               Logout
             </button>
