@@ -80,8 +80,8 @@ function SignUpPage() {
           </div>
         </div>
 
-        <form className="bg-white border rounded-lg p-6 w-80 shadow-md" onSubmit={handleRegister}>
-          <h2 className="text-xl font-bold mb-4 text-center">Register</h2>
+        <form className="bg-white/50 border border-white/30 rounded-xl p-6 w-80 shadow-md" onSubmit={handleRegister}>
+          <h2 className="text-xl font-bold mb-4 text-center">Sign Up</h2>
 
           <label htmlFor="username" className="block text-sm font-medium text-gray-700">
             Username
@@ -92,7 +92,7 @@ function SignUpPage() {
             placeholder="Username"
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#526b5c]/30 focus:border-[#526b5c]"
           />
 
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -105,7 +105,7 @@ function SignUpPage() {
             placeholder="Email"
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#526b5c]/30 focus:border-[#526b5c]"
           />
 
           <label htmlFor="password" className="block text-sm font-medium text-gray-700">
@@ -118,7 +118,7 @@ function SignUpPage() {
             placeholder="Password"
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#526b5c]/30 focus:border-[#526b5c]"
           />
 
           <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
@@ -131,7 +131,7 @@ function SignUpPage() {
             placeholder="Confirm Password"
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#526b5c]/30 focus:border-[#526b5c]"
           />
 
           {/* Show password toggle affecting both fields */}
@@ -150,7 +150,7 @@ function SignUpPage() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
+            className="w-full bg-[#EF6B48] text-white py-2 px-4 rounded-md hover:bg-[#e9542b] transition"
           >
             Register
           </button>
