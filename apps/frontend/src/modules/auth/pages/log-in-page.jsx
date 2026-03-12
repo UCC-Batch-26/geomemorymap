@@ -75,7 +75,7 @@ function LoginPage({ setToken, setUser }) {
           </h4>
         </div>
         {/* FORM */}
-        <div className="place-items-center col-start-3 row-start-2 -mt-16">
+        <div className="col-start-3 row-start-2 justify-self-end -mt-16">
           <form onSubmit={handleLogin} className="bg-white/50 p-6 rounded-xl shadow-md w-80 ">
             <h2 className="text-3xl font-bold text-gray-100 text-shadow-2xs text-center mb-6 font-[Montserrat]">
               Login
