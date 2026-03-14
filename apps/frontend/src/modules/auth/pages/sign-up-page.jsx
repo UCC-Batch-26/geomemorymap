@@ -29,7 +29,7 @@ function SignUpPage() {
     const age = form.age;
 
     if (!username || !email || !password) {
-      alert('Please fill in all required fields.');
+      toast.error('Please fill in all required fields.');
       return;
     }
 
@@ -50,7 +50,13 @@ function SignUpPage() {
 
       if (res.ok) {
         toast.success('Registered successfully! You can login now.');
-        setForm({ username: '', email: '', password: '', age: '' });
+        setForm({
+          username: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          age: '',
+        });
         setTimeout(() => navigate('/login'), 1000);
       } else {
         toast.error(data.message || 'Registration failed');
@@ -62,99 +68,118 @@ function SignUpPage() {
   };
 
   return (
-    <section className="fixed bg-[url(@/assets/geo-memory-map-bg.png)] bg-size-[900px] bg-no-repeat bg-center h-screen w-full">
-      <div className="flex items-center justify-center min-h-screen bg-[#526b5c]/80 text-white">
-        <div className=" font-display flex flex-col justify-center-safe gap-5 text-left">
-          <h1 className="text-7xl font-semibold pt-20 pr-20">Create New Account</h1>
+    <section className="min-h-screen w-full bg-[url(@/assets/geo-memory-map-bg.png)] bg-size-[900px] bg-no-repeat bg-center">
+      <div className="min-h-screen bg-[#526b5c]/80 text-white px-4 py-8 sm:px-6 md:px-10">
+        <div className="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center gap-8 md:flex-row md:gap-12">
+          <div className="font-display flex w-full max-w-xl flex-col gap-4 text-center md:text-left">
+            <h1 className="text-4xl font-semibold leading-tight sm:text-5xl md:pt-0 md:pr-10 md:text-7xl">
+              Create New Account
+            </h1>
 
-          <div className="flex flex-row items-center gap-2">
-            <h3 className="text-2xl font-semibold">Already Registered?</h3>
-            <Link to="/login" className="text-green-500  text-2xl underline hover:no-underline">
-              Login
-            </Link>
+            <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center md:justify-start">
+              <h3 className="text-lg font-semibold sm:text-xl md:text-2xl">
+                Already Registered?
+              </h3>
+              <Link
+                to="/login"
+                className="text-lg text-green-500 underline hover:no-underline sm:text-xl md:text-2xl"
+              >
+                Login
+              </Link>
+            </div>
+
+            <div className="flex flex-col items-center md:items-start">
+              <hr className="my-2 h-px w-24 border-0 bg-white/40" />
+              <span className="py-1 text-base text-white/80 sm:text-lg md:text-xl">
+                Save memories. Pin moments.
+              </span>
+            </div>
           </div>
 
-          <div className="flex flex-col">
-            <hr className="w-24 h-px my-2 bg-white/40 border-0 self-start" />
-            <span className="py-2 text-xl text-white/80">Save memories. Pin moments.</span>
-          </div>
-        </div>
-
-        <form className="bg-white/50 border border-white/30 rounded-xl p-6 w-80 shadow-md" onSubmit={handleRegister}>
-          <h2 className="text-xl font-bold mb-4 text-center">Sign Up</h2>
-
-          <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-            Username
-          </label>
-          <input
-            id="username"
-            name="username"
-            placeholder="Username"
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#526b5c]/30 focus:border-[#526b5c]"
-          />
-
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#526b5c]/30 focus:border-[#526b5c]"
-          />
-
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-            Password
-          </label>
-          <input
-            id="password"
-            type={showPassword ? 'text' : 'password'}
-            name="password"
-            placeholder="Password"
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#526b5c]/30 focus:border-[#526b5c]"
-          />
-
-          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-            Confirm Password
-          </label>
-          <input
-            id="confirmPassword"
-            type={showPassword ? 'text' : 'password'}
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 mb-3 border border-gray-300 rounded-md bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#526b5c]/30 focus:border-[#526b5c]"
-          />
-
-          {/* Show password toggle affecting both fields */}
-          <div className="flex items-center mb-4">
-            <input
-              type="checkbox"
-              id="showPassword"
-              checked={showPassword}
-              onChange={() => setShowPassword(!showPassword)}
-              className="mr-2"
-            />
-            <label htmlFor="showPassword" className="text-sm text-gray-700">
-              Show Password
-            </label>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-[#EF6B48] text-white py-2 px-4 rounded-md hover:bg-[#e9542b] transition"
+          <form
+            className="w-full max-w-sm rounded-xl border border-white/30 bg-white/40 p-5 shadow-md backdrop-blur-sm sm:p-6"
+            onSubmit={handleRegister}
           >
-            Register
-          </button>
-        </form>
+            <h2 className="mb-4 text-center text-xl font-bold text-gray-900">
+              Sign Up
+            </h2>
+
+            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+              Username
+            </label>
+            <input
+              id="username"
+              name="username"
+              value={form.username}
+              placeholder="Username"
+              onChange={handleChange}
+              required
+              className="mb-3 w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-gray-900 focus:border-[#526b5c] focus:outline-none focus:ring-2 focus:ring-[#526b5c]/30"
+            />
+
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              value={form.email}
+              placeholder="Email"
+              onChange={handleChange}
+              required
+              className="mb-3 w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-gray-900 focus:border-[#526b5c] focus:outline-none focus:ring-2 focus:ring-[#526b5c]/30"
+            />
+
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
+            <input
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              value={form.password}
+              placeholder="Password"
+              onChange={handleChange}
+              required
+              className="mb-3 w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-gray-900 focus:border-[#526b5c] focus:outline-none focus:ring-2 focus:ring-[#526b5c]/30"
+            />
+
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+              Confirm Password
+            </label>
+            <input
+              id="confirmPassword"
+              type={showPassword ? 'text' : 'password'}
+              name="confirmPassword"
+              value={form.confirmPassword}
+              placeholder="Confirm Password"
+              onChange={handleChange}
+              required
+              className="mb-3 w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-gray-900 focus:border-[#526b5c] focus:outline-none focus:ring-2 focus:ring-[#526b5c]/30"
+            />
+
+            <div className="mb-4 flex items-center">
+              <input
+                type="checkbox"
+                id="showPassword"
+                checked={showPassword}
+                onChange={() => setShowPassword(!showPassword)}
+                className="mr-2"
+              />
+              <label htmlFor="showPassword" className="text-sm text-gray-700">
+                Show Password
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full rounded-md bg-[#EF6B48] px-4 py-2 text-white transition hover:bg-[#e9542b]"
+            >
+              Register
+            </button>
+          </form>
+        </div>
       </div>
     </section>
   );
