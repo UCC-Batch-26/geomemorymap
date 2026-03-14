@@ -65,18 +65,18 @@ function LoginPage({ setToken, setUser }) {
   }, [loggedIn, navigate]);
 
   return (
-    <div className="fixed bg-[url(@/assets/geo-memory-map-bg.png)] bg-size-[600px] bg-no-repeat bg-center ">
-      <div className="grid grid-cols-4 bg-[#526b5c]/80 h-[100vh]">
-        <div className="col-start-2 row-start-2">
-          <h1 className="font-[Montserrat] text-7xl font-bold text-white text-left">Login</h1>
+    <div className="fixed h-screen w-full bg-[url(@/assets/geo-memory-map-bg.png)] bg-[length:600px] bg-no-repeat bg-center">
+      <div className="grid min-h-screen grid-cols-1 items-center bg-[#526b5c]/80 px-6 py-12 md:grid-cols-2 md:gap-10 md:px-10 xl:grid-cols-4 xl:px-0">
+        <div className="text-left xl:col-start-2 xl:row-start-2">
+          <h1 className="font-[Montserrat] text-5xl sm:text-6xl xl:text-7xl font-bold text-white">Login</h1>
           <h3 className="font-[Montserrat] text-2xl font-bold text-white text-left py-5">Sign in to continue</h3>
-          <h4 className="font-[Montserrat] text-md  text-white text-left py-20">
+          <h4 className="font-[Montserrat] text-base text-white py-8 md:py-12 xl:py-20">
             Discover your world's stories—pin your memories, share your moments, and bring your map to life!
           </h4>
         </div>
         {/* FORM */}
-        <div className="col-start-3 row-start-2 justify-self-end -mt-16">
-          <form onSubmit={handleLogin} className="bg-white/50 p-6 rounded-xl shadow-md w-80 ">
+        <div className="mt-8 md:mt-0 md:justify-self-end xl:col-start-3 xl:row-start-2">
+          <form onSubmit={handleLogin} className="bg-white/50 p-6 rounded-xl shadow-md w-full max-w-sm">
             <h2 className="text-3xl font-bold text-gray-100 text-shadow-2xs text-center mb-6 font-[Montserrat]">
               Login
             </h2>
