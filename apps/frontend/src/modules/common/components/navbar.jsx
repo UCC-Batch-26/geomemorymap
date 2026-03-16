@@ -99,39 +99,40 @@ function NavBar() {
         </button>
       </div>
 
-      {isMenuOpen && (
-        <div className='border-t border-[#526B5C]/10 bg-[#f2f0ef] px-4 pb-4 md:hidden'>
-          <ul className='flex flex-col gap-4 pt-4 font-display'>
-            <li>
-              <Link to='/' onClick={handleCloseMenu} className='block text-[#526B5C]'>
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to='/about' onClick={handleCloseMenu} className='block text-[#526B5C]'>
-                About
-              </Link>
-            </li>
-            <li>
-              <Link to='/contact' onClick={handleCloseMenu} className='block text-[#526B5C]'>
-                Contact
-              </Link>
-            </li>
+      <div
+        className={`overflow-hidden border-t border-[#526B5C]/10 bg-[#f2f0ef] transition-all duration-300 md:hidden ${
+          isMenuOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+      <ul className="flex flex-col gap-4 px-4 py-4 font-display">
+        <li>
+          <Link to="/" onClick={handleCloseMenu} className="block text-center text-[#526B5C]">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="/about" onClick={handleCloseMenu} className="block text-center text-[#526B5C]">
+            About
+          </Link>
+        </li>
+        <li>
+          <Link to="/contact" onClick={handleCloseMenu} className="block text-center text-[#526B5C]">
+            Contact
+          </Link>
+        </li>
 
-            {isAuthenticated && (
-              <li>
-                <button
-                  onClick={handleLogout}
-                  className='w-full rounded-md bg-[#EF6B48] px-4 py-2 text-white transition hover:bg-[#e9542b]'
-                >
-                  Logout
-                </button>
-              </li>
-            )}
-          </ul>
-
-        </div>
-      )}
+        {isAuthenticated && (
+          <li>
+            <button
+              onClick={handleLogout}
+              className="w-full rounded-md bg-[#EF6B48] px-4 py-2 text-white transition hover:bg-[#e9542b]"
+            >
+              Logout
+            </button>
+          </li>
+        )}
+      </ul>
+    </div>
     </nav>
   );
 }
