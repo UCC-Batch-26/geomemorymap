@@ -1,6 +1,7 @@
 import mapIcon from '@/assets/map-icon.png';
 import cameraIcon from '@/assets/camera-icon.png';
 import memoryIcon from '@/assets/memory-icon.png';
+import { MapPin } from 'lucide-react';
 
 function AboutPage() {
   return (
@@ -23,6 +24,16 @@ function AboutPage() {
                 Whether it’s a trip, celebration, or a place close to your heart, you can pin memories, add stories,
                 upload photos, and revisit them right where they happened.
               </p>
+
+              <div className="mt-4 flex items-center gap-3 rounded-lg bg-gray-800/20 px-4 py-3 backdrop-blur-sm border border-white/20">
+                <div className="rounded-xl bg-white/10 p-2.5">
+                  <MapPin className="h-6 w-6 text-white" strokeWidth={2} />
+                </div>
+                <p className="text-gray-100 text-sm md:text-base font-display">
+                  For the best experience, please allow location access so Geo Memory Map
+                  can accurately place and explore your memories on the map.
+                </p>
+              </div>
             </div>
           </div>
 
