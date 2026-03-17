@@ -52,14 +52,24 @@ function MemoryFormPage() {
 
   useEffect(() => {
     const run = async () => {
-      const entries = _memories.filter((m) => m.location && !labels[m._id]);
+      const entries = _memories.filter((m) => {
+        const memoryId = m._id ?? m.id;
+        return m.location && !labels[memoryId];
+      });
+      
       const updates = {};
+
       for (const m of entries) {
+        const memoryId = m._id ?? m.id;
         const name = await getCityFromCoords(m.location.lat, m.location.lng);
-        updates[m._id] = name ?? null;
+        updates[memoryId] = name ?? null;
       }
-      if (Object.keys(updates).length) setLabels((prev) => ({ ...prev, ...updates }));
+
+      if (Object.keys(updates).length) {
+        setLabels((prev) => ({ ...prev, ...updates }));
+      }
     };
+
     run();
   }, [_memories, labels]);
 
@@ -283,7 +293,7 @@ function MemoryFormPage() {
                       key={memory._id ?? memory.id}
                       img={memory.photoURL}
                       title={memory.title}
-                      locationName={labels[memory._id] ?? null}
+                      locationName={labels[memory._id ?? memory.id] ?? null}
                       location={memory.location}
                       description={memory.description}
                     />
