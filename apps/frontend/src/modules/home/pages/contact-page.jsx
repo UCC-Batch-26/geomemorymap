@@ -1,4 +1,48 @@
 import bg from '@/assets/geo-memory-map-bg.png';
+import { motion } from 'framer-motion';
+
+const MotionDiv = motion.div;
+const MotionForm = motion.form;
+
+
+const fadeSoft = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.7, ease: 'easeOut' },
+  },
+};
+
+const formFocus = {
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut',
+      delay: 0.15,
+    },
+  },
+};
+
+const inputPop = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4 },
+  },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.18,
+    },
+  },
+};
 
 function ContactPage() {
   return (
@@ -13,7 +57,12 @@ function ContactPage() {
       <div className="absolute inset-0 bg-[#526b5c]/75" />
 
       <div className="relative z-10 grid min-h-screen grid-cols-1 items-center gap-10 px-4 py-8 sm:px-6 lg:grid-cols-[1.6fr_1fr] lg:gap-28 lg:px-10">
-        <div className="flex max-w-4xl flex-col gap-8 text-left">
+        <MotionDiv 
+          className="flex max-w-4xl flex-col gap-8 text-left"
+          variants={fadeSoft}
+          initial="hidden"
+          animate="visible"
+        >
           <h1 className="font-display w-fit rounded-r-2xl bg-gray-800/40 py-2 pl-6 pr-6 text-4xl font-semibold text-white sm:pl-8 sm:pr-8 sm:text-5xl lg:pl-10 lg:pr-10 lg:text-7xl">
             Contact Us
           </h1>
@@ -39,43 +88,60 @@ function ContactPage() {
               Reach out for questions, feedback, or collaboration about Geo Memory Map.
             </p>
           </div>
-        </div>
+        </MotionDiv>
 
         <div className="flex justify-center">
-          <form
+          <MotionForm
             action="submit"
             method="post"
             className="w-full max-w-md rounded-3xl bg-gray-800/20 px-6 py-8 shadow-xl backdrop-blur-sm sm:px-8 sm:py-10 lg:w-[550px] lg:max-w-none lg:px-10 lg:py-10"
+            variants={formFocus}
+            initial="hidden"
+            animate="visible"
           >
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <input
-                type="text"
-                id="name"
-                placeholder="Name"
-                className="w-full rounded-xl border border-white/15 bg-white/85 px-4 py-3 font-display text-[#24342b] outline-none placeholder:text-gray-500 focus:border-white/30"
-              />
-
-              <input
-                type="email"
-                id="email"
-                placeholder="Email"
-                className="w-full rounded-xl border border-white/15 bg-white/85 px-4 py-3 font-display text-[#24342b] outline-none placeholder:text-gray-500 focus:border-white/30"
-              />
-            </div>
-
-            <textarea
-              id="message"
-              placeholder="Message"
-              className="mt-5 h-44 w-full rounded-2xl border border-white/15 bg-white/90 px-4 py-4 font-display text-[#24342b] outline-none placeholder:text-gray-500 focus:border-white/30 sm:h-52 lg:h-56"
-            ></textarea>
-
-            <button
-              type="submit"
-              className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[#526b5c] px-6 font-display text-base font-medium text-white shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 sm:h-14 sm:text-lg md:w-52 xl:text-xl"
+            <MotionDiv
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+              className=''
             >
-              Submit
-            </button>
-          </form>
+              <MotionDiv 
+                className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+                variants={inputPop}
+              >
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Name"
+                  className="w-full rounded-xl border border-white/15 bg-white/85 px-4 py-3 font-display text-[#24342b] outline-none placeholder:text-gray-500 focus:border-white/30"
+                />
+
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Email"
+                  className="w-full rounded-xl border border-white/15 bg-white/85 px-4 py-3 font-display text-[#24342b] outline-none placeholder:text-gray-500 focus:border-white/30"
+                />
+              </MotionDiv>
+
+              <MotionDiv>
+                <textarea
+                  id="message"
+                  placeholder="Message"
+                  className="mt-5 h-44 w-full rounded-2xl border border-white/15 bg-white/90 px-4 py-4 font-display text-[#24342b] outline-none placeholder:text-gray-500 focus:border-white/30 sm:h-52 lg:h-56"
+                />
+              </MotionDiv>
+
+              <MotionDiv>
+                <button
+                  type="submit"
+                  className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[#526b5c] px-6 font-display text-base font-medium text-white shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 sm:h-14 sm:text-lg md:w-52 xl:text-xl"
+                >
+                  Submit
+                </button>
+              </MotionDiv>
+            </MotionDiv>
+          </MotionForm>
         </div>
       </div>
     </section>
