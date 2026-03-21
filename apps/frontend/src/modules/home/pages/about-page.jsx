@@ -4,6 +4,7 @@ import memoryIcon from '@/assets/memory-icon.png';
 import { MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+const MotionDiv = motion.div;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -49,7 +50,7 @@ function AboutPage() {
     <section className="min-h-screen w-full bg-[url(@/assets/geo-memory-map-bg.png)] bg-[length:900px] bg-center bg-no-repeat">
       <div className="min-h-screen bg-[#526b5c]/75">
         <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] min-h-screen items-center px-4 py-8 sm:px-6 lg:px-10 gap-10 lg:gap-28">
-          <motion.div 
+          <MotionDiv 
             className="flex flex-col gap-8 text-left max-w-4xl"
             variants={fadeUp}
             initial="hidden"
@@ -81,22 +82,22 @@ function AboutPage() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           <div className="flex justify-center">
-            <motion.div 
+            <MotionDiv 
               className="w-full max-w-md rounded-3xl bg-gray-800/20 px-6 py-8 shadow-xl backdrop-blur-sm sm:px-8 sm:py-10 lg:w-[550px] lg:max-w-none lg:px-10 lg:py-12"
               variants={fadeRight}
               initial="hidden"
               animate="visible"
             >
-              <motion.div
+              <MotionDiv
                 variants={staggerContainer}
                 initial="hidden"
                 animate="visible"  
               >
 
-                <motion.div 
+                <MotionDiv
                   className="flex items-start gap-4 sm:items-center sm:gap-6"
                   variants={fadeUpItem}
                 >
@@ -108,11 +109,11 @@ function AboutPage() {
                     <h3 className="text-white text-xl sm:text-2xl lg:text-3xl font-display font-semibold">Pin Your Memories</h3>
                     <p className="text-gray-100 text-base sm:text-lg lg:text-xl mt-2 font-display">Drop pins anywhere on the map.</p>
                   </div>
-                </motion.div>
+                </MotionDiv>
 
                 <div className="border-t border-white/15 my-6 sm:my-8 lg:my-10"></div>
 
-                <motion.div 
+                <MotionDiv
                   className="flex items-start gap-4 sm:items-center sm:gap-6"
                   variants={fadeUpItem}
                 >
@@ -125,11 +126,11 @@ function AboutPage() {
                     <h3 className="text-white text-xl sm:text-2xl lg:text-3xl font-display font-semibold">Add Photos</h3>
                     <p className="text-gray-100 text-base sm:text-lg lg:text-xl mt-2 font-display">Attach images to each memory.</p>
                   </div>
-                </motion.div>
+                </MotionDiv>
 
                 <div className="border-t border-white/15 my-6 sm:my-8 lg:my-10"></div>
 
-                <motion.div 
+                <MotionDiv
                   className="flex items-start gap-4 sm:items-center sm:gap-6"
                   variants={fadeUpItem}
                 >
@@ -141,11 +142,11 @@ function AboutPage() {
                     <h3 className="text-white text-xl sm:text-2xl lg:text-3xl font-display font-semibold">Revisit Your Journey</h3>
                     <p className="text-gray-100 text-base sm:text-lg lg:text-xl  mt-2 font-display">Explore memories where they happened.</p>
                   </div>
-                </motion.div>
+                </MotionDiv>
 
                 <div className="border-t border-white/15 mt-6 sm:mt-8 lg:mt-10"></div>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           </div>
         </div>
       </div>
