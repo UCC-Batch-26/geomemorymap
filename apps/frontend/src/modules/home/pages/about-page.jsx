@@ -5,12 +5,15 @@ import { MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 
-const fadeLeft = {
-  hidden: { opacity: 0, x: -50 },
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
-    x: 0,
-    transition: { duration: 0.7, ease: 'easeOut' },
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
   },
 };
 
@@ -48,7 +51,7 @@ function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] min-h-screen items-center px-4 py-8 sm:px-6 lg:px-10 gap-10 lg:gap-28">
           <motion.div 
             className="flex flex-col gap-8 text-left max-w-4xl"
-            variants={fadeLeft}
+            variants={fadeUp}
             initial="hidden"
             animate="visible"
           >
