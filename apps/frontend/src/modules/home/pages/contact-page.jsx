@@ -1,5 +1,8 @@
 import bg from '@/assets/geo-memory-map-bg.png';
+import { sendContactMessage } from '@/modules/api-hooks/send-contact-message';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const MotionDiv = motion.div;
 const MotionForm = motion.form;
@@ -45,6 +48,45 @@ const staggerContainer = {
 };
 
 function ContactPage() {
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  })
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+  
+  async function handleSubmit(event) {
+      event.preventDefault();
+
+      try {
+        setIsSubmitting(true);
+
+        const response = await sendContactMessage(formData);
+        toast.success(response.message || 'Message sent succesfully.');
+
+        setFormData({
+          name: '',
+          email: '',
+          message: '',
+        });
+      } catch (error) {
+        toast.error(error.message || 'Failed to send message.');
+      } finally {
+        setIsSubmitting(false);
+      }
+  }
+
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
       <div
@@ -92,8 +134,7 @@ function ContactPage() {
 
         <div className="flex justify-center">
           <MotionForm
-            action="submit"
-            method="post"
+            onSubmit={handleSubmit}
             className="w-full max-w-md rounded-3xl bg-gray-800/20 px-6 py-8 shadow-xl backdrop-blur-sm sm:px-8 sm:py-10 lg:w-[550px] lg:max-w-none lg:px-10 lg:py-10"
             variants={formFocus}
             initial="hidden"
@@ -112,14 +153,22 @@ function ContactPage() {
                 <input
                   type="text"
                   id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Name"
+                  required
                   className="w-full rounded-xl border border-white/15 bg-white/85 px-4 py-3 font-display text-[#24342b] outline-none placeholder:text-gray-500 focus:border-white/30"
                 />
 
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Email"
+                  required  
                   className="w-full rounded-xl border border-white/15 bg-white/85 px-4 py-3 font-display text-[#24342b] outline-none placeholder:text-gray-500 focus:border-white/30"
                 />
               </MotionDiv>
@@ -127,7 +176,11 @@ function ContactPage() {
               <MotionDiv>
                 <textarea
                   id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Message"
+                  required
                   className="mt-5 h-44 w-full rounded-2xl border border-white/15 bg-white/90 px-4 py-4 font-display text-[#24342b] outline-none placeholder:text-gray-500 focus:border-white/30 sm:h-52 lg:h-56"
                 />
               </MotionDiv>
@@ -135,9 +188,10 @@ function ContactPage() {
               <MotionDiv>
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[#526b5c] px-6 font-display text-base font-medium text-white shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 sm:h-14 sm:text-lg md:w-52 xl:text-xl"
                 >
-                  Submit
+                  { isSubmitting ? 'Sending...' : 'Submit'}
                 </button>
               </MotionDiv>
             </MotionDiv>
