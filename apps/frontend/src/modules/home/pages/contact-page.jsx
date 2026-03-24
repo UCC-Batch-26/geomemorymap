@@ -69,6 +69,8 @@ function ContactPage() {
   async function handleSubmit(event) {
       event.preventDefault();
 
+      if (isSubmitting) return;
+
       try {
         setIsSubmitting(true);
 
@@ -189,7 +191,7 @@ function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[#526b5c] px-6 font-display text-base font-medium text-white shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 sm:h-14 sm:text-lg md:w-52 xl:text-xl"
+                  className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[#526b5c] px-6 font-display text-base font-medium text-white shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 sm:h-14 sm:text-lg md:w-52 xl:text-xl disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   { isSubmitting ? 'Sending...' : 'Submit'}
                 </button>
