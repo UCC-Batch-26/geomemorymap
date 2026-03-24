@@ -11,6 +11,11 @@ import loginRoutes from '#modules/routes/login-routes.js';
 import registerRoutes from '#modules/routes/register-routes.js';
 import memoryRoutes from '#modules/routes/memory-routes.js';
 import contactRoutes from '#modules/routes/contact-routes.js';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -44,13 +49,18 @@ app.use(morgan('combined'));
 await db(process.env.DB_URI);
 
 // Sample route
-app.use('/', sampleRoutes);
+//app.use('/', sampleRoutes);
 
 app.use('/api/auth', loginRoutes);
 app.use('/api/auth', registerRoutes);
 app.use('/api/memories', memoryRoutes);
 app.use('/api/contact', contactRoutes);
 
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+});
 // Error handling middleware, MUST always be the last
 app.use(errorHandler);
 
