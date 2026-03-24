@@ -9,8 +9,8 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: EMAIL_USER,
     pass: EMAIL_PASS,
-  }
-})
+  },
+});
 
 export async function sendContactEmail({ name, email, message }) {
   const mailOptions = {
@@ -27,7 +27,7 @@ export async function sendContactEmail({ name, email, message }) {
     Message:
     ${message}
       `.trim(),
-      html: `
+    html: `
         <h2>New contact form submission</h2>
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
@@ -47,4 +47,4 @@ function escapeHtml(value) {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#039;');
-} 
+}

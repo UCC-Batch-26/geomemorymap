@@ -24,7 +24,7 @@ export function validateContactMiddleware(req, res, next) {
   if (!isValidEmail(email)) {
     return res.status(400).json({
       message: 'Please provide a valid email address.',
-    })
+    });
   }
 
   if (message.length < 2) {
@@ -43,7 +43,7 @@ export function validateContactMiddleware(req, res, next) {
     name,
     email,
     message,
-  }
+  };
 
   next();
 }

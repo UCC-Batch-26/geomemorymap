@@ -71,13 +71,9 @@ function LoginPage({ setToken, setUser }) {
       <div className="min-h-screen bg-[#526b5c]/80 text-white px-4 py-8 sm:px-6 md:px-10">
         <div className="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center gap-8 md:flex-row md:gap-12">
           <div className="font-display flex w-full max-w-xl flex-col gap-4 text-center md:text-left">
-            <h1 className="text-4xl font-semibold leading-tight sm:text-5xl md:pr-10 md:text-7xl">
-              Login
-            </h1>
+            <h1 className="text-4xl font-semibold leading-tight sm:text-5xl md:pr-10 md:text-7xl">Login</h1>
 
-            <h3 className="text-lg font-semibold sm:text-xl md:text-2xl">
-              Sign in to continue
-            </h3>
+            <h3 className="text-lg font-semibold sm:text-xl md:text-2xl">Sign in to continue</h3>
 
             <div className="flex flex-col items-center md:items-start">
               <hr className="my-2 h-px w-24 border-0 bg-white/40" />
@@ -87,13 +83,8 @@ function LoginPage({ setToken, setUser }) {
             </div>
 
             <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center md:justify-start">
-              <h3 className="text-lg font-semibold sm:text-xl md:text-2xl">
-                Don&apos;t have an account?
-              </h3>
-              <Link
-                to="/signup"
-                className="text-lg text-green-500 underline hover:no-underline sm:text-xl md:text-2xl"
-              >
+              <h3 className="text-lg font-semibold sm:text-xl md:text-2xl">Don&apos;t have an account?</h3>
+              <Link to="/signup" className="text-lg text-green-500 underline hover:no-underline sm:text-xl md:text-2xl">
                 Register
               </Link>
             </div>
@@ -103,9 +94,7 @@ function LoginPage({ setToken, setUser }) {
             onSubmit={handleLogin}
             className="w-full max-w-sm rounded-xl border border-white/30 bg-white/40 p-5 shadow-md backdrop-blur-sm sm:p-6"
           >
-            <h2 className="mb-4 text-center text-xl font-bold text-gray-900">
-              Login
-            </h2>
+            <h2 className="mb-4 text-center text-xl font-bold text-gray-900">Login</h2>
 
             <label htmlFor="username" className="block text-sm font-medium text-gray-700">
               Username

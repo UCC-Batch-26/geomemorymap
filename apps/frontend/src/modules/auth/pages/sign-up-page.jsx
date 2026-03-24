@@ -77,22 +77,15 @@ function SignUpPage() {
             </h1>
 
             <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center md:justify-start">
-              <h3 className="text-lg font-semibold sm:text-xl md:text-2xl">
-                Already Registered?
-              </h3>
-              <Link
-                to="/login"
-                className="text-lg text-green-500 underline hover:no-underline sm:text-xl md:text-2xl"
-              >
+              <h3 className="text-lg font-semibold sm:text-xl md:text-2xl">Already Registered?</h3>
+              <Link to="/login" className="text-lg text-green-500 underline hover:no-underline sm:text-xl md:text-2xl">
                 Login
               </Link>
             </div>
 
             <div className="flex flex-col items-center md:items-start">
               <hr className="my-2 h-px w-24 border-0 bg-white/40" />
-              <span className="py-1 text-base text-white/80 sm:text-lg md:text-xl">
-                Save memories. Pin moments.
-              </span>
+              <span className="py-1 text-base text-white/80 sm:text-lg md:text-xl">Save memories. Pin moments.</span>
             </div>
           </div>
 
@@ -100,9 +93,7 @@ function SignUpPage() {
             className="w-full max-w-sm rounded-xl border border-white/30 bg-white/40 p-5 shadow-md backdrop-blur-sm sm:p-6"
             onSubmit={handleRegister}
           >
-            <h2 className="mb-4 text-center text-xl font-bold text-gray-900">
-              Sign Up
-            </h2>
+            <h2 className="mb-4 text-center text-xl font-bold text-gray-900">Sign Up</h2>
 
             <label htmlFor="username" className="block text-sm font-medium text-gray-700">
               Username

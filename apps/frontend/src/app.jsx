@@ -46,7 +46,7 @@ export function App() {
         },
         { path: 'about', element: <AboutPage /> },
         { path: 'contact', element: <ContactPage /> },
-        { path: '*', element: <NotFoundPage />},
+        { path: '*', element: <NotFoundPage /> },
       ],
     },
   ]);

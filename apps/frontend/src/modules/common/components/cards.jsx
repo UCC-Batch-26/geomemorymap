@@ -6,9 +6,7 @@ function Cards(props) {
   return (
     <div className="mx-auto">
       <div className="relative w-full max-w-[200px] overflow-hidden rounded-md md:max-w-[220px] lg:max-w-[230px]">
-        {!isLoaded && (
-          <div className="absolute inset-0 animate-pulse rounded-md bg-neutral-300" />
-        )}
+        {!isLoaded && <div className="absolute inset-0 animate-pulse rounded-md bg-neutral-300" />}
 
         <img
           src={props.img}

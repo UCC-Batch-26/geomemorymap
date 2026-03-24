@@ -56,7 +56,7 @@ function MemoryFormPage() {
         const memoryId = m._id ?? m.id;
         return m.location && !labels[memoryId];
       });
-      
+
       const updates = {};
 
       for (const m of entries) {
@@ -180,9 +180,7 @@ function MemoryFormPage() {
   const handleDelete = async (memory) => {
     try {
       if (isGuest) {
-        const updatedMemories = _memories.filter(
-          (m) => (m.id ?? m._id) !== (memory.id ?? memory._id)
-        );
+        const updatedMemories = _memories.filter((m) => (m.id ?? m._id) !== (memory.id ?? memory._id));
 
         setMemories(updatedMemories);
         sessionStorage.setItem('guestMemories', JSON.stringify(updatedMemories));
@@ -205,26 +203,24 @@ function MemoryFormPage() {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      })
+      });
 
       if (!res.ok) throw new Error('Failed to delete');
 
-      setMemories((prev) =>
-        prev.filter((m) => (m._id ?? m.id) !== memoryId)
-      );
-      
+      setMemories((prev) => prev.filter((m) => (m._id ?? m.id) !== memoryId));
+
       toast.success('Memory deleted');
     } catch (error) {
       console.error(error);
       toast.error('Failed to delete memory');
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-[url(@/assets/geo-memory-map-bg.png)] bg-cover bg-center bg-no-repeat">
       <section className="min-h-screen bg-[#526b5c]/90">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
-          <div className='grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-stretch'>
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-stretch">
             <div className="rounded-2xl bg-white/50 p-4 shadow-lg backdrop-blur-sm sm:p-6">
               <div className="mb-6">
                 <h1 className="font-display text-2xl sm:text-3xl">Add New Memory</h1>
@@ -234,8 +230,8 @@ function MemoryFormPage() {
 
                 <div className="mt-3 rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-900">
                   <p className="leading-relaxed">
-                    <span className="font-semibold">Your privacy matters.</span>{' '}
-                    We use your location only to place your memories. We do not track or share your data.
+                    <span className="font-semibold">Your privacy matters.</span> We use your location only to place your
+                    memories. We do not track or share your data.
                   </p>
                 </div>
               </div>
@@ -307,9 +303,7 @@ function MemoryFormPage() {
                   </button>
                 </div>
 
-                {imageFile && (
-                  <p className="mt-3 text-sm text-gray-700 break-all">Selected file: {imageFile.name}</p>
-                )}
+                {imageFile && <p className="mt-3 text-sm text-gray-700 break-all">Selected file: {imageFile.name}</p>}
 
                 {/* Warning message */}
                 {isFileTooBig && <p className="text-red-500 mt-1 text-sm">File’s too chunky! &lt; 5MB please</p>}
@@ -331,26 +325,26 @@ function MemoryFormPage() {
           </div>
 
           {/* CARD GENERATEED FROM API BELOW */}
-            <div className="mt-8 pb-10 sm:mt-10">
-              <h1 className="font-display text-2xl font-bold text-white sm:text-3xl">Your Memories</h1>
-              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {_memories
-                  .slice()
-                  .reverse()
-                  .slice(0, 6)
-                  .map((memory) => (
-                    <MemCards
-                      key={memory._id ?? memory.id}
-                      img={memory.photoURL}
-                      title={memory.title}
-                      locationName={labels[memory._id ?? memory.id] ?? null}
-                      location={memory.location}
-                      description={memory.description}
-                      onDelete={() => handleDelete(memory)}
-                    />
-                  ))}
-              </div>
+          <div className="mt-8 pb-10 sm:mt-10">
+            <h1 className="font-display text-2xl font-bold text-white sm:text-3xl">Your Memories</h1>
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {_memories
+                .slice()
+                .reverse()
+                .slice(0, 6)
+                .map((memory) => (
+                  <MemCards
+                    key={memory._id ?? memory.id}
+                    img={memory.photoURL}
+                    title={memory.title}
+                    locationName={labels[memory._id ?? memory.id] ?? null}
+                    location={memory.location}
+                    description={memory.description}
+                    onDelete={() => handleDelete(memory)}
+                  />
+                ))}
             </div>
+          </div>
         </div>
       </section>
     </div>

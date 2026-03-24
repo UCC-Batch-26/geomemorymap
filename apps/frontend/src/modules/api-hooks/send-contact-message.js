@@ -6,14 +6,14 @@ export async function sendContactMessage({ name, email, message }) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-       Accept: 'application/json',
+      Accept: 'application/json',
     },
     body: JSON.stringify({
       name,
       email,
-      message
-    })
-  })
+      message,
+    }),
+  });
 
   const data = await response.json();
 

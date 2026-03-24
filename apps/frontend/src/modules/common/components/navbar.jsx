@@ -7,12 +7,10 @@ import toast from 'react-hot-toast';
 
 function NavBar() {
   const navLink =
-  "relative transition transform hover:-translate-y-1 duration-200 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#526B5C] after:transition-all after:duration-300 hover:after:w-full";
+    'relative transition transform hover:-translate-y-1 duration-200 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#526B5C] after:transition-all after:duration-300 hover:after:w-full';
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -42,10 +40,9 @@ function NavBar() {
     setIsMenuOpen(false);
   };
 
-
   return (
     <nav className="bg-[#f2f0ef] w-full">
-      <div className='mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 md:px-8 lg:px-12'>
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 md:px-8 lg:px-12">
         <div className="flex items-center gap-3">
           <Link to="/" onClick={handleCloseMenu}>
             <img src={logo} alt="Geo Memory Map logo" className="w-13 h-10" />
@@ -54,12 +51,16 @@ function NavBar() {
           <h1 className="font-display text-lg font-bold text-[#526B5C] sm:text-2xl md:text-3xl">Geo Memory Map</h1>
         </div>
 
-      <ul className="hidden items-center gap-8 md:flex font-display ">
+        <ul className="hidden items-center gap-8 md:flex font-display ">
           <li>
-            <Link to={'/'} className={navLink}>Home</Link>
+            <Link to={'/'} className={navLink}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to={'/about'} className={navLink}>About</Link>
+            <Link to={'/about'} className={navLink}>
+              About
+            </Link>
           </li>
           {/* <li>
             <Link to={'/login'}>Login</Link>
@@ -71,7 +72,9 @@ function NavBar() {
             <Link to={'/user'}>Profile</Link>
           </li> */}
           <li>
-            <Link to={'/contact'} className={navLink}>Contact</Link>
+            <Link to={'/contact'} className={navLink}>
+              Contact
+            </Link>
           </li>
 
           {isAuthenticated && (
@@ -87,15 +90,14 @@ function NavBar() {
         </ul>
 
         <button
-          type='button'
+          type="button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className='flex flex-col gap-1.5 md:hidden'
-          aria-label='Toggle navigation menu'
+          className="flex flex-col gap-1.5 md:hidden"
+          aria-label="Toggle navigation menu"
         >
           <span className="h-0.5 w-6 bg-[#526B5C]"></span>
           <span className="h-0.5 w-6 bg-[#526B5C]"></span>
           <span className="h-0.5 w-6 bg-[#526B5C]"></span>
-          
         </button>
       </div>
 
@@ -104,35 +106,35 @@ function NavBar() {
           isMenuOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-      <ul className="flex flex-col gap-4 px-4 py-4 font-display">
-        <li>
-          <Link to="/" onClick={handleCloseMenu} className="block text-center text-[#526B5C]">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/about" onClick={handleCloseMenu} className="block text-center text-[#526B5C]">
-            About
-          </Link>
-        </li>
-        <li>
-          <Link to="/contact" onClick={handleCloseMenu} className="block text-center text-[#526B5C]">
-            Contact
-          </Link>
-        </li>
-
-        {isAuthenticated && (
+        <ul className="flex flex-col gap-4 px-4 py-4 font-display">
           <li>
-            <button
-              onClick={handleLogout}
-              className="w-full rounded-md bg-[#EF6B48] px-4 py-2 text-white transition hover:bg-[#e9542b]"
-            >
-              Logout
-            </button>
+            <Link to="/" onClick={handleCloseMenu} className="block text-center text-[#526B5C]">
+              Home
+            </Link>
           </li>
-        )}
-      </ul>
-    </div>
+          <li>
+            <Link to="/about" onClick={handleCloseMenu} className="block text-center text-[#526B5C]">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" onClick={handleCloseMenu} className="block text-center text-[#526B5C]">
+              Contact
+            </Link>
+          </li>
+
+          {isAuthenticated && (
+            <li>
+              <button
+                onClick={handleLogout}
+                className="w-full rounded-md bg-[#EF6B48] px-4 py-2 text-white transition hover:bg-[#e9542b]"
+              >
+                Logout
+              </button>
+            </li>
+          )}
+        </ul>
+      </div>
     </nav>
   );
 }

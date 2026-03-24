@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 const MotionDiv = motion.div;
 const MotionForm = motion.form;
 
-
 const fadeSoft = {
   hidden: { opacity: 0 },
   visible: {
@@ -48,12 +47,11 @@ const staggerContainer = {
 };
 
 function ContactPage() {
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
-  })
+  });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -63,30 +61,30 @@ function ContactPage() {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
+    }));
   }
-  
+
   async function handleSubmit(event) {
-      event.preventDefault();
+    event.preventDefault();
 
-      if (isSubmitting) return;
+    if (isSubmitting) return;
 
-      try {
-        setIsSubmitting(true);
+    try {
+      setIsSubmitting(true);
 
-        const response = await sendContactMessage(formData);
-        toast.success(response.message || 'Message sent succesfully.');
+      const response = await sendContactMessage(formData);
+      toast.success(response.message || 'Message sent succesfully.');
 
-        setFormData({
-          name: '',
-          email: '',
-          message: '',
-        });
-      } catch (error) {
-        toast.error(error.message || 'Failed to send message.');
-      } finally {
-        setIsSubmitting(false);
-      }
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+      });
+    } catch (error) {
+      toast.error(error.message || 'Failed to send message.');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -101,7 +99,7 @@ function ContactPage() {
       <div className="absolute inset-0 bg-[#526b5c]/75" />
 
       <div className="relative z-10 grid min-h-screen grid-cols-1 items-center gap-10 px-4 py-8 sm:px-6 lg:grid-cols-[1.6fr_1fr] lg:gap-28 lg:px-10">
-        <MotionDiv 
+        <MotionDiv
           className="flex max-w-4xl flex-col gap-8 text-left"
           variants={fadeSoft}
           initial="hidden"
@@ -142,16 +140,8 @@ function ContactPage() {
             initial="hidden"
             animate="visible"
           >
-            <MotionDiv
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-              className=''
-            >
-              <MotionDiv 
-                className="grid grid-cols-1 gap-4 sm:grid-cols-2"
-                variants={inputPop}
-              >
+            <MotionDiv variants={staggerContainer} initial="hidden" animate="visible" className="">
+              <MotionDiv className="grid grid-cols-1 gap-4 sm:grid-cols-2" variants={inputPop}>
                 <input
                   type="text"
                   id="name"
@@ -170,7 +160,7 @@ function ContactPage() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Email"
-                  required  
+                  required
                   className="w-full rounded-xl border border-white/15 bg-white/85 px-4 py-3 font-display text-[#24342b] outline-none placeholder:text-gray-500 focus:border-white/30"
                 />
               </MotionDiv>
@@ -193,7 +183,7 @@ function ContactPage() {
                   disabled={isSubmitting}
                   className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[#526b5c] px-6 font-display text-base font-medium text-white shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 sm:h-14 sm:text-lg md:w-52 xl:text-xl disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  { isSubmitting ? 'Sending...' : 'Submit'}
+                  {isSubmitting ? 'Sending...' : 'Submit'}
                 </button>
               </MotionDiv>
             </MotionDiv>

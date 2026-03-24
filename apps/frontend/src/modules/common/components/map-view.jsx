@@ -33,16 +33,16 @@ function RecenterMap({ center }) {
   return null;
 }
 
-function MapClickHandler({setCenter, onLocationSelect}) {
-    useMapEvent('click', (e) => {
-      const {lat, lng} = e.latlng;
-      setCenter([lat, lng]);
-      onLocationSelect?.({ lat, lng });
-      toast('New location selected 📍');
-    });
+function MapClickHandler({ setCenter, onLocationSelect }) {
+  useMapEvent('click', (e) => {
+    const { lat, lng } = e.latlng;
+    setCenter([lat, lng]);
+    onLocationSelect?.({ lat, lng });
+    toast('New location selected 📍');
+  });
 
-    return null;
-  }
+  return null;
+}
 
 export default function MapView({ _memories = [], onLocationSelect }) {
   // Default center (Manila) as fallback
@@ -97,7 +97,7 @@ export default function MapView({ _memories = [], onLocationSelect }) {
   };
 
   return (
-    <div className='h-full overflow-hidden rounded-2xl shadow-lg'>
+    <div className="h-full overflow-hidden rounded-2xl shadow-lg">
       <div className="h-[320px] w-full sm:h-[420px] lg:h-full lg:min-h-[520px]">
         <MapContainer center={center} zoom={16} className="h-full w-full z-0">
           <TileLayer

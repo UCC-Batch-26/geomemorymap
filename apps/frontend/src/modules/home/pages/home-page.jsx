@@ -25,9 +25,8 @@ export function HomePage() {
               </h1>
 
               <p className="mx-auto max-w-md text-base leading-8 text-neutral-800 sm:text-lg lg:mx-0">
-                <em className="font-semibold">Geo Memory Map</em> helps you pin down life&apos;s
-                special moments on a map — so your memories aren&apos;t just written, they&apos;re
-                rooted in the places that shaped them.
+                <em className="font-semibold">Geo Memory Map</em> helps you pin down life&apos;s special moments on a
+                map — so your memories aren&apos;t just written, they&apos;re rooted in the places that shaped them.
               </p>
 
               <div className="mt-8 flex justify-center lg:justify-start">

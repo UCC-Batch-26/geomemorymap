@@ -10,17 +10,17 @@ function MemCards({ img, title, description, location, locationName, onDelete })
     <div className="relative w-full overflow-hidden rounded-2xl border border-white/70 bg-white p-3 shadow-xl transition duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl sm:p-4">
       <div className="h-50 w-full overflow-hidden rounded-xl bg-[#526b5c] sm:h-48">
         <img
-            className="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105"
-            src={src}
-            alt={title}
-            onError={(e) => {
-              if (e.currentTarget.src !== noImage) {
-                e.currentTarget.onerror = null;
-                e.currentTarget.src = noImage;
-              }
-            }}
-            loading="lazy"
-          />
+          className="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105"
+          src={src}
+          alt={title}
+          onError={(e) => {
+            if (e.currentTarget.src !== noImage) {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = noImage;
+            }
+          }}
+          loading="lazy"
+        />
       </div>
       <div className="mt-3 space-y-2">
         <h2 className="font-display text-lg font-semibold leading-tight text-gray-900 sm:text-xl line-clamp-2">
@@ -40,9 +40,7 @@ function MemCards({ img, title, description, location, locationName, onDelete })
           </p>
         )}
 
-        <p className="font-display text-sm leading-relaxed text-gray-700 sm:text-base line-clamp-4">
-          {description}
-        </p>
+        <p className="font-display text-sm leading-relaxed text-gray-700 sm:text-base line-clamp-4">{description}</p>
 
         {onDelete && (
           <button
@@ -55,7 +53,6 @@ function MemCards({ img, title, description, location, locationName, onDelete })
         )}
       </div>
     </div>
-    
   );
 }
 export default MemCards;
