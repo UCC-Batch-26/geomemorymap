@@ -177,6 +177,49 @@ function MemoryFormPage() {
     }
   };
 
+  const handleDelete = async (memory) => {
+    try {
+      if (isGuest) {
+        const updatedMemories = _memories.filter(
+          (m) => (m.id ?? m._id) !== (memory.id ?? memory._id)
+        );
+
+        setMemories(updatedMemories);
+        sessionStorage.setItem('guestMemories', JSON.stringify(updatedMemories));
+
+        toast.success('Memory removed (Guest Mode)');
+        return;
+      }
+
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        toast.error('You must be logged in');
+        return;
+      }
+
+      const memoryId = memory._id ?? memory.id;
+
+      const res = await fetch(`${MEMORY_URL}/${memoryId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (!res.ok) throw new Error('Failed to delete');
+
+      setMemories((prev) =>
+        prev.filter((m) => (m._id ?? m.id) !== memoryId)
+      );
+      
+      toast.success('Memory deleted');
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to delete memory');
+    }
+  }
+
   return (
     <div className="min-h-screen bg-[url(@/assets/geo-memory-map-bg.png)] bg-cover bg-center bg-no-repeat">
       <section className="min-h-screen bg-[#526b5c]/90">
@@ -303,6 +346,7 @@ function MemoryFormPage() {
                       locationName={labels[memory._id ?? memory.id] ?? null}
                       location={memory.location}
                       description={memory.description}
+                      onDelete={() => handleDelete(memory)}
                     />
                   ))}
               </div>
