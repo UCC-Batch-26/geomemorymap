@@ -188,6 +188,13 @@ function MemoryFormPage() {
                 <p className="mt-2 text-sm text-gray-700 sm:text-base">
                   Fill out the form and choose your location on the map.
                 </p>
+
+                <div className="mt-3 rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-900">
+                  <p className="leading-relaxed">
+                    <span className="font-semibold">Your privacy matters.</span>{' '}
+                    We use your location only to place your memories. We do not track or share your data.
+                  </p>
+                </div>
               </div>
               {/* FORM STARTS HERE */}
               <form action="" method="post" className="space-y-4" onSubmit={handleSubmit}>
@@ -244,14 +251,14 @@ function MemoryFormPage() {
                   />
                   <label
                     htmlFor="file-upload"
-                    className="inline-flex items-center justify-center rounded-lg bg-green-700 px-4 py-3 text-sm font-medium text-white shadow transition hover:bg-green-800 sm:text-base"
+                    className="inline-flex items-center justify-center rounded-lg border border-[#526b5c] bg-white px-4 py-3 text-sm font-medium text-[#526b5c] shadow-sm transition hover:bg-[#526b5c] hover:text-white cursor-pointer"
                   >
                     Upload File
                   </label>
 
                   <button
                     type="submit"
-                    className="px-5 py-2.5 text-sm font-medium text-white bg-green-700 rounded-lg shadow hover:bg-green-800 transition"
+                    className="px-5 py-2.5 text-sm font-medium text-white bg-[#EF6B48] rounded-lg shadow transition hover:bg-[#e9542b] cursor-pointer"
                   >
                     Submit
                   </button>
