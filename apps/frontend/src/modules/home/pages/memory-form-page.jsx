@@ -20,6 +20,7 @@ function MemoryFormPage() {
   const navigate = useNavigate();
   const [labels, setLabels] = useState({});
   const [isFileTooBig, setFileTooBig] = useState(false);
+  const [memoryToDelete, setMemoryToDelete] = useState(null);
 
   const isGuest = sessionStorage.getItem('guest') === 'true';
 
@@ -52,14 +53,24 @@ function MemoryFormPage() {
 
   useEffect(() => {
     const run = async () => {
-      const entries = _memories.filter((m) => m.location && !labels[m._id]);
+      const entries = _memories.filter((m) => {
+        const memoryId = m._id ?? m.id;
+        return m.location && !labels[memoryId];
+      });
+
       const updates = {};
+
       for (const m of entries) {
+        const memoryId = m._id ?? m.id;
         const name = await getCityFromCoords(m.location.lat, m.location.lng);
-        updates[m._id] = name ?? null;
+        updates[memoryId] = name ?? null;
       }
-      if (Object.keys(updates).length) setLabels((prev) => ({ ...prev, ...updates }));
+
+      if (Object.keys(updates).length) {
+        setLabels((prev) => ({ ...prev, ...updates }));
+      }
     };
+
     run();
   }, [_memories, labels]);
 
@@ -167,102 +178,157 @@ function MemoryFormPage() {
     }
   };
 
+  const handleDelete = async (memory) => {
+    try {
+      if (isGuest) {
+        const updatedMemories = _memories.filter((m) => (m.id ?? m._id) !== (memory.id ?? memory._id));
+
+        setMemories(updatedMemories);
+        sessionStorage.setItem('guestMemories', JSON.stringify(updatedMemories));
+
+        toast.success('Memory removed (Guest Mode)');
+        return;
+      }
+
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        toast.error('You must be logged in');
+        return;
+      }
+
+      const memoryId = memory._id ?? memory.id;
+
+      const res = await fetch(`${MEMORY_URL}/${memoryId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) throw new Error('Failed to delete');
+
+      setMemories((prev) => prev.filter((m) => (m._id ?? m.id) !== memoryId));
+
+      toast.success('Memory deleted');
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to delete memory');
+    }
+  };
+
   return (
-    <div className="bg-[url(@/assets/geo-memory-map-bg.png)] bg-no-repeat bg-center min-h-screen">
-      <section className="flex items-center justify-center bg-[#526b5c]/90 min-h-screen bg-auto bg-no-repeat bg-center justify-items-center ">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-10 max-w-7xl w-full mx-auto px-4">
-          <div className="bg-white/50 rounded-lg shadow-lg w-full p-6">
-            <h1 className="font-display pt-5 pl-5 text-3xl">Add New Memory</h1>
-            {/* FORM STARTS HERE */}
-            <form action="" method="post" className="ml-5 rounded-lg w-[100%]" onSubmit={handleSubmit}>
-              <h2 className="font-display p-2 text-2xl">Title</h2>
+    <div className="min-h-screen bg-[url(@/assets/geo-memory-map-bg.png)] bg-cover bg-center bg-no-repeat">
+      <section className="min-h-screen bg-[#526b5c]/90">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-stretch">
+            <div className="rounded-2xl bg-white/50 p-4 shadow-lg backdrop-blur-sm sm:p-6">
+              <div className="mb-6">
+                <h1 className="font-display text-2xl sm:text-3xl">Add New Memory</h1>
+                <p className="mt-2 text-sm text-gray-700 sm:text-base">
+                  Fill out the form and choose your location on the map.
+                </p>
 
-              <input
-                type="text"
-                placeholder="Title of your memory..."
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="ml-2 bg-white/20 w-[95%] rounded-sm"
-                required
-              />
-
-              <h2 className="font-display p-2 text-2xl">Description</h2>
-
-              <textarea
-                className="ml-2 block w-[95%] bg-white/20 rounded-sm min-h-[100px]"
-                placeholder="Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                required
-              ></textarea>
-
-              <h2 className="font-display p-2 text-2xl">Location</h2>
-              <p className="ml-2">
-                {locationName
-                  ? `${locationName} (${location.lat.toFixed(4)}, ${location.lng.toFixed(4)})` // place name with coordinates
-                  : `Latitude: ${location.lat.toFixed(4)}, Longitude: ${location.lng.toFixed(4)}`}
-              </p>
-
-              <h2 className="font-display p-2 text-2xl">Upload Photo</h2>
-
-              <div className="ml-2 mb-4 flex items-center gap-4">
-                <input
-                  id="file-upload"
-                  type="file"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const file = e.target.files[0];
-                    if (!file) {
-                      return;
-                    }
-
-                    if (file.size > 5 * 1024 * 1024) {
-                      setFileTooBig(true);
-                      setImageFile(null);
-                    } else {
-                      setFileTooBig(false);
-                      setImageFile(file);
-                    }
-                  }}
-                />
-                <label
-                  htmlFor="file-upload"
-                  className="cursor-pointer py-2 px-4 bg-green-700 text-white rounded-lg shadow hover:bg-green-800 transition duration-150"
-                >
-                  Upload File
-                </label>
-
-                <button
-                  type="submit"
-                  className="px-5 py-2.5 text-sm font-medium text-white bg-green-700 rounded-lg shadow hover:bg-green-800 transition"
-                >
-                  Submit
-                </button>
+                <div className="mt-3 rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-900">
+                  <p className="leading-relaxed">
+                    <span className="font-semibold">Your privacy matters.</span> We use your location only to place your
+                    memories. We do not track or share your data.
+                  </p>
+                </div>
               </div>
+              {/* FORM STARTS HERE */}
+              <form action="" method="post" className="space-y-4" onSubmit={handleSubmit}>
+                <label className="mb-2 block font-display text-xl sm:text-2xl">Title</label>
 
-              {/* Warning message */}
-              {isFileTooBig && <p className="text-red-500 ml-2 mt-1 text-sm">File’s too chunky! &lt; 5MB please</p>}
+                <input
+                  type="text"
+                  placeholder="Title of your memory..."
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="w-full rounded-lg border border-white/30 bg-white/70 px-4 py-3 text-sm outline-none ring-0 placeholder:text-gray-500 focus:border-green-700 sm:text-base"
+                  required
+                />
 
-              <p className="text-sm text-gray-500 mt-1 ml-2">Maximum file size: 5MB</p>
-            </form>
-          </div>
+                <label className="mb-2 block font-display text-xl sm:text-2xl">Description</label>
 
-          <div className="w-full h-full place-items-center">
-            <MapView
-              _memories={_memories}
-              onLocationSelect={async (coords) => {
-                setLocation(coords); // keep coordinates
-                const label = await getCityFromCoords(coords.lat, coords.lng);
-                setLocationName(label); // store barangay, city for UI
-              }}
-            />
+                <textarea
+                  className="min-h-[120px] w-full rounded-lg border border-white/30 bg-white/70 px-4 py-3 text-sm outline-none placeholder:text-gray-500 focus:border-green-700 sm:min-h-[140px] sm:text-base"
+                  placeholder="Description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                ></textarea>
+
+                <label className="mb-2 block font-display text-xl sm:text-2xl">Location</label>
+                <p className="rounded-lg bg-white/50 px-4 py-3 text-sm text-gray-800 break-words sm:text-base">
+                  {locationName
+                    ? `${locationName} (${location.lat.toFixed(4)}, ${location.lng.toFixed(4)})` // place name with coordinates
+                    : `Latitude: ${location.lat.toFixed(4)}, Longitude: ${location.lng.toFixed(4)}`}
+                </p>
+
+                <label className="mb-2 block font-display text-xl sm:text-2xl">Upload Photo</label>
+
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <input
+                    id="file-upload"
+                    type="file"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) {
+                        return;
+                      }
+
+                      if (file.size > 5 * 1024 * 1024) {
+                        setFileTooBig(true);
+                        setImageFile(null);
+                      } else {
+                        setFileTooBig(false);
+                        setImageFile(file);
+                      }
+                    }}
+                  />
+                  <label
+                    htmlFor="file-upload"
+                    className="inline-flex items-center justify-center rounded-lg border border-[#526b5c] bg-white px-4 py-3 text-sm font-medium text-[#526b5c] shadow-sm transition hover:bg-[#526b5c] hover:text-white cursor-pointer"
+                  >
+                    Upload File
+                  </label>
+
+                  <button
+                    type="submit"
+                    className="px-5 py-2.5 text-sm font-medium text-white bg-[#EF6B48] rounded-lg shadow transition hover:bg-[#e9542b] cursor-pointer"
+                  >
+                    Submit
+                  </button>
+                </div>
+
+                {imageFile && <p className="mt-3 text-sm text-gray-700 break-all">Selected file: {imageFile.name}</p>}
+
+                {/* Warning message */}
+                {isFileTooBig && <p className="text-red-500 mt-1 text-sm">File’s too chunky! &lt; 5MB please</p>}
+
+                <p className="text-sm text-gray-500 mt-1">Maximum file size: 5MB</p>
+              </form>
+            </div>
+
+            <div className="w-full">
+              <MapView
+                _memories={_memories}
+                onLocationSelect={async (coords) => {
+                  setLocation(coords); // keep coordinates
+                  const label = await getCityFromCoords(coords.lat, coords.lng);
+                  setLocationName(label); // store barangay, city for UI
+                }}
+              />
+            </div>
           </div>
 
           {/* CARD GENERATEED FROM API BELOW */}
-          <div className="sm:col-span-2 w-full pb-10">
-            <h1 className="font-display text-3xl font-bold p-10 text-white">Your Memories</h1>
-            <div className="flex flex-wrap gap-4 justify-center place-item">
+          <div className="mt-8 pb-10 sm:mt-10">
+            <h1 className="font-display text-2xl font-bold text-white sm:text-3xl">Your Memories</h1>
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {_memories
                 .slice()
                 .reverse()
@@ -272,14 +338,46 @@ function MemoryFormPage() {
                     key={memory._id ?? memory.id}
                     img={memory.photoURL}
                     title={memory.title}
-                    locationName={labels[memory._id] ?? null}
+                    locationName={labels[memory._id ?? memory.id] ?? null}
                     location={memory.location}
                     description={memory.description}
+                    onDelete={() => setMemoryToDelete(memory)}
                   />
                 ))}
             </div>
           </div>
         </div>
+
+        {memoryToDelete && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+            <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
+              <h2 className="font-display text-xl font-semibold text-gray-900">Delete memory?</h2>
+
+              <p className="mt-2 text-sm leading-relaxed text-gray-600">This action cannot be undone.</p>
+
+              <div className="mt-6 flex justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={() => setMemoryToDelete(null)}
+                  className="cursor-pointer rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await handleDelete(memoryToDelete);
+                    setMemoryToDelete(null);
+                  }}
+                  className="cursor-pointer rounded-lg bg-[#EF6B48] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#e9542b]"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
     </div>
   );

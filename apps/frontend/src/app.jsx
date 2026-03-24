@@ -9,6 +9,7 @@ import ContactPage from '@/modules/home/pages/contact-page';
 import MemoryFormPage from './modules/home/pages/memory-form-page';
 import { Toaster } from 'react-hot-toast';
 import { ProtectedRoute } from '@/modules/utils/protected-routes';
+import NotFoundPage from './modules/home/pages/not-found-page';
 
 export function App() {
   const [_token, setToken] = useState(() => localStorage.getItem('token'));
@@ -36,15 +37,16 @@ export function App() {
           ),
         },
         {
-          path: '/guest-memory',
+          path: 'guest-memory',
           element: (
             <ProtectedRoute>
               <MemoryFormPage />
             </ProtectedRoute>
           ),
         },
-        { path: '/about', element: <AboutPage /> },
-        { path: '/contact', element: <ContactPage /> },
+        { path: 'about', element: <AboutPage /> },
+        { path: 'contact', element: <ContactPage /> },
+        { path: '*', element: <NotFoundPage /> },
       ],
     },
   ]);

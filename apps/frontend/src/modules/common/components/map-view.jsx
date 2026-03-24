@@ -33,6 +33,17 @@ function RecenterMap({ center }) {
   return null;
 }
 
+function MapClickHandler({ setCenter, onLocationSelect }) {
+  useMapEvent('click', (e) => {
+    const { lat, lng } = e.latlng;
+    setCenter([lat, lng]);
+    onLocationSelect?.({ lat, lng });
+    toast('New location selected 📍');
+  });
+
+  return null;
+}
+
 export default function MapView({ _memories = [], onLocationSelect }) {
   // Default center (Manila) as fallback
   const [center, setCenter] = useState([14.5995, 120.9842]);
@@ -85,85 +96,68 @@ export default function MapView({ _memories = [], onLocationSelect }) {
     }
   };
 
-  const MapClickHandler = () => {
-    useMapEvent('click', (e) => {
-      const { lat, lng } = e.latlng;
-      setCenter([lat, lng]);
-      onLocationSelect?.({ lat, lng });
-      toast('New location selected📍');
-    });
-    return null;
-  };
-
   return (
-    <div id="map">
-      <MapContainer center={center} zoom={13}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+    <div className="h-full overflow-hidden rounded-2xl shadow-lg">
+      <div className="h-[320px] w-full sm:h-[420px] lg:h-full lg:min-h-[520px]">
+        <MapContainer center={center} zoom={16} className="h-full w-full z-0">
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
 
-        <MapClickHandler />
-        <RecenterMap center={center} />
-        {/* Draggable marker for user location */}
-        <Marker
-          position={center}
-          draggable={true}
-          icon={greenIcon}
-          eventHandlers={{ dragend: handleDragEnd }}
-          ref={markerRef}
-        >
-          <Popup>Drag me to adjust!</Popup>
-        </Marker>
+          <MapClickHandler setCenter={setCenter} onLocationSelect={onLocationSelect} />
+          <RecenterMap center={center} />
+          {/* Draggable marker for user location */}
+          <Marker
+            position={center}
+            draggable={true}
+            icon={greenIcon}
+            eventHandlers={{ dragend: handleDragEnd }}
+            ref={markerRef}
+          >
+            <Popup>Drag me to adjust!</Popup>
+          </Marker>
 
-        {/* Memory markers */}
-        {_memories
-          .filter((memory) => memory.location && memory.location.lat && memory.location.lng)
-          .map((memory) => (
-            <Marker
-              key={memory._id}
-              position={[memory.location.lat, memory.location.lng]}
-              eventHandlers={{
-                mouseover: (e) => e.target.openPopup(),
-                mouseout: (e) => e.target.closePopup(),
-              }}
-            >
-              <Tooltip>
-                <div
-                  className="
-                    bg-[#526b5c]/90 text-white font-display
-                    px-4 py-3 rounded-xl shadow-lg
-                    transition-transform duration-300 ease-in-out
-                    hover:scale-105 hover:bg-[#6b8b74]
-                    w-[220px] sm:w-[260px] md:w-[300px]
-                    overflow-hidden break-words"
-                >
-                  <h1 className="text-2xl font-semibold pt-2">{memory.title}</h1>
-                  <hr className="flex h-px my-2 bg-white/40 border-0 m-auto" />
-                  <p className="text-lg text-justify mb-2 break-words whitespace-normal line-clamp-4 overflow-hidden">
-                    {memory.description}
-                  </p>
-                  <div className="">
+          {/* Memory markers */}
+          {_memories
+            .filter((memory) => memory.location && memory.location.lat && memory.location.lng)
+            .map((memory) => (
+              <Marker
+                key={memory._id ?? memory.id}
+                position={[memory.location.lat, memory.location.lng]}
+                eventHandlers={{
+                  mouseover: (e) => e.target.openPopup(),
+                  mouseout: (e) => e.target.closePopup(),
+                }}
+              >
+                <Tooltip direction="top" offset={[0, -20]} opacity={1}>
+                  <div className="w-[180px] max-w-full rounded-xl bg-[#526b5c]/95 px-3 py-3 text-white shadow-lg sm:w-[220px] md:w-[250px]">
+                    <h1 className="font-display text-base font-semibold sm:text-lg">{memory.title}</h1>
+                    <hr className="my-2 border-white/30" />
+                    <p className="mb-2 text-xs leading-relaxed break-words sm:text-sm line-clamp-4">
+                      {memory.description}
+                    </p>
+
                     {memory.photoURL && (
                       <img
                         src={memory.photoURL}
                         alt={memory.title}
-                        className="m-auto h-[50%]  object-contain rounded-2xl"
+                        className="max-h-32 w-full rounded-lg object-cover"
                       />
                     )}
                   </div>
-                </div>
-              </Tooltip>
-            </Marker>
-          ))}
-        {/* Example fixed markers
-        <Marker position={[14.6925, 120.9699]}>
-          <Popup>Hello from Valenzuela! :flag_ph:</Popup>
-        </Marker>
-        <Marker position={[18.351, 121.5142]}>
-          <Popup>Hello from Ballesteros! :flag_ph:</Popup>
-        </Marker> */}
-      </MapContainer>
+                </Tooltip>
+              </Marker>
+            ))}
+          {/* Example fixed markers
+          <Marker position={[14.6925, 120.9699]}>
+            <Popup>Hello from Valenzuela! :flag_ph:</Popup>
+          </Marker>
+          <Marker position={[18.351, 121.5142]}>
+            <Popup>Hello from Ballesteros! :flag_ph:</Popup>
+          </Marker> */}
+        </MapContainer>
+      </div>
     </div>
   );
 }

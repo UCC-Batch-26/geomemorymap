@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/contact
+Content-Type: application/json
+origin : http://localhost:5173
+
+{
+  "name": "thename",
+  "email": "youremailplease@gmail.com",
+  "message": "Testing the contact form email submission."
+}
