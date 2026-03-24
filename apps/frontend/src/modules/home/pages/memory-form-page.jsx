@@ -20,6 +20,7 @@ function MemoryFormPage() {
   const navigate = useNavigate();
   const [labels, setLabels] = useState({});
   const [isFileTooBig, setFileTooBig] = useState(false);
+  const [memoryToDelete, setMemoryToDelete] = useState(null);
 
   const isGuest = sessionStorage.getItem('guest') === 'true';
 
@@ -340,12 +341,43 @@ function MemoryFormPage() {
                     locationName={labels[memory._id ?? memory.id] ?? null}
                     location={memory.location}
                     description={memory.description}
-                    onDelete={() => handleDelete(memory)}
+                    onDelete={() => setMemoryToDelete(memory)}
                   />
                 ))}
             </div>
           </div>
         </div>
+
+        {memoryToDelete && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+            <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
+              <h2 className="font-display text-xl font-semibold text-gray-900">Delete memory?</h2>
+
+              <p className="mt-2 text-sm leading-relaxed text-gray-600">This action cannot be undone.</p>
+
+              <div className="mt-6 flex justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={() => setMemoryToDelete(null)}
+                  className="cursor-pointer rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await handleDelete(memoryToDelete);
+                    setMemoryToDelete(null);
+                  }}
+                  className="cursor-pointer rounded-lg bg-[#EF6B48] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#e9542b]"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
     </div>
   );
